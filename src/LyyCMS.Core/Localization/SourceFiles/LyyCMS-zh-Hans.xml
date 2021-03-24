@@ -97,6 +97,9 @@
     <text name="DeleteTenantConfirm">确认删除该租户？</text>
     <text name="EditTenant">编辑租户</text>
     <text name="SearchWithThreeDot">搜索...</text>
+
+    <text name="PhoneNumber">电话号码</text>
+    <text name="FaceImg">头像</text>
     
   </texts>
 </localizationDictionary>

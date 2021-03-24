@@ -108,7 +108,7 @@
                 user.roleNames.push(_$roleCheckbox.val());
             }
         }
-
+        console.log(user);
         abp.ui.setBusy(_$modal);
         _userService.create(user).done(function () {
             _$modal.modal('hide');
@@ -162,6 +162,7 @@
     });
 
     $(document).on('click', 'a[data-target="#UserCreateModal"]', (e) => {
+        console.log(e);
         $('.nav-tabs a[href="#user-details"]').tab('show')
     });
 
@@ -185,4 +186,47 @@
             return false;
         }
     });
+
+    
+    //测试
+    console.log("xxxx");
+    $('input[type="file"]').change("propertychange", function () {
+        ajaxFileUpload();
+    });
+    function ajaxFileUpload() {
+
+        var fileUpload = $("#FaceImgFile").get(0);
+        var files = fileUpload.files;
+        var data = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            data.append(files[i].name, files[i]);
+        }
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: 'users/UploadAvatar',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                //成功之后
+                if (data.success) {
+
+                    $("#FaceImg").val(data.result);
+                } else {
+                    console.log("失败了");
+                }
+               
+            },
+            error: function () {
+                console.log(JSON.stringify(data));
+            }
+        });
+         
+        $('input[type="file"]').change(function (e) {//再次绑定
+            ajaxFileUpload();
+        })
+        return false;
+    }
 })(jQuery);

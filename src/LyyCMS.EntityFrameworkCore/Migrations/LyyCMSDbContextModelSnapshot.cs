@@ -1434,6 +1434,9 @@ namespace LyyCMS.Migrations
                         .HasMaxLength(328)
                         .HasColumnType("nvarchar(328)");
 
+                    b.Property<string>("FaceImg")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 

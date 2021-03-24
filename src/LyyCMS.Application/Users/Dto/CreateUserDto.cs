@@ -36,6 +36,12 @@ namespace LyyCMS.Users.Dto
         [DisableAuditing]
         public string Password { get; set; }
 
+        [StringLength(AbpUserBase.MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
+
+
+        public string FaceImg { get; set; }
+
         public void Normalize()
         {
             if (RoleNames == null)

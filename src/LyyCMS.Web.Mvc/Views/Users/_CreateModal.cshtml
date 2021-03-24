@@ -2,14 +2,12 @@
 @using LyyCMS.Web.Models.Common.Modals
 @using LyyCMS.Web.Models.Users
 @model UserListViewModel
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 <div class="modal fade" id="UserCreateModal" tabindex="-1" role="dialog" aria-labelledby="UserCreateModalLabel" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewUser")))
-            <form name="userCreateForm" role="form" class="form-horizontal">
+            <form name="userCreateForm" role="form" class="form-horizontal" enctype="multipart/form-data">
                 <div class="modal-body">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
@@ -57,6 +55,20 @@
                                     <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">@L("PhoneNumber")</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="PhoneNumber" maxlength="@AbpUserBase.MaxPhoneNumberLength">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">@L("FaceImg")</label>
+                                <div class="col-md-9">
+                                    <input type="hidden" name="FaceImg" id="FaceImg" value="" />
+                                    <input type="file" class="form-control" name="FaceImgFile" id="FaceImgFile"/>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="CreateUserIsActive">@L("IsActive")</label>
                                 <div class="col-md-9">
@@ -68,11 +80,10 @@
                             <div class="row">
                                 @foreach (var role in Model.Roles)
                                 {
-                                    <div class="col-md-6">
-                                        <input type="checkbox" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" />
-                                        <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
-                                    </div>
-                                }
+                    <div class="col-md-6">
+                        <input type="checkbox" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" />
+                        <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                    </div>}
                             </div>
                         </div>
                     </div>

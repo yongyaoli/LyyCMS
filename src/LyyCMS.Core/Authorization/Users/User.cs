@@ -9,6 +9,11 @@ namespace LyyCMS.Authorization.Users
     {
         public const string DefaultPassword = "123qwe";
 
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public virtual string FaceImg { get; set; }
+
         public static string CreateRandomPassword()
         {
             return Guid.NewGuid().ToString("N").Truncate(16);

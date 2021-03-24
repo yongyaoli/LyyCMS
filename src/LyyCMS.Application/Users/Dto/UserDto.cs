@@ -36,5 +36,7 @@ namespace LyyCMS.Users.Dto
         public DateTime CreationTime { get; set; }
 
         public string[] RoleNames { get; set; }
+
+        public string FaceImg { get; set; }
     }
 }

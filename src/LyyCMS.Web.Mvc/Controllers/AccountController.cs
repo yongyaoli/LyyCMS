@@ -30,6 +30,8 @@ using LyyCMS.MultiTenancy;
 using LyyCMS.Sessions;
 using LyyCMS.Web.Models.Account;
 using LyyCMS.Web.Views.Shared.Components.TenantChange;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace LyyCMS.Web.Controllers
 {
@@ -72,6 +74,47 @@ namespace LyyCMS.Web.Controllers
             _tenantCache = tenantCache;
             _notificationPublisher = notificationPublisher;
         }
+
+
+        [HttpPost("single")]
+        public async Task<IActionResult> single()
+        {
+            return Ok();
+        }
+            
+        [HttpPost("single_upload_avatar")]
+        public async Task<IActionResult> SingleUploadAvatar()
+        {
+            #region 单个文件上传
+            var file = Request.Form.Files[0];
+
+            string fileName = string.Empty;
+            using (FileStream fs = System.IO.File.Create(fileName))
+            {
+                file.CopyTo(fs);
+                fs.Flush();
+            }
+            #endregion
+
+            #region 批量上传
+            //var files = Request.Form.Files;
+            //string filePhysicalPath = string.Empty;
+            //foreach (var itemFile in files)
+            //{
+            //    if (file.Length > 0)
+            //    {
+            //        var fName = System.Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//文件名+文件后缀名
+            //        using (var stream = new FileStream(filePhysicalPath + fileName, FileMode.Create))
+            //        {
+            //            await file.CopyToAsync(stream);
+            //        }
+            //    }
+            //}
+            #endregion
+            return Ok();
+        } 
+
+
 
         #region Login / Logout
 
@@ -160,6 +203,31 @@ namespace LyyCMS.Web.Controllers
         {
             try
             {
+                var date = Request;
+                var files = Request.Form.Files;
+                long size = files.Sum(f => f.Length);
+                string shortTime = DateTime.Now.ToString("yyyy/MM/dd") + "/";
+                var path = Directory.GetCurrentDirectory();
+                string filePhysicalPath = Path.Combine(path, shortTime);
+                //string filePhysicalPath = MapPath("~/Content" + shortTime);  //文件路径  可以通过注入 IHostingEnvironment 服务对象来取得Web根目录和内容根目录的物理路径
+
+                if (!Directory.Exists(filePhysicalPath)) //判断上传文件夹是否存在，若不存在，则创建
+                {
+                    Directory.CreateDirectory(filePhysicalPath); //创建文件夹
+                }
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = System.Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);//文件名+文件后缀名
+                        using (var stream = new FileStream(filePhysicalPath + fileName, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                    }
+                }
+
+
                 ExternalLoginInfo externalLoginInfo = null;
                 if (model.IsExternalLogin)
                 {
@@ -187,6 +255,8 @@ namespace LyyCMS.Web.Controllers
                     model.UserName,
                     model.Password,
                     true // Assumed email address is always confirmed. Change this if you want to implement email confirmation.
+                    ,model.PhoneNumber
+                    ,model.FaceImg
                 );
 
                 // Getting tenant-specific settings
@@ -258,6 +328,8 @@ namespace LyyCMS.Web.Controllers
                 return View("Register", model);
             }
         }
+
+
 
         #endregion
 

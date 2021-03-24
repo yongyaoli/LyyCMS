@@ -141,7 +141,9 @@ namespace LyyCMS.Controllers
                 externalUser.EmailAddress,
                 externalUser.EmailAddress,
                 Authorization.Users.User.CreateRandomPassword(),
-                true
+                true,
+                externalUser.PhoneNumber,
+                externalUser.FaceImg
             );
 
             user.Logins = new List<UserLogin>

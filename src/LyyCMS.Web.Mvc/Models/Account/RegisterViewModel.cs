@@ -29,6 +29,11 @@ namespace LyyCMS.Web.Models.Account
         [DisableAuditing]
         public string Password { get; set; }
 
+
+        public string PhoneNumber { get; set; }
+
+        public string FaceImg { get; set; }
+
         public bool IsExternalLogin { get; set; }
 
         public string ExternalLoginAuthSchema { get; set; }
