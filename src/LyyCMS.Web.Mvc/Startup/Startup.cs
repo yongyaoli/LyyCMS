@@ -19,6 +19,11 @@ using Abp.Json;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.OpenApi.Models;
+using UEditor.Core;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace LyyCMS.Web.Startup
 {
@@ -33,6 +38,8 @@ namespace LyyCMS.Web.Startup
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            //ueditor
+            services.AddUEditorService();
             // MVC
             services.AddControllersWithViews(
                     options =>
@@ -63,6 +70,9 @@ namespace LyyCMS.Web.Startup
                 options.DocInclusionPredicate((docName, description) => true);
             });
 
+            
+
+
             // Configure Abp and Dependency Injection
             return services.AddAbp<LyyCMSWebMvcModule>(
                 // Configure Log4Net logging
@@ -74,6 +84,9 @@ namespace LyyCMS.Web.Startup
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            
+
+
             app.UseAbp(); // Initializes ABP framework.
 
             if (env.IsDevelopment())
@@ -84,7 +97,17 @@ namespace LyyCMS.Web.Startup
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            //静态资源
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(),"upload")),
+                RequestPath = "/upload",
+                OnPrepareResponse = ctx =>
+                {
+                    ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=36000");
+                }
+            });
             app.UseStaticFiles();
 
             app.UseRouting();

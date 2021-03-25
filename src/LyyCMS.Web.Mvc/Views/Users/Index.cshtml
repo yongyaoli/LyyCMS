@@ -1,10 +1,8 @@
 ﻿@using LyyCMS.Web.Startup
 @using LyyCMS.Web.Models.Users
 @model UserListViewModel
-@{
-    ViewBag.Title = L("Users");
-    ViewBag.CurrentPageName = PageNames.Users;
-}
+@{ ViewBag.Title = L("Users");
+    ViewBag.CurrentPageName = PageNames.Users; }
 @section scripts
 {
     <environment names="Development">
@@ -14,6 +12,14 @@
     <environment names="Staging,Production">
         <script src="~/view-resources/Views/Users/Index.min.js" asp-append-version="true"></script>
     </environment>
+
+    <script src="~/ueditor-1.4.3.3/ueditor.config.js"></script>
+    <script src="~/ueditor-1.4.3.3/ueditor.all.js"></script>
+    <script type="text/javascript">
+        var ue = UE.getEditor('container', {
+            initialFrameHeight: 300,
+            initialFrameWidth: 300
+        });</script>
 }
 <section class="content-header">
     <div class="container-fluid">
@@ -77,6 +83,3 @@
         </div>
     </div>
 </div>
-<script>
-    
-</script>
