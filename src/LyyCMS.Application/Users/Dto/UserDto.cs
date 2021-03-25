@@ -27,6 +27,10 @@ namespace LyyCMS.Users.Dto
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
 
+        [StringLength(AbpUserBase.MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
+
+
         public bool IsActive { get; set; }
 
         public string FullName { get; set; }

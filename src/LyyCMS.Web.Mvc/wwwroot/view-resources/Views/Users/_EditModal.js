@@ -44,4 +44,55 @@
     _$modal.on('shown.bs.modal', function () {
         _$form.find('input[type=text]:first').focus();
     });
+
+
+    $('input[type="file"]').change("propertychange", function () {
+        console.log("edit")
+        ajaxFileUpload();
+    });
+    function ajaxFileUpload() {
+
+        var fileUpload = $("#FaceImgFileEdit").get(0);
+        console.log(fileUpload);
+        var files = fileUpload.files;
+        console.log(files);
+        var data = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            data.append(files[i].name, files[i]);
+        }
+        console.log(data);
+        if (files.length < 1) {
+            console.log("没有数据");
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: 'users/UploadAvatar',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                //成功之后
+                if (data.success) {
+                    console.log(data.result);
+                    //$("#FaceImg").val(data.result);
+                    $('input[name="FaceImg"]').val(data.result);
+                    $("#FaceImgEditShow").attr("src", data.result);
+                } else {
+                    abp.notify.info(l('SavedSuccessfully'));
+                }
+
+            },
+            error: function () {
+                console.log(JSON.stringify(data));
+            }
+        });
+
+        $('input[type="file"]').change(function (e) {//再次绑定
+            ajaxFileUpload();
+        })
+        return false;
+    }
 })(jQuery);

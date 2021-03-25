@@ -59,12 +59,25 @@
             },
             {
                 targets: 4,
+                data: 'faceImg',
+                sortable: false,
+                render: data => {
+                    console.log(data);
+                    if (data == null) {
+                        return `<img width="50" heigth="50" src="img/logo.png">`; //empty
+                    } else {
+                        return `<img width="50" heigth="50" src="${data}">`;
+                    }
+                }
+            },
+            {
+                targets: 5,
                 data: 'isActive',
                 sortable: false,
                 render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             },
             {
-                targets: 5,
+                targets: 6,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -187,21 +200,26 @@
         }
     });
 
+     
     
-    //测试
-    console.log("xxxx");
     $('input[type="file"]').change("propertychange", function () {
+        console.log("add");
         ajaxFileUpload();
     });
     function ajaxFileUpload() {
 
         var fileUpload = $("#FaceImgFile").get(0);
         var files = fileUpload.files;
+        console.log(files);
         var data = new FormData();
         for (var i = 0; i < files.length; i++) {
             data.append(files[i].name, files[i]);
         }
         console.log(data);
+        if (files.length < 1) {
+            console.log("没有数据");
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: 'users/UploadAvatar',
@@ -212,8 +230,8 @@
                 console.log(JSON.stringify(data));
                 //成功之后
                 if (data.success) {
-
                     $("#FaceImg").val(data.result);
+                    $("#FaceImgShow").attr("src", data.result);
                 } else {
                     console.log("失败了");
                 }
