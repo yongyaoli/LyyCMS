@@ -10,7 +10,8 @@ html {
 
 /* main sidebar not under model */
 .modal {
-    z-index: 1110;
+    /*z-index: 1110;*/
+    z-index: 110;
 }
 
 .form-group.required .col-form-label:after {
@@ -28,4 +29,9 @@ html {
 
 .famfamfam-flags {
     display: inline-block;
+}
+
+
+.modal-backdrop{
+    z-index:100;
 }

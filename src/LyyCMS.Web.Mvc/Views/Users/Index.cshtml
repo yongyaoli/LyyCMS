@@ -14,12 +14,32 @@
     </environment>
 
     <script src="~/ueditor-1.4.3.3/ueditor.config.js"></script>
-    <script src="~/ueditor-1.4.3.3/ueditor.all.js"></script>
+    <script src="~/ueditor-1.4.3.3/ueditor.all.min.js"></script>
+    <script src="~/ueditor-1.4.3.3/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript">
-        var ue = UE.getEditor('container', {
-            initialFrameHeight: 300,
-            initialFrameWidth: 300
-        });</script>
+        $(function () {
+            var editor = UE.getEditor('container', {
+                serverUrl: 'upload/new',
+                //serverUrl: 'api/ueditor/do',
+                initialFrameWidth: '100%',
+                initialFrameHeight: 350
+            });
+        })
+        //var ue = UE.getEditor('container', {
+        //    initialFrameHeight: 300,
+        //    initialFrameWidth: 300
+        //});
+        //UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+        //UE.Editor.prototype.getActionUrl = function (action) {
+        //    if (action == "uploadimage") {
+        //        return "upload/new";
+        //    } else {
+        //        return this._bkGetActionUrl.call(this, action);
+        //    }
+        //}
+
+
+    </script>
 }
 <section class="content-header">
     <div class="container-fluid">
