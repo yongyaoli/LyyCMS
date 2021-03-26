@@ -85,8 +85,6 @@ namespace LyyCMS.Web.Startup
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             
-
-
             app.UseAbp(); // Initializes ABP framework.
 
             if (env.IsDevelopment())
@@ -98,16 +96,18 @@ namespace LyyCMS.Web.Startup
                 app.UseExceptionHandler("/Error");
             }
             //静态资源
+            string temp = Path.Combine(env.WebRootPath, "upload");
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(),"upload")),
+                    Path.Combine(env.WebRootPath, "upload")),
                 RequestPath = "/upload",
                 OnPrepareResponse = ctx =>
                 {
                     ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=36000");
                 }
             });
+
             app.UseStaticFiles();
 
             app.UseRouting();

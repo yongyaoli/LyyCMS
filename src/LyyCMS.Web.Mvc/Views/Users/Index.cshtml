@@ -12,6 +12,19 @@
     <environment names="Staging,Production">
         <script src="~/view-resources/Views/Users/Index.min.js" asp-append-version="true"></script>
     </environment>
+    <script charset="utf-8" src="~/kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="~/kindeditor/lang/zh-CN.js"></script>
+    <script>
+        KindEditor.ready(function (K) {
+            window.editor = K.create('#editor_id', {
+                cssPath: '/kindeditor/plugins/code/prettify.css',
+                uploadJson: 'upload/Kind?Title=qqq&ContextId=1',
+                fileManagerJson: '@Url.Action("KindFileManager", "Upload")',
+                //fileManagerJson: '../asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+            });
+        });
+    </script>
 
     <script src="~/ueditor-1.4.3.3/ueditor.config.js"></script>
     <script src="~/ueditor-1.4.3.3/ueditor.all.min.js"></script>
@@ -22,21 +35,27 @@
                 serverUrl: 'upload/new',
                 //serverUrl: 'api/ueditor/do',
                 initialFrameWidth: '100%',
-                initialFrameHeight: 350
+                initialFrameHeight: 350,
+                toolbars: [[
+                    'fullscreen', 'source', '|', 'undo', 'redo', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', 'removeformat', 'pasteplain', '|', 'forecolor', 'insertorderedlist', 'insertunorderedlist', '|',
+                    'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                    'link', 'unlink', 'anchor'
+                ]]
             });
         })
-        //var ue = UE.getEditor('container', {
-        //    initialFrameHeight: 300,
-        //    initialFrameWidth: 300
-        //});
-        //UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
-        //UE.Editor.prototype.getActionUrl = function (action) {
-        //    if (action == "uploadimage") {
-        //        return "upload/new";
-        //    } else {
-        //        return this._bkGetActionUrl.call(this, action);
-        //    }
-        //}
+            //var ue = UE.getEditor('container', {
+            //    initialFrameHeight: 300,
+            //    initialFrameWidth: 300
+            //});
+            //UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+            //UE.Editor.prototype.getActionUrl = function (action) {
+            //    if (action == "uploadimage") {
+            //        return "upload/new";
+            //    } else {
+            //        return this._bkGetActionUrl.call(this, action);
+            //    }
+            //}
 
 
     </script>
