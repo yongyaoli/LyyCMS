@@ -3,7 +3,7 @@ Address book management system based on ABP | [中文文档](README.zh-CN.md)
 
 ---
 #### About Abp
-[Abop](https://aspnetboilerplate.com/)
+[Abp website](https://aspnetboilerplate.com/)
 
 #### Start
 
@@ -24,5 +24,5 @@ Address book management system based on ABP | [中文文档](README.zh-CN.md)
 
 #### swagger
 
-[swagger](http://localhost:62114/swagger/index.html)
+[local swagger url](http://localhost:62114/swagger/index.html)
 
