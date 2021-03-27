@@ -100,7 +100,12 @@
 
     <text name="PhoneNumber">电话号码</text>
     <text name="FaceImg">头像</text>
-    
+
+    <text name="Member">会员</text>
+    <text name="Members">会员</text>
+    <text name="LoginName">登录名</text>
+    <text name="Email">邮箱</text>
+    <text name="IsDeleted">是否删除</text>
   </texts>
 </localizationDictionary>
 

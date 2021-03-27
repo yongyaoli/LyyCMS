@@ -1,10 +1,10 @@
 ﻿(function ($) {
-    var _userService = abp.services.app.user,
+    var _memberService = abp.services.app.members,
         l = abp.localization.getSource('LyyCMS'),
         _$modal = $('#UserCreateModal'),
         _$form = _$modal.find('form'),
-        _$table = $('#UsersTable');
-
+        _$table = $('#MembersTable');
+    console.log(_memberService);
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
@@ -15,7 +15,7 @@
             filter.skipCount = data.start;
 
             abp.ui.setBusy(_$table);
-            _userService.getAll(filter).done(function (result) {
+            _memberService.getPagedMemeber(filter).done(function (result) {
                 callback({
                     recordsTotal: result.totalCount,
                     recordsFiltered: result.totalCount,
@@ -45,35 +45,27 @@
             },
             {
                 targets: 1,
-                data: 'userName',
+                data: 'name',
                 sortable: false
             },
             {
                 targets: 2,
-                data: 'fullName',
+                data: 'loginName',
                 sortable: false
             },
             {
                 targets: 3,
-                data: 'emailAddress',
+                data: 'email',
                 sortable: false
             },
             {
                 targets: 4,
-                data: 'faceImg',
-                sortable: false,
-                render: data => {
-                    console.log(data);
-                    if (data == null) {
-                        return `<img width="50" heigth="50" src="img/logo.png">`; //empty
-                    } else {
-                        return `<img width="50" heigth="50" src="${data}">`;
-                    }
-                }
+                data: 'phoneNumber',
+                sortable: false
             },
             {
                 targets: 5,
-                data: 'isActive',
+                data: 'isDeleted',
                 sortable: false,
                 render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
             },
@@ -124,7 +116,7 @@
         }
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _userService.create(user).done(function () {
+        _memberService.create(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
@@ -149,7 +141,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _userService.delete({
+                    _memberService.delete({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));
@@ -164,8 +156,10 @@
         var userId = $(this).attr("data-user-id");
 
         e.preventDefault();
+        console.log(abp.appPath + 'Users/EditModal?userId=' + userId);
+        console.log(abp.appPath + 'Members/EditMember?userId=' + userId);
         abp.ajax({
-            url: abp.appPath + 'Users/EditModal?userId=' + userId,
+            url: abp.appPath + 'Members/EditMember?userId=' + userId,
             type: 'POST',
             dataType: 'html',
             success: function (content) {
@@ -202,50 +196,4 @@
     });
 
      
-    
-    $('input[type="file"]').change("propertychange", function () {
-        console.log("add");
-        ajaxFileUpload();
-    });
-    function ajaxFileUpload() {
-
-        var fileUpload = $("#FaceImgFile").get(0);
-        var files = fileUpload.files;
-        console.log(files);
-        var data = new FormData();
-        for (var i = 0; i < files.length; i++) {
-            data.append(files[i].name, files[i]);
-        }
-        console.log(data);
-        if (files.length < 1) {
-            console.log("没有数据");
-            return false;
-        }
-        $.ajax({
-            type: "POST",
-            url: 'users/UploadAvatar',
-            contentType: false,
-            processData: false,
-            data: data,
-            success: function (data) {
-                console.log(JSON.stringify(data));
-                //成功之后
-                if (data.success) {
-                    $("#FaceImg").val(data.result);
-                    $("#FaceImgShow").attr("src", data.result);
-                } else {
-                    console.log("失败了");
-                }
-               
-            },
-            error: function () {
-                console.log(JSON.stringify(data));
-            }
-        });
-         
-        $('input[type="file"]').change(function (e) {//再次绑定
-            ajaxFileUpload();
-        })
-        return false;
-    }
 })(jQuery);

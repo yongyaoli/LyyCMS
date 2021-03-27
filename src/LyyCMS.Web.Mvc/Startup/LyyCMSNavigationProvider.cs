@@ -50,7 +50,7 @@ namespace LyyCMS.Web.Startup
                     new MenuItemDefinition(
                         PageNames.About,
                         L("About"),
-                        url: "About",
+                        url: "Member",
                         icon: "fas fa-info-circle"
                     )
                 ).AddItem( // Menu items below is just for demonstration!
