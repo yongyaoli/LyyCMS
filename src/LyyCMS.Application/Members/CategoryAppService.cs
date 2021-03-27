@@ -14,31 +14,32 @@ using Abp.Linq.Extensions;
 
 namespace LyyCMS.Members
 {
-    public class MembersAppService : IMembersAppService
+    public class CategoryAppService : ICategoryAppService
     {
-        private readonly IRepository<Member> _resposotory;
+        private readonly IRepository<Category> _resposotory;
 
-        public MembersAppService(IRepository<Member> repository)
+        public CategoryAppService(IRepository<Category> repository)
         {
             _resposotory = repository;
         }
 
-        public async Task CreateOrUpdateMemberAsync(CreateOrUpdateMemberDtoInput input)
+
+        public async Task CreateOrUpdateCategoryAsync(CreateOrUpdateCategoryDtoInput input)
         {
             if (input.edit.Id.HasValue)
             {
-                await UpdateMemberAsync(input.edit);
+                await UpdateCategoryAsync(input.edit);
             }
             else
             {
-                await CreateMemberAsync(input.edit);
+                await CreateCategoryAsync(input.edit);
             }
 
 
             throw new NotImplementedException();
         }
 
-        public async Task DeleteMemberAsync(EntityDto input)
+        public async Task DeleteCategoryAsync(EntityDto input)
         {
             var p = await _resposotory.GetAsync(input.Id);
             if (p == null)
@@ -48,35 +49,35 @@ namespace LyyCMS.Members
             await _resposotory.DeleteAsync(input.Id);
         }
 
-        public async Task<MemberListDto> GetMemberByIdAsync(NullableIdDto input)
+        public async Task<CategoryListDto> GetCategoryByIdAsync(NullableIdDto input)
         {
             var category = await _resposotory.GetAsync(input.Id.Value);
-            return category.MapTo<MemberListDto>();
+            return category.MapTo<CategoryListDto>();
         }
 
-        public async Task<PagedResultDto<MemberListDto>> GetPagedMemeberAsync(GetMemberInput input)
+        public async Task<PagedResultDto<CategoryListDto>> GetPagedMemeberAsync(GetCategoryInput input)
         {
             var query = _resposotory.GetAll();
             var personcount = await query.CountAsync();
 
             var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
 
-            var dtos = persons.MapTo<List<MemberListDto>>();
-            var pagedReulstMember = new PagedResultDto<MemberListDto>(personcount, dtos);
+            var dtos = persons.MapTo<List<CategoryListDto>>();
+            var pagedReulstMember = new PagedResultDto<CategoryListDto>(personcount, dtos);
 
             return pagedReulstMember;
         }
 
-        protected async Task UpdateMemberAsync(MemberEditDto input)
+        protected async Task UpdateCategoryAsync(CategoryEditDto input)
         {
             var p = await _resposotory.GetAsync(input.Id.Value);
             await _resposotory.UpdateAsync(input.MapTo(p));
 
         }
 
-        protected async Task CreateMemberAsync(MemberEditDto input)
+        protected async Task CreateCategoryAsync(CategoryEditDto input)
         {
-            await _resposotory.InsertAsync(input.MapTo<Member>());
+            await _resposotory.InsertAsync(input.MapTo<Category>());
         }
     }
 }

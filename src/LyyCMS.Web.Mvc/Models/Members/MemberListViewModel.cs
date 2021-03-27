@@ -7,5 +7,7 @@ namespace LyyCMS.Web.Models.Members
 {
     public class MemberListViewModel
     {
+
+        public IReadOnlyList<RoleDto> Roles { get; set; }
     }
 }
