@@ -18,8 +18,9 @@
         KindEditor.ready(function (K) {
             window.editor = K.create('#editor_id', {
                 cssPath: '/kindeditor/plugins/code/prettify.css',
-                uploadJson: 'upload/Kind?Title=qqq&ContextId=1',
-                fileManagerJson: '@Url.Action("KindFileManager", "Upload")',
+                uploadJson: '@Url.Action("KindeditorPicUpload", "Upload")',
+                fileManagerJson: '@Url.Action("KindeditorPicUpload", "Upload")',
+
                 //fileManagerJson: '../asp.net/file_manager_json.ashx',
                 allowFileManager: true,
             });
