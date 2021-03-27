@@ -100,7 +100,7 @@ namespace LyyCMS.Web.Startup
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.WebRootPath, "upload")),
+                    Path.Combine(Directory.GetCurrentDirectory(), "upload")),
                 RequestPath = "/upload",
                 OnPrepareResponse = ctx =>
                 {

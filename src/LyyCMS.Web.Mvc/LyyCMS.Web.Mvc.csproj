@@ -46,7 +46,7 @@
     <PackageReference Include="UEditor.Core" Version="1.0.6" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\libs\" />
+    <Folder Include="upload\image\" />
     <Folder Include="wwwroot\upload\" />
     <Folder Include="wwwroot\view-resources\Views\_Bundles\" />
   </ItemGroup>
