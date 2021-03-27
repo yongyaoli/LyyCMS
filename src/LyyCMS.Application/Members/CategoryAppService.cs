@@ -55,7 +55,7 @@ namespace LyyCMS.Members
             return category.MapTo<CategoryListDto>();
         }
 
-        public async Task<PagedResultDto<CategoryListDto>> GetPagedMemeberAsync(GetCategoryInput input)
+        public async Task<PagedResultDto<CategoryListDto>> GetPagedCategoryAsync(GetCategoryInput input)
         {
             var query = _resposotory.GetAll();
             var personcount = await query.CountAsync();
@@ -67,6 +67,22 @@ namespace LyyCMS.Members
 
             return pagedReulstMember;
         }
+
+
+        public async Task<PagedResultDto<CategoryListDto>> GetPagedAllCategoryAsync()
+        {
+            var query = _resposotory.GetAll();
+            var personcount = await query.CountAsync();
+
+            var persons = await query.ToListAsync();
+
+            var dtos = persons.MapTo<List<CategoryListDto>>();
+            var pagedReulstMember = new PagedResultDto<CategoryListDto>(personcount, dtos);
+
+            return pagedReulstMember;
+        }
+
+
 
         protected async Task UpdateCategoryAsync(CategoryEditDto input)
         {

@@ -16,7 +16,7 @@ namespace LyyCMS.Members
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultDto<CategoryListDto>> GetPagedMemeberAsync(GetCategoryInput input);
+        Task<PagedResultDto<CategoryListDto>> GetPagedCategoryAsync(GetCategoryInput input);
 
 
         Task<CategoryListDto> GetCategoryByIdAsync(NullableIdDto input);
@@ -24,6 +24,8 @@ namespace LyyCMS.Members
         Task CreateOrUpdateCategoryAsync(CreateOrUpdateCategoryDtoInput input);
 
         Task DeleteCategoryAsync(EntityDto input);
+
+        Task<PagedResultDto<CategoryListDto>> GetPagedAllCategoryAsync();
 
     }
 }

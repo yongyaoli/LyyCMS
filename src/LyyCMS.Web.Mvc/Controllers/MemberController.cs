@@ -2,6 +2,7 @@
 using LyyCMS.Controllers;
 using LyyCMS.Members;
 using LyyCMS.Members.Dtos;
+using LyyCMS.Web.Models.Members;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,18 +18,25 @@ namespace LyyCMS.Web.Controllers
 
         private readonly IMembersAppService _membersAppService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ICategoryAppService _categoryAppService;
 
-        public MemberController(IMembersAppService membersAppService, IWebHostEnvironment webHostEnvironment)
+        public MemberController(IMembersAppService membersAppService, 
+            IWebHostEnvironment webHostEnvironment,
+            ICategoryAppService categoryAppService)
         {
             _membersAppService = membersAppService;
             _webHostEnvironment = webHostEnvironment;
+            _categoryAppService = categoryAppService;
         }
 
         public async Task<IActionResult> Index(GetMemberInput input)
         {
-            var dtos = await _membersAppService.GetPagedMemeberAsync(input);
-
-            return View(dtos);
+            var CategoryList = _categoryAppService.GetPagedAllCategoryAsync();
+            var model = new MemberListViewModel
+            {
+                //Categories = CategoryList
+            };
+            return View(model);
         }
 
 
