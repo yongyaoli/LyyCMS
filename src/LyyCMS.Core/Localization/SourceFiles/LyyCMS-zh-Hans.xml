@@ -106,6 +106,10 @@
     <text name="LoginName">登录名</text>
     <text name="Email">邮箱</text>
     <text name="IsDeleted">是否删除</text>
+
+    <text name="CreateNewMember">创建会员</text>
+    <text name="MemberDetails">会员详情</text>
+    <text name="Category">分类</text>
   </texts>
 </localizationDictionary>
 

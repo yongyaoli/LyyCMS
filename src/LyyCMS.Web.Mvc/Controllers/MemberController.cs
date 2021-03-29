@@ -31,10 +31,10 @@ namespace LyyCMS.Web.Controllers
 
         public async Task<IActionResult> Index(GetMemberInput input)
         {
-            var CategoryList = _categoryAppService.GetPagedAllCategoryAsync();
+            var CategoryList = (await _categoryAppService.GetPagedAllCategoryAsync()).Items;
             var model = new MemberListViewModel
             {
-                //Categories = CategoryList
+                Categories = CategoryList
             };
             return View(model);
         }
