@@ -13,6 +13,14 @@ namespace LyyCMS
         public override void PreInitialize()
         {
             Configuration.Authorization.Providers.Add<LyyCMSAuthorizationProvider>();
+
+            //TODO 会员权限
+            //Configuration.Authorization.Providers.Add<MemberAuthorizationProvider>();
+
+            Configuration.Authorization.Providers.Add<VerificationCodeAuthorizationProvider>();
+
+
+            //VerificationCodeDtoAutoMapper.CreateMappings(configuration);
         }
 
         public override void Initialize()
