@@ -4,14 +4,16 @@ using LyyCMS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LyyCMS.Migrations
 {
     [DbContext(typeof(LyyCMSDbContext))]
-    partial class LyyCMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210331062850_VerificationCode")]
+    partial class VerificationCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1320,56 +1322,6 @@ namespace LyyCMS.Migrations
                     b.ToTable("AbpWebhookSubscriptions");
                 });
 
-            modelBuilder.Entity("LyyCMS.Articles.ArticleCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrderNum")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(99);
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("ArticleCategory");
-                });
-
             modelBuilder.Entity("LyyCMS.Authorization.Roles.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -1977,15 +1929,6 @@ namespace LyyCMS.Migrations
                     b.Navigation("WebhookEvent");
                 });
 
-            modelBuilder.Entity("LyyCMS.Articles.ArticleCategory", b =>
-                {
-                    b.HasOne("LyyCMS.Articles.ArticleCategory", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
             modelBuilder.Entity("LyyCMS.Authorization.Roles.Role", b =>
                 {
                     b.HasOne("LyyCMS.Authorization.Users.User", "CreatorUser")
@@ -2109,11 +2052,6 @@ namespace LyyCMS.Migrations
                 });
 
             modelBuilder.Entity("Abp.Organizations.OrganizationUnit", b =>
-                {
-                    b.Navigation("Children");
-                });
-
-            modelBuilder.Entity("LyyCMS.Articles.ArticleCategory", b =>
                 {
                     b.Navigation("Children");
                 });

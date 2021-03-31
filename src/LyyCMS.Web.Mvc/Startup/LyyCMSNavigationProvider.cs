@@ -45,6 +45,13 @@ namespace LyyCMS.Web.Startup
                         icon: "fas fa-theater-masks",
                         permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Roles)
                             )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        PageNames.ArticleCategory,
+                        L("ArticleCategory"),
+                        url: "ArticleCategory",
+                        icon: "fas fa-theater-masks"
+                            )
                 )
                 .AddItem(
                     new MenuItemDefinition(

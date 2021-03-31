@@ -110,6 +110,11 @@
     <text name="CreateNewMember">创建会员</text>
     <text name="MemberDetails">会员详情</text>
     <text name="Category">分类</text>
+
+
+    <text name="ArticleCategory">文章分类</text>
+    <text name="CreateNewArticleCategory">创建文章分类</text>
+    <text name="Parent">父级数据</text>
   </texts>
 </localizationDictionary>
 

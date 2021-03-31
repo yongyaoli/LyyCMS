@@ -5,6 +5,7 @@ using LyyCMS.Authorization.Users;
 using LyyCMS.MultiTenancy;
 using LyyCMS.Members;
 using LyyCMS.EntityMapper.VerificationCodes;
+using LyyCMS.Articles;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -25,16 +26,18 @@ namespace LyyCMS.EntityFrameworkCore
         //验证码
         public DbSet<VerificationCode> VerificationCodes { get; set; }
 
+        public DbSet<ArticleCategory> ArticleCategory { get; set; }
+
 
         //重写创建实体的方法
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Member>().ToTable("Member");
             modelBuilder.Entity<Category>().ToTable("Category");
-
-            //modelBuilder.ApplyConfiguration(new VerificationCodeCfg());
             modelBuilder.Entity<VerificationCode>().ToTable("VerificationCode");
-
+            modelBuilder.Entity<ArticleCategory>().ToTable("ArticleCategory")
+                .Property(x=>x.OrderNum)
+                .HasDefaultValue(99);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -12,5 +12,10 @@
         /// 会员
         /// </summary>
         public const string Members = "Members";
+
+        /// <summary>
+        /// 文章分类
+        /// </summary>
+        public const string ArticleCategory = "ArticleCategory";
     }
 }

@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 namespace LyyCMS.Members.Dtos
 {
     [AutoMapFrom(typeof(Category))]
-    public class CategoryListDto: FullAuditedEntityDto
+    public class CategoryListDto: EntityDto
     {
         /// <summary>
         /// 分类名称
