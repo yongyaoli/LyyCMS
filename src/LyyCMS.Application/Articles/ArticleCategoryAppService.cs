@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using Abp.Linq.Extensions;
 using Abp.AutoMapper;
+using Abp.UI;
 
 namespace LyyCMS.Articles
 {
@@ -44,6 +45,37 @@ namespace LyyCMS.Articles
             var dtos = persons.MapTo<List<ArticleCategoryListDto>>();
 
             return dtos;
+        }
+
+        public async Task<ArticleCategoryListDto> GetArticleCategoryByIdAsync(NullableIdDto input)
+        {
+            var category = await _resposotory.GetAsync(input.Id.Value);
+            return category.MapTo<ArticleCategoryListDto>();
+        }
+
+        public async Task CreateOrUpdateArticleCategoryAsync(ArticleCategoryEditDto input)
+        {
+            int pid = input.ParentId;
+            var category = await _resposotory.GetAsync(pid);
+            //ArticleCategory articleCategory = input.MapTo<ArticleCategory>();
+            ArticleCategory articleCategory = new ArticleCategory();
+            articleCategory.Name = input.Name;
+            articleCategory.OrderNum = input.OrderNum;
+            articleCategory.Description = input.Description;
+
+            articleCategory.Parent = category;
+
+            await _resposotory.InsertAsync(articleCategory);
+        }
+
+        public async Task DeleteArticleCategoryAsync(EntityDto input)
+        {
+            var p = await _resposotory.GetAsync(input.Id);
+            if (p == null)
+            {
+                throw new UserFriendlyException("数据不存在");
+            }
+            await _resposotory.DeleteAsync(input.Id);
         }
     }
 }

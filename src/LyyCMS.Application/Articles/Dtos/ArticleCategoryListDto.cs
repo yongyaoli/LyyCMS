@@ -32,11 +32,11 @@ namespace LyyCMS.Articles.Dtos
         /// <summary>
         /// 父级分类
         /// </summary>
-        public virtual ArticleCategory Parent { get; set; }
+        //public virtual ArticleCategory Parent { get; set; }
 
         /// <summary>
         /// 子级
         /// </summary>
-        public virtual ICollection<ArticleCategory> Children { get; set; }
+        //public virtual ICollection<ArticleCategory> Children { get; set; }
     }
 }

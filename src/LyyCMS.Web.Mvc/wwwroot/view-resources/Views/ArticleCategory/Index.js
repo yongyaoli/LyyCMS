@@ -1,10 +1,11 @@
 ﻿(function ($) {
-    var _userService = abp.services.app.articleCategory,
+    var _articleCategoryService = abp.services.app.articleCategory,
         l = abp.localization.getSource('LyyCMS'),
         _$modal = $('#ArticleCategoryModal'),
         _$form = _$modal.find('form'),
-        _$table = $('#UsersTable');
-    console.log(_userService);
+        _$table = $('#ArticleCategoryTable');
+    console.log(_articleCategoryService);
+    console.log(_articleCategoryService.getPagedArticleCategory);
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
@@ -13,9 +14,9 @@
             var filter = $('#ArticleCategorySearchForm').serializeFormToObject(true);
             filter.maxResultCount = data.length;
             filter.skipCount = data.start;
-
+            console.log(filter);
             abp.ui.setBusy(_$table);
-            _userService.getPagedArticleCategory(filter).done(function (result) {
+            _articleCategoryService.getPagedArticleCategory(filter).done(function (result) {
                 console.log("返回的结果:", result);
                 callback({
                     recordsTotal: result.totalCount,
@@ -106,7 +107,7 @@
         }
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _userService.create(user).done(function () {
+        _articleCategoryService.createOrUpdateArticleCategory(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
@@ -131,7 +132,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _userService.delete({
+                    _articleCategoryService.delete({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));

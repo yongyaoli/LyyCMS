@@ -29,14 +29,7 @@ namespace LyyCMS.Articles.Dtos
         [Required]
         public int OrderNum { get; set; }
 
-        /// <summary>
-        /// 父级分类
-        /// </summary>
-        public virtual ArticleCategory Parent { get; set; }
 
-        /// <summary>
-        /// 子级
-        /// </summary>
-        public virtual ICollection<ArticleCategory> Children { get; set; }
+        public int ParentId { get; set; }
     }
 }

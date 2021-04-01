@@ -16,5 +16,12 @@ namespace LyyCMS.Articles
 
         Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync();
 
+
+        Task<ArticleCategoryListDto> GetArticleCategoryByIdAsync(NullableIdDto input);
+
+        Task CreateOrUpdateArticleCategoryAsync(ArticleCategoryEditDto input);
+
+        Task DeleteArticleCategoryAsync(EntityDto input);
+
     }
 }

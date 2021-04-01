@@ -23,6 +23,7 @@ namespace LyyCMS.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             var articleCategories = (await _categoryAppService.GetAllArticleCategoryListAsync());
             var model = new ArticleCategoryListViewModel
             {
