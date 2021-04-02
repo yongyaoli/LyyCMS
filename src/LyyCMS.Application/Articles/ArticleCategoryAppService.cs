@@ -67,19 +67,8 @@ namespace LyyCMS.Articles
             var query = _resposotory.GetAll();
             var count = await query.CountAsync();
             var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
-            //var dtos = persons.MapTo<List<ArticleCategoryDto>>();
-            List<ArticleCategoryDto> articleCategoryDtos = new List<ArticleCategoryDto>();
-            foreach(ArticleCategory articleCategory in persons)
-            {
-                ArticleCategoryDto categoryDto = new ArticleCategoryDto();
-                categoryDto.Name = articleCategory.Name;
-                categoryDto.Description = articleCategory.Description;
-                categoryDto.OrderNum = articleCategory.OrderNum;
-                categoryDto.ParentId = articleCategory.Parent?.Id;
-                categoryDto.ParentName = articleCategory.Parent?.Name;
-                articleCategoryDtos.Add(categoryDto);
-            }
-            var pagedReulstArticleCategory = new PagedResultDto<ArticleCategoryDto>(count, articleCategoryDtos);
+            var dtos = persons.MapTo<List<ArticleCategoryDto>>();
+            var pagedReulstArticleCategory = new PagedResultDto<ArticleCategoryDto>(count, dtos);
             
             return pagedReulstArticleCategory;
         }
@@ -95,16 +84,7 @@ namespace LyyCMS.Articles
             articleCategory.Parent = category;
 
             await _resposotory.InsertAsync(articleCategory);
-
-            ArticleCategoryDto articleCategoryDto = new ArticleCategoryDto();
-            articleCategoryDto.Id = articleCategory.Id;
-            articleCategoryDto.Name = articleCategory.Name;
-            articleCategoryDto.Description = articleCategory.Description;
-            articleCategoryDto.ParentId = articleCategory.Parent?.Id;
-            articleCategoryDto.ParentName = articleCategory.Parent?.Name;
-
-
-            return articleCategoryDto;
+            return articleCategory.MapTo<ArticleCategoryDto>();
         }
 
         public async Task<ArticleCategoryDto> UpdateAsync(ArticleCategoryEditDto input)

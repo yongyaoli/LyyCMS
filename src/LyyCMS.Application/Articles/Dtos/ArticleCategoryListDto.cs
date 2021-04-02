@@ -3,6 +3,7 @@ using Abp.AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,11 +33,13 @@ namespace LyyCMS.Articles.Dtos
         /// <summary>
         /// 父级ID
         /// </summary>
+        [NotMapped]
         public int ParentId { get; set; }
 
         /// <summary>
         /// 父级名称
         /// </summary>
+        [NotMapped]
         public string ParentName { get; set; }
 
         /// <summary>
