@@ -30,6 +30,16 @@ namespace LyyCMS.Articles.Dtos
         public int OrderNum { get; set; }
 
         /// <summary>
+        /// 父级ID
+        /// </summary>
+        public int ParentId { get; set; }
+
+        /// <summary>
+        /// 父级名称
+        /// </summary>
+        public string ParentName { get; set; }
+
+        /// <summary>
         /// 父级分类
         /// </summary>
         //public virtual ArticleCategory Parent { get; set; }

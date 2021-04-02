@@ -43,7 +43,13 @@ namespace LyyCMS.Articles
             var persons = await query.ToListAsync();
 
             var dtos = persons.MapTo<List<ArticleCategoryListDto>>();
-
+            foreach(ArticleCategoryListDto listDto in dtos){
+                ArticleCategory parent = persons.FirstOrDefault(x => x.Id == listDto.Id).Parent;
+                listDto.ParentId = parent == null ? 0 : parent.Id;
+                listDto.ParentName = parent == null ? "无" : parent.Name;
+            }
+            //order
+            dtos = dtos.OrderBy(x => x.OrderNum).OrderBy(x => x.ParentId).ToList();
             return dtos;
         }
 

@@ -62,6 +62,11 @@
             },
             {
                 targets: 4,
+                data: 'parentName',
+                sortable: false
+            },
+            {
+                targets: 5,
                 data: null,
                 sortable: false,
                 autoWidth: false,
