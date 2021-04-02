@@ -16,7 +16,8 @@
             filter.skipCount = data.start;
             console.log(filter);
             abp.ui.setBusy(_$table);
-            _articleCategoryService.getPagedArticleCategory(filter).done(function (result) {
+            //getPagedArticleCategory
+            _articleCategoryService.getAll(filter).done(function (result) {
                 console.log("返回的结果:", result);
                 callback({
                     recordsTotal: result.totalCount,
@@ -102,17 +103,17 @@
         }
 
         var user = _$form.serializeFormToObject();
-        user.roleNames = [];
-        var _$roleCheckboxes = _$form[0].querySelectorAll("input[name='role']:checked");
-        if (_$roleCheckboxes) {
-            for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
-                var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
-                user.roleNames.push(_$roleCheckbox.val());
-            }
-        }
+        //user.roleNames = [];
+        //var _$roleCheckboxes = _$form[0].querySelectorAll("input[name='role']:checked");
+        //if (_$roleCheckboxes) {
+        //    for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
+        //        var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
+        //        user.roleNames.push(_$roleCheckbox.val());
+        //    }
+        //}
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _articleCategoryService.createOrUpdateArticleCategory(user).done(function () {
+        _articleCategoryService.create(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));

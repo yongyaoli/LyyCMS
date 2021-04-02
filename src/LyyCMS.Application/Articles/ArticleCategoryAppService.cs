@@ -5,16 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using Abp.Linq.Extensions;
 using Abp.AutoMapper;
 using Abp.UI;
+using Abp.Application.Services;
 
 namespace LyyCMS.Articles
 {
-    public class ArticleCategoryAppService : IArticleCategoryAppService
+    public class ArticleCategoryAppService : 
+        IAsyncCrudAppService<ArticleCategoryDto, int, PagedArticleCategoryResultRequestDto, CreateArticleCategoryDto, ArticleCategoryDto>,
+        IArticleCategoryAppService
     {
 
         private readonly IRepository<ArticleCategory> _resposotory;
@@ -37,6 +39,7 @@ namespace LyyCMS.Articles
             return pagedReulstArticleCategory;
         }
 
+        [Obsolete("use GetAllAsync")]
         public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
         {
             var query = _resposotory.GetAll();
@@ -53,28 +56,73 @@ namespace LyyCMS.Articles
             return dtos;
         }
 
-        public async Task<ArticleCategoryListDto> GetArticleCategoryByIdAsync(NullableIdDto input)
+        public async Task<ArticleCategoryDto> GetAsync(EntityDto<int> input)
         {
-            var category = await _resposotory.GetAsync(input.Id.Value);
-            return category.MapTo<ArticleCategoryListDto>();
+            var category = await _resposotory.GetAsync(input.Id);
+            return category.MapTo<ArticleCategoryDto>();
         }
 
-        public async Task CreateOrUpdateArticleCategoryAsync(ArticleCategoryEditDto input)
+        public async Task<PagedResultDto<ArticleCategoryDto>> GetAllAsync(PagedArticleCategoryResultRequestDto input)
+        {
+            var query = _resposotory.GetAll();
+            var count = await query.CountAsync();
+            var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
+            //var dtos = persons.MapTo<List<ArticleCategoryDto>>();
+            List<ArticleCategoryDto> articleCategoryDtos = new List<ArticleCategoryDto>();
+            foreach(ArticleCategory articleCategory in persons)
+            {
+                ArticleCategoryDto categoryDto = new ArticleCategoryDto();
+                categoryDto.Name = articleCategory.Name;
+                categoryDto.Description = articleCategory.Description;
+                categoryDto.OrderNum = articleCategory.OrderNum;
+                categoryDto.ParentId = articleCategory.Parent?.Id;
+                categoryDto.ParentName = articleCategory.Parent?.Name;
+                articleCategoryDtos.Add(categoryDto);
+            }
+            var pagedReulstArticleCategory = new PagedResultDto<ArticleCategoryDto>(count, articleCategoryDtos);
+            
+            return pagedReulstArticleCategory;
+        }
+
+        public async Task<ArticleCategoryDto> CreateAsync(CreateArticleCategoryDto input)
         {
             int pid = input.ParentId;
             var category = await _resposotory.GetAsync(pid);
-            //ArticleCategory articleCategory = input.MapTo<ArticleCategory>();
             ArticleCategory articleCategory = new ArticleCategory();
             articleCategory.Name = input.Name;
             articleCategory.OrderNum = input.OrderNum;
             articleCategory.Description = input.Description;
-
             articleCategory.Parent = category;
 
             await _resposotory.InsertAsync(articleCategory);
+
+            ArticleCategoryDto articleCategoryDto = new ArticleCategoryDto();
+            articleCategoryDto.Id = articleCategory.Id;
+            articleCategoryDto.Name = articleCategory.Name;
+            articleCategoryDto.Description = articleCategory.Description;
+            articleCategoryDto.ParentId = articleCategory.Parent?.Id;
+            articleCategoryDto.ParentName = articleCategory.Parent?.Name;
+
+
+            return articleCategoryDto;
         }
 
-        public async Task DeleteArticleCategoryAsync(EntityDto input)
+        public async Task<ArticleCategoryDto> UpdateAsync(ArticleCategoryEditDto input)
+        {
+            int pid = input.ParentId;
+            var category = await _resposotory.GetAsync(pid);
+            ArticleCategory articleCategory = new ArticleCategory();
+            articleCategory.Name = input.Name;
+            articleCategory.OrderNum = input.OrderNum;
+            articleCategory.Description = input.Description;
+            articleCategory.Parent = category;
+
+            await _resposotory.UpdateAsync(articleCategory);
+
+            return articleCategory.MapTo<ArticleCategoryDto>();
+        }
+
+        public async Task DeleteAsync(EntityDto<int> input)
         {
             var p = await _resposotory.GetAsync(input.Id);
             if (p == null)
@@ -82,6 +130,11 @@ namespace LyyCMS.Articles
                 throw new UserFriendlyException("数据不存在");
             }
             await _resposotory.DeleteAsync(input.Id);
+        }
+
+        public Task<ArticleCategoryDto> UpdateAsync(ArticleCategoryDto input)
+        {
+            throw new NotImplementedException();
         }
     }
 }
