@@ -11,16 +11,20 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using Abp.Linq.Extensions;
+using LyyCMS.Articles.Dtos;
+using Abp.Application.Services;
 
 namespace LyyCMS.Members
 {
-    public class MembersAppService : IMembersAppService
+    public class MembersAppService :
+        AsyncCrudAppService<Member, MemberDto, int, PagedMemberResultRequestDto, CreateMemberDto, MemberDto>,
+        IMembersAppService
     {
         private readonly IRepository<Member> _resposotory;
 
-        public MembersAppService(IRepository<Member> repository)
+        public MembersAppService(IRepository<Member> repository) : base(repository)
         {
-            _resposotory = repository;
+            //_resposotory = repository;
         }
 
         public async Task CreateOrUpdateMemberAsync(CreateOrUpdateMemberDtoInput input)
@@ -77,6 +81,31 @@ namespace LyyCMS.Members
         protected async Task CreateMemberAsync(MemberEditDto input)
         {
             await _resposotory.InsertAsync(input.MapTo<Member>());
+        }
+
+        public Task<MemberDto> GetAsync(EntityDto<int> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PagedResultDto<MemberDto>> GetAllAsync(PagedMemberResultRequestDto input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MemberDto> CreateAsync(CreateMemberDto input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MemberDto> UpdateAsync(MemberDto input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(EntityDto<int> input)
+        {
+            throw new NotImplementedException();
         }
     }
 }

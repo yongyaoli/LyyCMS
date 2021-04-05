@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace LyyCMS.Members
 {
-    public interface IMembersAppService : IApplicationService
+    public interface IMembersAppService :
+        IAsyncCrudAppService<MemberDto, int, PagedMemberResultRequestDto, CreateMemberDto, MemberDto>
     {
         /// <summary>
         /// 分页获取会员信息

@@ -113,7 +113,7 @@
         //}
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _articleCategoryService.create(user).done(function () {
+        _articleCategoryService.createEntity(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
@@ -154,11 +154,11 @@
 
         e.preventDefault();
         abp.ajax({
-            url: abp.appPath + 'ArticleCategory/EditModal?userId=' + userId,
+            url: abp.appPath + 'ArticleCategory/EditModal?id=' + userId,
             type: 'POST',
             dataType: 'html',
             success: function (content) {
-                $('#UserEditModal div.modal-content').html(content);
+                $('#ArticleCategoryEditModal div.modal-content').html(content);
             },
             error: function (e) { }
         });

@@ -11,17 +11,18 @@ using Abp.Linq.Extensions;
 using Abp.AutoMapper;
 using Abp.UI;
 using Abp.Application.Services;
+using Abp.Domain.Entities;
 
 namespace LyyCMS.Articles
 {
-    public class ArticleCategoryAppService : 
-        IAsyncCrudAppService<ArticleCategoryDto, int, PagedArticleCategoryResultRequestDto, CreateArticleCategoryDto, ArticleCategoryDto>,
+    public class ArticleCategoryAppService :
+        AsyncCrudAppService<ArticleCategory, ArticleCategoryDto, int, PagedArticleCategoryResultRequestDto, CreateArticleCategoryDto, ArticleCategoryDto>,
         IArticleCategoryAppService
     {
 
         private readonly IRepository<ArticleCategory> _resposotory;
 
-        public ArticleCategoryAppService(IRepository<ArticleCategory> repository)
+        public ArticleCategoryAppService(IRepository<ArticleCategory> repository) : base(repository)
         {
             _resposotory = repository;
         }
@@ -39,7 +40,7 @@ namespace LyyCMS.Articles
             return pagedReulstArticleCategory;
         }
 
-        [Obsolete("use GetAllAsync")]
+
         public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
         {
             var query = _resposotory.GetAll();
@@ -62,18 +63,18 @@ namespace LyyCMS.Articles
             return category.MapTo<ArticleCategoryDto>();
         }
 
-        public async Task<PagedResultDto<ArticleCategoryDto>> GetAllAsync(PagedArticleCategoryResultRequestDto input)
-        {
-            var query = _resposotory.GetAll();
-            var count = await query.CountAsync();
-            var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
-            var dtos = persons.MapTo<List<ArticleCategoryDto>>();
-            var pagedReulstArticleCategory = new PagedResultDto<ArticleCategoryDto>(count, dtos);
+        //public async Task<PagedResultDto<ArticleCategoryDto>> GetAllAsync(PagedArticleCategoryResultRequestDto input)
+        //{
+        //    var query = _resposotory.GetAll();
+        //    var count = await query.CountAsync();
+        //    var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
+        //    var dtos = persons.MapTo<List<ArticleCategoryDto>>();
+        //    var pagedReulstArticleCategory = new PagedResultDto<ArticleCategoryDto>(count, dtos);
             
-            return pagedReulstArticleCategory;
-        }
+        //    return pagedReulstArticleCategory;
+        //}
 
-        public async Task<ArticleCategoryDto> CreateAsync(CreateArticleCategoryDto input)
+        public async Task<ArticleCategoryDto> CreateEntityAsync(CreateArticleCategoryDto input)
         {
             int pid = input.ParentId;
             var category = await _resposotory.GetAsync(pid);
@@ -84,37 +85,33 @@ namespace LyyCMS.Articles
             articleCategory.Parent = category;
 
             await _resposotory.InsertAsync(articleCategory);
-            return articleCategory.MapTo<ArticleCategoryDto>();
+            //return articleCategory.MapTo<ArticleCategoryDto>();
+            return MapToEntityDto(articleCategory);
         }
 
-        public async Task<ArticleCategoryDto> UpdateAsync(ArticleCategoryEditDto input)
+        public async Task<ArticleCategoryDto> UpdateEntryAsync(ArticleCategoryEditDto input)
         {
-            int pid = input.ParentId;
-            var category = await _resposotory.GetAsync(pid);
-            ArticleCategory articleCategory = new ArticleCategory();
-            articleCategory.Name = input.Name;
-            articleCategory.OrderNum = input.OrderNum;
-            articleCategory.Description = input.Description;
-            articleCategory.Parent = category;
 
+            var articleCategory = await GetEntityByIdAsync(input.Id);
+
+            ObjectMapper.Map(input, articleCategory);
+            var parent = await GetEntityByIdAsync(input.ParentId);
+            articleCategory.Parent = parent;
             await _resposotory.UpdateAsync(articleCategory);
-
-            return articleCategory.MapTo<ArticleCategoryDto>();
+            return MapToEntityDto(articleCategory);
         }
 
-        public async Task DeleteAsync(EntityDto<int> input)
+
+        protected override async Task<ArticleCategory> GetEntityByIdAsync(int id)
         {
-            var p = await _resposotory.GetAsync(input.Id);
-            if (p == null)
+            var user = await Repository.GetAllIncluding(x => x.Children).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
             {
-                throw new UserFriendlyException("数据不存在");
+                throw new EntityNotFoundException(typeof(ArticleCategory), id);
             }
-            await _resposotory.DeleteAsync(input.Id);
-        }
 
-        public Task<ArticleCategoryDto> UpdateAsync(ArticleCategoryDto input)
-        {
-            throw new NotImplementedException();
+            return user;
         }
     }
 }

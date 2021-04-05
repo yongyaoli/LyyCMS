@@ -1,0 +1,49 @@
+﻿@using Abp.Authorization.Users
+@using LyyCMS.Web.Models.Common.Modals
+@using LyyCMS.Web.Models.Articles
+@model EditArticleCategoryModalViewModel
+@{ Layout = null; }
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditArticleCategory")))
+<form name="UserEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.ArticleCategory.Id" />
+    <div class="modal-body">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" role="tab" href="#edit-user-details">@L("ArticleCategoryDetails")</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#edit-user-roles">@L("Parent")</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container active" id="edit-user-details">
+                
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="name">@L("Name")</label>
+                    <div class="col-md-9">
+                        <input id="name" type="text" class="form-control" name="Name" value="@Model.ArticleCategory.Name" required maxlength="@AbpUserBase.MaxNameLength">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="surname">@L("Description")</label>
+                    <div class="col-md-9">
+                        <input id="description" type="text" class="form-control" name="Description" value="@Model.ArticleCategory.Description" required maxlength="@AbpUserBase.MaxSurnameLength">
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane container" id="edit-user-roles">
+                    <div class="row">
+                        @foreach (var role in Model.Parents)
+                        {
+            <div class="col-md-6">
+                <input type="checkbox" name="parent" value="@role.Id" title="@role.Description" class="filled-in" id="@($"role{role.Id}")"  />
+                <label for="@($"role{role.Id}")" title="@role.Name">@role.Name</label>
+            </div>}
+                    </div>
+                </div>
+            </div>
+        </div>
+        @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/ArticleCategory/_EditModal.js" asp-append-version="true"></script>
