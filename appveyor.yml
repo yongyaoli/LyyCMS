@@ -1,3 +1,20 @@
 version: 1.0.{build}
+image: Visual Studio 2019
+configuration: Release
+platform: Any CPU
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  version_prefix: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 build:
+  project: LyyCMS.slm
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  publish_aspnet_core: true
   verbosity: minimal
