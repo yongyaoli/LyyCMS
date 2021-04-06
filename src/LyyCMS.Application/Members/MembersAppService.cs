@@ -83,29 +83,29 @@ namespace LyyCMS.Members
             await _resposotory.InsertAsync(input.MapTo<Member>());
         }
 
-        public Task<MemberDto> GetAsync(EntityDto<int> input)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<MemberDto> GetAsync(EntityDto<int> input)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<PagedResultDto<MemberDto>> GetAllAsync(PagedMemberResultRequestDto input)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<PagedResultDto<MemberDto>> GetAllAsync(PagedMemberResultRequestDto input)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<MemberDto> CreateAsync(CreateMemberDto input)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<MemberDto> CreateAsync(CreateMemberDto input)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<MemberDto> UpdateAsync(MemberDto input)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<MemberDto> UpdateAsync(MemberDto input)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task DeleteAsync(EntityDto<int> input)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task DeleteAsync(EntityDto<int> input)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

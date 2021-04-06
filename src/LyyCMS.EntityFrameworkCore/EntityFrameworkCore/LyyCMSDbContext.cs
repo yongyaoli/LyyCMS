@@ -28,6 +28,8 @@ namespace LyyCMS.EntityFrameworkCore
 
         public DbSet<ArticleCategory> ArticleCategory { get; set; }
 
+        public DbSet<Article> Article { get; set; }
+
 
         //重写创建实体的方法
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,6 +40,10 @@ namespace LyyCMS.EntityFrameworkCore
             modelBuilder.Entity<ArticleCategory>().ToTable("ArticleCategory")
                 .Property(x=>x.OrderNum)
                 .HasDefaultValue(99);
+
+            modelBuilder.Entity<Article>().ToTable("Article")
+                .Property(x => x.status)
+                .HasDefaultValue(0);
 
             base.OnModelCreating(modelBuilder);
         }

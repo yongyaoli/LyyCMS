@@ -57,11 +57,11 @@ namespace LyyCMS.Articles
             return dtos;
         }
 
-        public async Task<ArticleCategoryDto> GetAsync(EntityDto<int> input)
-        {
-            var category = await _resposotory.GetAsync(input.Id);
-            return category.MapTo<ArticleCategoryDto>();
-        }
+        //public async Task<ArticleCategoryDto> GetAsync(EntityDto<int> input)
+        //{
+        //    var category = await _resposotory.GetAsync(input.Id);
+        //    return category.MapTo<ArticleCategoryDto>();
+        //}
 
         //public async Task<PagedResultDto<ArticleCategoryDto>> GetAllAsync(PagedArticleCategoryResultRequestDto input)
         //{
