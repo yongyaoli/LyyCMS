@@ -3,8 +3,9 @@
 #### 基于Abp的后台管理系统  | [English](README.en.md)
 
 
-<img alt="GitHub" src="https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square">
-
+[![MIT](https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square)](https://yongyaoli/LyyCMS)
+[![Abp](https://img.shields.io/nuget/v/Abp.svg?style=flat-square)](https://www.nuget.org/packages/Abp/6.0.0)
+[![NuGet Download](https://img.shields.io/nuget/dt/LyyCMS.svg?style=flat-square)](https://www.nuget.org/packages/LyyCMS)
 
 ---
 #### 关于Abp
