@@ -4,11 +4,12 @@
 
 
 [![MIT](https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square)](https://github.com/yongyaoli/LyyCMS/blob/main/LICENSE)
-[![Abp](https://img.shields.io/nuget/v/Abp.svg?style=flat-square)](https://www.nuget.org/packages/Abp/6.0.0)
 [![NuGet Download](https://img.shields.io/nuget/dt/LyyCMS.svg?style=flat-square)](https://www.nuget.org/packages/LyyCMS)
 
 ---
 #### 关于Abp
+
+[![Abp](https://img.shields.io/nuget/v/Abp.svg?style=flat-square)](https://www.nuget.org/packages/Abp/6.0.0)
 [Abp官网](https://aspnetboilerplate.com/)
 
 [Abp](https://abp.io/)
