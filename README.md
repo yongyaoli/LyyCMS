@@ -2,6 +2,11 @@
 ---
 #### 基于Abp的后台管理系统  | [English](README.en.md)
 
+
+    ![GitHub](https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square)
+
+
+
 ---
 #### 关于Abp
 [Abp官网](https://aspnetboilerplate.com/)
