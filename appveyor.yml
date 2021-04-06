@@ -12,7 +12,7 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 build:
-  project: LyyCMS.slm
+  project: LyyCMS.sln
   publish_nuget: true
   publish_nuget_symbols: true
   include_nuget_references: true
