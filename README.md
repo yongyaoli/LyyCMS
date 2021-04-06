@@ -3,8 +3,7 @@
 #### 基于Abp的后台管理系统  | [English](README.en.md)
 
 
-    ![GitHub](https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square)
-
+<img alt="GitHub" src="https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square">
 
 
 ---
