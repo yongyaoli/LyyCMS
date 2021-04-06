@@ -1,11 +1,5 @@
 version: 1.0.{build}
 image: Visual Studio 2019
-configuration: Release
-platform: Any CPU
 build:
   project: LyyCMS.sln
-  publish_nuget: true
-  publish_nuget_symbols: true
-  include_nuget_references: true
-  publish_aspnet_core: true
   verbosity: minimal
