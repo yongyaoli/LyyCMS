@@ -9,7 +9,7 @@
 ---
 #### 关于Abp
 [Abp官网](https://aspnetboilerplate.com/)  
-[![Abp](https://img.shields.io/nuget/v/Abp.svg?style=flat-square)](https://www.nuget.org/packages/Abp/6.0.0)
+[![Abp](https://img.shields.io/nuget/v/Abp.svg?style=flat-square)](https://www.nuget.org/packages/Abp)
 
 
 [Abp](https://abp.io/)
