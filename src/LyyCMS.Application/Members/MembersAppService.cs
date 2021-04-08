@@ -24,7 +24,7 @@ namespace LyyCMS.Members
 
         public MembersAppService(IRepository<Member> repository) : base(repository)
         {
-            //_resposotory = repository;
+            _resposotory = repository;
         }
 
         public async Task CreateOrUpdateMemberAsync(CreateOrUpdateMemberDtoInput input)
@@ -55,7 +55,7 @@ namespace LyyCMS.Members
         public async Task<MemberListDto> GetMemberByIdAsync(NullableIdDto input)
         {
             var category = await _resposotory.GetAsync(input.Id.Value);
-            return category.MapTo<MemberListDto>();
+            return ObjectMapper.Map<MemberListDto>(category);
         }
 
         public async Task<PagedResultDto<MemberListDto>> GetPagedMemeberAsync(GetMemberInput input)
@@ -63,9 +63,8 @@ namespace LyyCMS.Members
             var query = _resposotory.GetAll();
             var personcount = await query.CountAsync();
 
-            var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
-
-            var dtos = persons.MapTo<List<MemberListDto>>();
+            var members = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
+            var dtos = ObjectMapper.Map<List<MemberListDto>>(members);
             var pagedReulstMember = new PagedResultDto<MemberListDto>(personcount, dtos);
 
             return pagedReulstMember;
@@ -83,29 +82,14 @@ namespace LyyCMS.Members
             await _resposotory.InsertAsync(input.MapTo<Member>());
         }
 
-        //public Task<MemberDto> GetAsync(EntityDto<int> input)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task RegisterMember(CreateOrUpdateMemberDtoInput input)
+        {
+            var member = input;
+            member.edit.LoginPass = "123456";
+            var entity = ObjectMapper.Map<Member>(member);
 
-        //public Task<PagedResultDto<MemberDto>> GetAllAsync(PagedMemberResultRequestDto input)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            await _resposotory.InsertAsync(entity);
 
-        //public Task<MemberDto> CreateAsync(CreateMemberDto input)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<MemberDto> UpdateAsync(MemberDto input)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task DeleteAsync(EntityDto<int> input)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        }
     }
 }

@@ -11,7 +11,7 @@ html {
 /* main sidebar not under model */
 .modal {
     /*z-index: 1110;*/
-    z-index: 110;
+    z-index: 1110;
 }
 
 .form-group.required .col-form-label:after {
@@ -34,4 +34,8 @@ html {
 
 .modal-backdrop{
     z-index:100;
+}
+
+.modal-open .modal{
+    top:30px;
 }

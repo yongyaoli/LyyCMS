@@ -33,8 +33,7 @@ namespace LyyCMS.Articles
             var personcount = await query.CountAsync();
 
             var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
-
-            var dtos = persons.MapTo<List<ArticleCategoryListDto>>();
+            var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(persons);
             var pagedReulstArticleCategory = new PagedResultDto<ArticleCategoryListDto>(personcount, dtos);
 
             return pagedReulstArticleCategory;
@@ -45,8 +44,7 @@ namespace LyyCMS.Articles
         {
             var query = _resposotory.GetAll();
             var persons = await query.ToListAsync();
-
-            var dtos = persons.MapTo<List<ArticleCategoryListDto>>();
+            var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(persons);
             foreach(ArticleCategoryListDto listDto in dtos){
                 ArticleCategory parent = persons.FirstOrDefault(x => x.Id == listDto.Id).Parent;
                 listDto.ParentId = parent == null ? 0 : parent.Id;
@@ -57,22 +55,6 @@ namespace LyyCMS.Articles
             return dtos;
         }
 
-        //public async Task<ArticleCategoryDto> GetAsync(EntityDto<int> input)
-        //{
-        //    var category = await _resposotory.GetAsync(input.Id);
-        //    return category.MapTo<ArticleCategoryDto>();
-        //}
-
-        //public async Task<PagedResultDto<ArticleCategoryDto>> GetAllAsync(PagedArticleCategoryResultRequestDto input)
-        //{
-        //    var query = _resposotory.GetAll();
-        //    var count = await query.CountAsync();
-        //    var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
-        //    var dtos = persons.MapTo<List<ArticleCategoryDto>>();
-        //    var pagedReulstArticleCategory = new PagedResultDto<ArticleCategoryDto>(count, dtos);
-            
-        //    return pagedReulstArticleCategory;
-        //}
 
         public async Task<ArticleCategoryDto> CreateEntityAsync(CreateArticleCategoryDto input)
         {
@@ -85,7 +67,6 @@ namespace LyyCMS.Articles
             articleCategory.Parent = category;
 
             await _resposotory.InsertAsync(articleCategory);
-            //return articleCategory.MapTo<ArticleCategoryDto>();
             return MapToEntityDto(articleCategory);
         }
 

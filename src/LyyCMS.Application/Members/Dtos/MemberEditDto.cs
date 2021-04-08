@@ -32,8 +32,6 @@ namespace LyyCMS.Members.Dtos
         /// <summary>
         /// 登录密码
         /// </summary>
-        [Required]
-        [MaxLength(32)]
         public string LoginPass { get; set; }
 
         /// <summary>

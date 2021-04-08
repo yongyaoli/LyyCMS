@@ -90,12 +90,12 @@
     });
 
     _$form.validate({
-        rules: {
-            Password: "required",
-            ConfirmPassword: {
-                equalTo: "#Password"
-            }
-        }
+        //rules: {
+        //    Password: "required",
+        //    ConfirmPassword: {
+        //        equalTo: "#Password"
+        //    }
+        //}
     });
 
     _$form.find('.save-button').on('click', (e) => {
@@ -116,7 +116,7 @@
         }
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _memberService.create(user).done(function () {
+        _memberService.RegisterMember(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));

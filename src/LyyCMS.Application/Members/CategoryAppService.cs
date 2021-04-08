@@ -60,9 +60,9 @@ namespace LyyCMS.Members
             var query = _resposotory.GetAll();
             var personcount = await query.CountAsync();
 
-            var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
-
-            var dtos = persons.MapTo<List<CategoryListDto>>();
+            var categories = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
+            //var dtos = AutoMapperObjectMapper.
+            var dtos = categories.MapTo<List<CategoryListDto>>();
             var pagedReulstMember = new PagedResultDto<CategoryListDto>(personcount, dtos);
 
             return pagedReulstMember;

@@ -18,6 +18,7 @@ using LyyCMS.Members;
 using LyyCMS.Members.Dtos;
 using LyyCMS.Members.DomainService;
 using LyyCMS.Authorization;
+using Abp.Application.Services;
 
 namespace LyyCMS.Members
 {
@@ -25,26 +26,17 @@ namespace LyyCMS.Members
     /// 验证码应用层服务的接口实现方法
     ///</summary>
     //[AbpAuthorize]
-    public class VerificationCodeAppService : LyyCMSAppServiceBase, IVerificationCodeAppService
+    public class VerificationCodeAppService :
+        AsyncCrudAppService<VerificationCode, VerificationCodeDto, int, PagedCommonResultRequestDto, CreateVerificationCodeDto, VerificationCodeDto>,
+        IVerificationCodeAppService
     {
-        private readonly IRepository<VerificationCode, int>
-            _verificationCodeRepository;
-
-        //private readonly IVerificationCodeListExcelExporter _verificationCodeListExcelExporter;
-
-        private readonly IVerificationCodeManager _verificationCodeManager;
+        private readonly IRepository<VerificationCode> _resposotory;
         /// <summary>
         /// 构造函数
         /// </summary>
-        public VerificationCodeAppService(
-        IRepository<VerificationCode, int>
-verificationCodeRepository
-            , IVerificationCodeManager verificationCodeManager
-            )
+        public VerificationCodeAppService(IRepository<VerificationCode> repository) : base(repository)
         {
-            _verificationCodeRepository = verificationCodeRepository;
-            _verificationCodeManager = verificationCodeManager;
-
+            _resposotory = repository;
         }
 
 
@@ -53,11 +45,11 @@ verificationCodeRepository
         ///</summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [AbpAuthorize(VerificationCodePermissions.VerificationCode_Query)]
+        //[AbpAuthorize(VerificationCodePermissions.VerificationCode_Query)]
         public async Task<PagedResultDto<VerificationCodeListDto>> GetPaged(GetVerificationCodesInput input)
         {
 
-            var query = _verificationCodeRepository.GetAll()
+            var query = _resposotory.GetAll()
             .WhereIf(!input.FilterText.IsNullOrWhiteSpace(), a =>
                           //模糊搜索member
                           a.member.Contains(input.FilterText) ||
@@ -81,10 +73,10 @@ verificationCodeRepository
         /// <summary>
         /// 通过指定id获取VerificationCodeListDto信息
         /// </summary>
-        [AbpAuthorize(VerificationCodePermissions.VerificationCode_Query)]
+        //[AbpAuthorize(VerificationCodePermissions.VerificationCode_Query)]
         public async Task<VerificationCodeListDto> GetById(EntityDto<int> input)
         {
-            var entity = await _verificationCodeRepository.GetAsync(input.Id);
+            var entity = await _resposotory.GetAsync(input.Id);
 
             var dto = ObjectMapper.Map<VerificationCodeListDto>(entity);
             return dto;
@@ -95,7 +87,7 @@ verificationCodeRepository
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [AbpAuthorize(VerificationCodePermissions.VerificationCode_Create, VerificationCodePermissions.VerificationCode_Edit)]
+        //[AbpAuthorize(VerificationCodePermissions.VerificationCode_Create, VerificationCodePermissions.VerificationCode_Edit)]
         public async Task<GetVerificationCodeForEditOutput> GetForEdit(NullableIdDto<int> input)
         {
             var output = new GetVerificationCodeForEditOutput();
@@ -103,16 +95,13 @@ verificationCodeRepository
 
             if (input.Id.HasValue)
             {
-                var entity = await _verificationCodeRepository.GetAsync(input.Id.Value);
+                var entity = await _resposotory.GetAsync(input.Id.Value);
                 editDto = ObjectMapper.Map<VerificationCodeEditDto>(entity);
             }
             else
             {
                 editDto = new VerificationCodeEditDto();
             }
-
-
-
             output.VerificationCode = editDto;
             return output;
         }
@@ -141,14 +130,13 @@ verificationCodeRepository
         /// <summary>
         /// 新增验证码
         /// </summary>
-        [AbpAuthorize(VerificationCodePermissions.VerificationCode_Create)]
         protected virtual async Task<VerificationCodeEditDto> Create(VerificationCodeEditDto input)
         {
             //TODO:新增前的逻辑判断，是否允许新增
 
             var entity = ObjectMapper.Map<VerificationCode>(input);
             //调用领域服务
-            entity = await _verificationCodeManager.CreateAsync(entity);
+            await _resposotory.InsertAsync(entity);
 
             var dto = ObjectMapper.Map<VerificationCodeEditDto>(entity);
             return dto;
@@ -162,11 +150,10 @@ verificationCodeRepository
         {
             //TODO:更新前的逻辑判断，是否允许更新
 
-            var entity = await _verificationCodeRepository.GetAsync(input.Id.Value);
-            //  input.MapTo(entity);
+            var entity = await _resposotory.GetAsync(input.Id.Value);
             //将input属性的值赋值到entity中
             ObjectMapper.Map(input, entity);
-            await _verificationCodeManager.UpdateAsync(entity);
+            await _resposotory.UpdateAsync(entity);
         }
 
 
@@ -180,43 +167,12 @@ verificationCodeRepository
         public async Task Delete(EntityDto<int> input)
         {
             //TODO:删除前的逻辑判断，是否允许删除
-            await _verificationCodeManager.DeleteAsync(input.Id);
+            await _resposotory.DeleteAsync(input.Id);
         }
 
 
-
-        /// <summary>
-        /// 批量删除VerificationCode的方法
-        /// </summary>
-        [AbpAuthorize(VerificationCodePermissions.VerificationCode_BatchDelete)]
-        public async Task BatchDelete(List<int> input)
-        {
-            // TODO:批量删除前的逻辑判断，是否允许删除
-            await _verificationCodeManager.BatchDelete(input);
-        }
-
-
-
-
-        /// <summary>
-        /// 导出验证码为excel文件
-        /// </summary>
-        /// <returns></returns>
-        //[AbpAuthorize(VerificationCodePermissions.VerificationCode_ExportExcel)]
-        //public async Task<FileDto> GetToExcelFile()
-        //{
-        //   var verificationCodes = await _verificationCodeManager.QueryVerificationCodes().ToListAsync();
-        //          var verificationCodeListDtos = ObjectMapper.Map<List<VerificationCodeListDto>>(verificationCodes);
-        //          return _verificationCodeListExcelExporter.ExportToExcelFile(verificationCodeListDtos);
-        //}
-
-
-
-        //// custom codes
-
-
-
-        //// custom codes end
+ 
+         
 
     }
 }

@@ -25,5 +25,7 @@ namespace LyyCMS.Members
         Task CreateOrUpdateMemberAsync(CreateOrUpdateMemberDtoInput input);
 
         Task DeleteMemberAsync(EntityDto input);
+
+        Task RegisterMember(CreateOrUpdateMemberDtoInput input);
     }
 }
