@@ -116,6 +116,7 @@
     <text name="CreateNewArticleCategory">创建文章分类</text>
     <text name="Parent">父级</text>
     <text name="ArticleCategoryDetails">文章分类详情</text>
+    <text name="Article">文章</text>
 
     <text name="OrderNum">排序</text>
   </texts>

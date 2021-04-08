@@ -45,22 +45,38 @@ namespace LyyCMS.Web.Startup
                         icon: "fas fa-theater-masks",
                         permissionDependency: new SimplePermissionDependency(PermissionNames.Pages_Roles)
                             )
-                ).AddItem(
-                    new MenuItemDefinition(
-                        PageNames.ArticleCategory,
-                        L("ArticleCategory"),
-                        url: "ArticleCategory",
-                        icon: "fas fa-theater-masks"
-                            )
                 )
                 .AddItem(
                     new MenuItemDefinition(
                         PageNames.About,
-                        L("About"),
+                        L("Member"),
                         url: "Member",
                         icon: "fas fa-info-circle"
                     )
-                ).AddItem( // Menu items below is just for demonstration!
+                )
+                .AddItem( 
+                    new MenuItemDefinition(
+                        "Article",
+                        L("Article"),
+                        icon: "fas fa-circle"
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.ArticleCategory,
+                            L("ArticleCategory"),
+                            url: "ArticleCategory",
+                            icon: "fa fa-tags"
+                        )
+                        ).AddItem(
+                        new MenuItemDefinition(
+                            "Article",
+                            L("Article"),
+                            url: "Article",
+                            icon: "fa fa-book"
+                        )
+                        )
+                    )
+
+                .AddItem( // Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",
                         L("MultiLevelMenu"),

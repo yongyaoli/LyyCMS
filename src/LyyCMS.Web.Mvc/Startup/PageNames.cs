@@ -17,5 +17,7 @@
         /// 文章分类
         /// </summary>
         public const string ArticleCategory = "ArticleCategory";
+
+        public const string Article = "Article";
     }
 }
