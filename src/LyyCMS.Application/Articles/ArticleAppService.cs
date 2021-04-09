@@ -35,6 +35,16 @@ namespace LyyCMS.Articles
             });
         }
 
+        public async Task<ArticleDto> CreateArticleAsync(CreateArticleDto input)
+        {
+            var id = input.articleCategoryId;
+            var cate = _categoryRepository.FirstOrDefaultAsync(x => x.Id == id).Result;
+            input.category = cate;
+            var dtos = ObjectMapper.Map<Article>(input);
+            await _resposotory.InsertAsync(dtos);
+            return MapToEntityDto(dtos);
+        }
+
         public async Task<PagedResultDto<ArticleListDto>> GetPagedArticleAsync(GetArticleInput input)
         {
             var query = _resposotory.GetAll();

@@ -123,7 +123,10 @@
     <text name="CategoryName">分类名称</text>
     <text name="Status">状态</text>
     <text name="OrderNum">排序</text>
+    <text name="CreateNewArticle">新建文章</text>
+    <text name="ArticleDetails">文章详情</text>
 
+    <text name="NeedArticleCategory">需要文章分类</text>
     <text name="Save">保存</text>
   </texts>
 </localizationDictionary>

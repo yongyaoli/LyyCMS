@@ -10,7 +10,7 @@
         serverSide: true,
         ajax: function (data, callback, settings) {
             console.log("记录一下", data);
-            var filter = $('#UsersSearchForm').serializeFormToObject(true);
+            var filter = $('#ArticleSearchForm').serializeFormToObject(true);
             filter.maxResultCount = data.length;
             filter.skipCount = data.start;
 
@@ -76,7 +76,7 @@
                 defaultContent: '',
                 render: (data, type, row, meta) => {
                     return [
-                        `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#UserEditModal">`,
+                        `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#ArticleEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
                         `   <button type="button" class="btn btn-sm bg-danger delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
@@ -104,18 +104,10 @@
             return;
         }
 
-        var user = _$form.serializeFormToObject();
-        user.roleNames = [];
-        var _$roleCheckboxes = _$form[0].querySelectorAll("input[name='role']:checked");
-        if (_$roleCheckboxes) {
-            for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
-                var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
-                user.roleNames.push(_$roleCheckbox.val());
-            }
-        }
-        console.log(user);
+        var article = _$form.serializeFormToObject();
+        console.log(article);
         abp.ui.setBusy(_$modal);
-        _articleService.RegisterMember(user).done(function () {
+        _articleService.createArticle(article).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
@@ -156,19 +148,19 @@
 
         e.preventDefault();
         console.log(abp.appPath + 'Users/EditModal?userId=' + userId);
-        console.log(abp.appPath + 'Members/EditMember?userId=' + userId);
+        console.log(abp.appPath + 'Articles/EditArticle?userId=' + userId);
         abp.ajax({
-            url: abp.appPath + 'Members/EditMember?userId=' + userId,
+            url: abp.appPath + 'Articles/EditArticle?userId=' + userId,
             type: 'POST',
             dataType: 'html',
             success: function (content) {
-                $('#UserEditModal div.modal-content').html(content);
+                $('#ArticleEditModal div.modal-content').html(content);
             },
             error: function (e) { }
         });
     });
 
-    $(document).on('click', 'a[data-target="#UserCreateModal"]', (e) => {
+    $(document).on('click', 'a[data-target="#ArticleCreateModal"]', (e) => {
         console.log(e);
         $('.nav-tabs a[href="#user-details"]').tab('show')
     });

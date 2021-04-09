@@ -20,6 +20,9 @@ namespace LyyCMS.Articles
 
         Task<PagedResultDto<ArticleListDto>> GetPagedArticleAsync(GetArticleInput input);
 
+
+        Task<ArticleDto> CreateArticleAsync(CreateArticleDto input);
+
     }
 
 }
