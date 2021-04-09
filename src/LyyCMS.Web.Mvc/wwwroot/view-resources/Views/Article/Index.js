@@ -1,10 +1,10 @@
 ﻿(function ($) {
-    var _memberService = abp.services.app.members,
+    var _articleService = abp.services.app.article,
         l = abp.localization.getSource('LyyCMS'),
-        _$modal = $('#UserCreateModal'),
+        _$modal = $('#ArticleModal'),
         _$form = _$modal.find('form'),
-        _$table = $('#MembersTable');
-    console.log(_memberService);
+        _$table = $('#ArticleTable');
+    console.log(_articleService);
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
@@ -15,7 +15,7 @@
             filter.skipCount = data.start;
 
             abp.ui.setBusy(_$table);
-            _memberService.getPagedMemeber(filter).done(function (result) {
+            _articleService.getPagedArticle(filter).done(function (result) {
                 callback({
                     recordsTotal: result.totalCount,
                     recordsFiltered: result.totalCount,
@@ -45,29 +45,28 @@
             },
             {
                 targets: 1,
-                data: 'name',
+                data: 'title',
                 sortable: false
             },
             {
                 targets: 2,
-                data: 'loginName',
+                data: 'source',
                 sortable: false
             },
             {
                 targets: 3,
-                data: 'email',
+                data: 'categoryName',
                 sortable: false
             },
             {
                 targets: 4,
-                data: 'phoneNumber',
+                data: 'red',
                 sortable: false
             },
             {
                 targets: 5,
-                data: 'isDeleted',
-                sortable: false,
-                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
+                data: 'status',
+                sortable: false
             },
             {
                 targets: 6,
@@ -116,7 +115,7 @@
         }
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _memberService.RegisterMember(user).done(function () {
+        _articleService.RegisterMember(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));

@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using Abp.Domain.Entities;
 using LyyCMS.Articles.Dtos;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace LyyCMS.Articles
         /// <returns></returns>
         Task ActiveArticle(Entity<int> input);
 
+
+        Task<PagedResultDto<ArticleListDto>> GetPagedArticleAsync(GetArticleInput input);
 
     }
 
