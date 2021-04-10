@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Castle.Core.Logging;
+
 
 namespace LyyCMS.Articles
 {
@@ -16,6 +18,7 @@ namespace LyyCMS.Articles
         AsyncCrudAppService<Article, ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleDto>,
         IArticleAppService
     {
+        public ILogger Logger { get; set; }
 
         private readonly IRepository<Article> _resposotory;
         private readonly IRepository<ArticleCategory> _categoryRepository;
@@ -24,7 +27,7 @@ namespace LyyCMS.Articles
         {
             _resposotory = repository;
             _categoryRepository = categoryRepository;
-
+            Logger = NullLogger.Instance;
         }
 
         public async Task ActiveArticle(Entity<int> input)
@@ -37,6 +40,7 @@ namespace LyyCMS.Articles
 
         public async Task<ArticleDto> CreateArticleAsync(CreateArticleDto input)
         {
+            Logger.Info("start create article");
             var id = input.articleCategoryId;
             var cate = _categoryRepository.FirstOrDefaultAsync(x => x.Id == id).Result;
             input.category = cate;

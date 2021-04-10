@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Abp.AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LyyCMS.Articles.Dtos
 {
+    [AutoMapTo(typeof(Article))]
     public class CreateArticleDto
     {
 
