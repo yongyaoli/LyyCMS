@@ -20,7 +20,6 @@ namespace LyyCMS
             Configuration.Authorization.Providers.Add<VerificationCodeAuthorizationProvider>();
 
 
-            //VerificationCodeDtoAutoMapper.CreateMappings(configuration);
         }
 
         public override void Initialize()

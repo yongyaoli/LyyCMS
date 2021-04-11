@@ -144,13 +144,11 @@
     }
 
     $(document).on('click', '.edit-user', function (e) {
-        var userId = $(this).attr("data-user-id");
+        var id = $(this).attr("data-user-id");
 
         e.preventDefault();
-        console.log(abp.appPath + 'Users/EditModal?userId=' + userId);
-        console.log(abp.appPath + 'Articles/EditArticle?userId=' + userId);
         abp.ajax({
-            url: abp.appPath + 'Articles/EditArticle?userId=' + userId,
+            url: abp.appPath + 'Article/EditModal?id=' + id,
             type: 'POST',
             dataType: 'html',
             success: function (content) {

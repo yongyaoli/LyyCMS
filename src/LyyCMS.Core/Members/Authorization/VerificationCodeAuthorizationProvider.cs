@@ -53,7 +53,7 @@ namespace LyyCMS.Authorization
 
 
             //// custom codes
-
+            //context.CreatePermission(PermissionNames.Pages_Users, L("Users"));
 
 
             //// custom codes end

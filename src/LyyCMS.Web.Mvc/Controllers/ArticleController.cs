@@ -1,4 +1,6 @@
-﻿using LyyCMS.Articles;
+﻿using Abp.Application.Services.Dto;
+using LyyCMS.Articles;
+using LyyCMS.Articles.Dtos;
 using LyyCMS.Controllers;
 using LyyCMS.Web.Models.Articles;
 using Microsoft.AspNetCore.Hosting;
@@ -73,40 +75,21 @@ namespace LyyCMS.Web.Controllers
             return View();
         }
 
-        // POST: ArticleController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditModal(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var article = await _articleAppService.GetAsync(new EntityDto<int>(id));
 
-        // GET: ArticleController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            PagedArticleCategoryResultRequestDto dto = new PagedArticleCategoryResultRequestDto();
+            dto.MaxResultCount = int.MaxValue;
+            var allCategory = await _categoryAppService.GetAllAsync(dto);
 
-        // POST: ArticleController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var model = new EditArticleModalViewModel
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Article = article,
+                ArticleCategory = allCategory.Items
+            };
+            return PartialView("_EditModal", model);
         }
+         
     }
 }

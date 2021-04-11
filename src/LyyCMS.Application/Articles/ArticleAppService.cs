@@ -64,8 +64,17 @@ namespace LyyCMS.Articles
             var pagedReulstArticle = new PagedResultDto<ArticleListDto>(personcount, dtos);
 
             return pagedReulstArticle;
+        }
 
+        public async Task<ArticleDto> UpdateEntryAsync(ArticleEditDto input)
+        {
+            var article = await GetEntityByIdAsync(input.Id);
 
+            ObjectMapper.Map(input, article);
+            var cate = await _categoryRepository.FirstOrDefaultAsync(x => x.Id == input.articleCategoryId);
+            article.category = cate;
+            await _resposotory.UpdateAsync(article);
+            return MapToEntityDto(article);
         }
     }
 }
