@@ -126,6 +126,7 @@
     <text name="CreateNewArticle">新建文章</text>
     <text name="ArticleDetails">文章详情</text>
 
+    <text name="ArticleList">文章列表</text>
     <text name="NeedArticleCategory">需要文章分类</text>
     <text name="Save">保存</text>
   </texts>

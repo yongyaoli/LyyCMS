@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LyyCMS.Articles
 {
     public interface IArticleAppService :
-         IAsyncCrudAppService<ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleDto>
+         IAsyncCrudAppService<ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleDto, ArticleListDto, ArticleDto>
     {
 
         /// <summary>

@@ -15,7 +15,7 @@ using Castle.Core.Logging;
 namespace LyyCMS.Articles
 {
     public class ArticleAppService :
-        AsyncCrudAppService<Article, ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleDto>,
+        AsyncCrudAppService<Article, ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleDto, ArticleListDto, ArticleDto>,
         IArticleAppService
     {
         public ILogger Logger { get; set; }
@@ -76,5 +76,7 @@ namespace LyyCMS.Articles
             await _resposotory.UpdateAsync(article);
             return MapToEntityDto(article);
         }
+
+
     }
 }

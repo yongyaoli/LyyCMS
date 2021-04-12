@@ -8,6 +8,6 @@ namespace LyyCMS.Web.Models.Articles
 
         public ArticleDto Article { get; set; }
 
-        public IReadOnlyList<ArticleCategoryDto> ArticleCategory { get; set; }
+        public List<ArticleCategoryListDto> ArticleCategory { get; set; }
     }
 }

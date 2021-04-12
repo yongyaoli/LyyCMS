@@ -79,6 +79,9 @@
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#ArticleEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
+                        `   <button type="button" class="btn btn-sm bg-secondary edit-user-page" data-user-id="${row.id}">`,
+                        `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
+                        '   </button>',
                         `   <button type="button" class="btn btn-sm bg-danger delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
                         `       <i class="fas fa-trash"></i> ${l('Delete')}`,
                         '   </button>'
@@ -117,6 +120,14 @@
         });
     });
 
+    $(document).on("click", ".edit-user-page", function () {
+        var id = $(this).attr("data-user-id");
+        var editurl = "/artilce/edit/" + id;
+        var url = abp.appPath + 'Article/Edit?id=' + id;
+        console.log(editurl, url);
+        window.location.href=url;
+    })
+
     $(document).on('click', '.delete-user', function () {
         var userId = $(this).attr("data-user-id");
         var userName = $(this).attr('data-user-name');
@@ -132,7 +143,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _memberService.delete({
+                    _articleService.delete({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));

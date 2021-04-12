@@ -70,23 +70,50 @@ namespace LyyCMS.Web.Controllers
         }
 
         // GET: ArticleController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            ArticleListDto articleDto = new ArticleListDto();
+            articleDto.Id = id;
+            var article = await _articleAppService.GetAsync(articleDto);
+            var allCategory = await _categoryAppService.GetAllArticleCategoryListAsync();
+            EditArticleModalViewModel model = new EditArticleModalViewModel()
+            {
+                Article = article,
+                ArticleCategory = allCategory
+            };
+            return View(model);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(IFormCollection collection)
+        {
+            try
+            {
+                var x = collection;
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
         public async Task<ActionResult> EditModal(int id)
         {
-            var article = await _articleAppService.GetAsync(new EntityDto<int>(id));
-
-            PagedArticleCategoryResultRequestDto dto = new PagedArticleCategoryResultRequestDto();
-            dto.MaxResultCount = int.MaxValue;
-            var allCategory = await _categoryAppService.GetAllAsync(dto);
-
+            ArticleListDto articleDto = new ArticleListDto()
+            {
+                Id = id
+            };
+            var article = await _articleAppService.GetAsync(articleDto);
+            var allCategory = await _categoryAppService.GetAllArticleCategoryListAsync();
             var model = new EditArticleModalViewModel
             {
                 Article = article,
-                ArticleCategory = allCategory.Items
+                ArticleCategory = allCategory
             };
             return PartialView("_EditModal", model);
         }
