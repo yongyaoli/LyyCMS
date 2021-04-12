@@ -5,6 +5,7 @@
 
 [![MIT](https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square)](https://github.com/yongyaoli/LyyCMS/blob/main/LICENSE)
 [![Build status](https://ci.appveyor.com/api/projects/status/xsv4y8h7h1xelkco?svg=true)](https://ci.appveyor.com/project/yongyaoli/lyycms)
+[>_<]:
 [![NuGet Download](https://img.shields.io/nuget/dt/LyyCMS.svg?style=flat-square)](https://www.nuget.org/packages/LyyCMS)
 
 ---
