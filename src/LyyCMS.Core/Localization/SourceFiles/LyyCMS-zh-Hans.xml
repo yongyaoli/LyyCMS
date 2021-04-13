@@ -116,6 +116,8 @@
     <text name="CreateNewArticleCategory">创建文章分类</text>
     <text name="Parent">父级</text>
     <text name="ArticleCategoryDetails">文章分类详情</text>
+    <text name="EditArticleCategory">编辑文章分类</text>
+    
     
     <text name="Article">文章</text>
     <text name="Source">来源</text>
@@ -125,7 +127,11 @@
     <text name="OrderNum">排序</text>
     <text name="CreateNewArticle">新建文章</text>
     <text name="ArticleDetails">文章详情</text>
-
+    <text name="Top">置顶</text>
+    <text name="Comment">评论</text>
+    <text name="Hit">点击量</text>
+    <text name="Favorite">收藏</text>
+    <text name="Thumbnail">图片</text>
     <text name="ArticleList">文章列表</text>
     <text name="NeedArticleCategory">需要文章分类</text>
     <text name="Save">保存</text>

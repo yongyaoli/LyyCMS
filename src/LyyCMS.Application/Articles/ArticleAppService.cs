@@ -18,7 +18,7 @@ namespace LyyCMS.Articles
         AsyncCrudAppService<Article, ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleDto, ArticleListDto, ArticleDto>,
         IArticleAppService
     {
-        public ILogger Logger { get; set; }
+        //public ILogger Logger { get; set; }
 
         private readonly IRepository<Article> _resposotory;
         private readonly IRepository<ArticleCategory> _categoryRepository;
