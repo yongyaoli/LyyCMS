@@ -3,12 +3,14 @@ using Abp.Application.Services.Dto;
 using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using Abp.UI;
 using LyyCMS.Articles.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Abp.Extensions;
 
 namespace LyyCMS.Articles
 {
@@ -17,16 +19,19 @@ namespace LyyCMS.Articles
         IArticleCategoryAppService
     {
 
-        private readonly IRepository<ArticleCategory> _resposotory;
+        private readonly IRepository<ArticleCategory> _respository;
 
-        public ArticleCategoryAppService(IRepository<ArticleCategory> repository) : base(repository)
+        private readonly IRepository<Article> _repositoryArticle;
+
+        public ArticleCategoryAppService(IRepository<ArticleCategory> repository,IRepository<Article> repositoryArticle) : base(repository)
         {
-            _resposotory = repository;
+            _respository = repository;
+            _repositoryArticle = repositoryArticle;
         }
 
         public async Task<PagedResultDto<ArticleCategoryListDto>> GetPagedArticleCategoryAsync(GetArticleCategoryInput input)
         {
-            var query = _resposotory.GetAll();
+            var query = _respository.GetAll();
             var personcount = await query.CountAsync();
 
             var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
@@ -39,7 +44,7 @@ namespace LyyCMS.Articles
 
         public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
         {
-            var query = _resposotory.GetAll();
+            var query = _respository.GetAll();
             var persons = await query.ToListAsync();
             var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(persons);
             foreach(ArticleCategoryListDto listDto in dtos){
@@ -56,14 +61,14 @@ namespace LyyCMS.Articles
         public async Task<ArticleCategoryDto> CreateEntityAsync(CreateArticleCategoryDto input)
         {
             int pid = input.ParentId;
-            var category = await _resposotory.GetAsync(pid);
+            var category = await _respository.GetAsync(pid);
             ArticleCategory articleCategory = new ArticleCategory();
             articleCategory.Name = input.Name;
             articleCategory.OrderNum = input.OrderNum;
             articleCategory.Description = input.Description;
             articleCategory.Parent = category;
 
-            await _resposotory.InsertAsync(articleCategory);
+            await _respository.InsertAsync(articleCategory);
             return MapToEntityDto(articleCategory);
         }
 
@@ -75,8 +80,27 @@ namespace LyyCMS.Articles
             ObjectMapper.Map(input, articleCategory);
             var parent = await GetEntityByIdAsync(input.ParentId);
             articleCategory.Parent = parent;
-            await _resposotory.UpdateAsync(articleCategory);
+            await _respository.UpdateAsync(articleCategory);
             return MapToEntityDto(articleCategory);
+        }
+
+        public async Task DeleteEntityAsync(EntityDto<int> input)
+        {
+            var articleCategory = await Repository.GetAllIncluding(x => x.Children).FirstOrDefaultAsync(x => x.Id == input.Id);
+            if(null== articleCategory)
+            {
+                throw new UserFriendlyException("数据不存在");
+            }
+            if (articleCategory.Children.Count>0)
+            {
+                throw new UserFriendlyException("请选删除子级分类");
+            }
+            var articles = _repositoryArticle.GetAllListAsync().Result.Where(x => x.articleCategoryId == input.Id).ToList();
+            if(null!=articles && articles.Count > 0)
+            {
+                throw new UserFriendlyException("文章分类下存在文章，不能进行删除");
+            }
+            await Repository.DeleteAsync(articleCategory);
         }
 
 
@@ -91,5 +115,7 @@ namespace LyyCMS.Articles
 
             return user;
         }
+
+
     }
 }

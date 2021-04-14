@@ -49,9 +49,15 @@ namespace LyyCMS.Web.Controllers
         }
 
         // GET: ArticleController/Create
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var allCategory = await _categoryAppService.GetAllArticleCategoryListAsync();
+            EditArticleModalViewModel model = new EditArticleModalViewModel()
+            {
+                Article =  new ArticleDto(),
+                ArticleCategory = allCategory
+            };
+            return View(model);
         }
 
         // POST: ArticleController/Create

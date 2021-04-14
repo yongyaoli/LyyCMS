@@ -1,0 +1,134 @@
+﻿@using LyyCMS.Web.Startup
+@using Abp.Authorization.Users
+@using LyyCMS.Web.Models.Articles
+@model EditArticleModalViewModel
+
+@{ ViewBag.Title = L("Article");
+    ViewBag.CurrentPageName = PageNames.Article; }
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Article/Edit.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Article/Edit.min.js" asp-append-version="true"></script>
+    </environment>
+    <script src="~/ueditor-1.4.3.3/ueditor.config.js"></script>
+    <script src="~/ueditor-1.4.3.3/ueditor.all.js"></script>
+    <script src="~/ueditor-1.4.3.3/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var editor = UE.getEditor('container', {
+                initialFrameHeight: 500
+            });
+            console.log(editor);
+        });
+
+
+    </script>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Article")</h1>
+            </div>
+            <div class="col-sm-6">
+                <a href="@Url.Action("Index","Article")" class="btn bg-blue float-sm-right">
+                    <i class="fa fa-plus-square"></i>
+                    @L("ArticleList")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <form name="ArticleEditForm" id="ArticleEditForm" role="form" class="form-horizontal"    enctype="multipart/form-data">
+        <input type="hidden" name="Id" value="@Model.Article.Id" />
+        <div class="modal-body">
+          
+            <div class="tab-content mt-4">
+                <div role="tabpanel" class="tab-pane container active" id="edit-user-details">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("ArticleCategory")</label>
+                        <div class="col-md-9">
+                            <select id="articleCategoryId" name="articleCategoryId" class="form-control">
+                                @foreach (var cate in Model.ArticleCategory)
+                                {
+                                    <!option value="@cate.Id" @(Model.Article.articleCategoryId==cate.Id ? "selected" : "")>@cate.Name </!option>
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="username">@L("Title")</label>
+                        <div class="col-md-9">
+                            <input id="Title" type="text" class="form-control" name="Title" value="@Model.Article.title" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="name">@L("Source")</label>
+                        <div class="col-md-9">
+                            <input id="Source" type="text" class="form-control" name="Source" value="@Model.Article.source" required maxlength="@AbpUserBase.MaxNameLength">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("Content")</label>
+                        <div class="col-md-9">
+                            
+                            <script id="container" name="Content" type="text/plain" style="width:100%;height:200px;">
+                               
+                                @Model.Article.content
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("Top")</label>
+                        <div class="col-md-9">
+                            <input id="top" type="checkbox" name="top" value="true" @(Model.Article.top ? "checked" : "") />
+                        </div>
+                    </div>
+
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("Red")</label>
+                        <div class="col-md-9">
+                            <input id="red" type="checkbox" name="red" value="true" @(Model.Article.red ? "checked" : "") />
+                        </div>
+                    </div>
+
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("Comment")</label>
+                        <div class="col-md-9">
+                            <input id="comment" type="checkbox" name="comment" value="true" @(Model.Article.comment ? "checked" : "") />
+                        </div>
+                    </div>
+
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">@L("Favorite")</label>
+                        <div class="col-md-9">
+                            <input id="favorite" type="number" name="favorite" value="@Model.Article.favorite" />
+                        </div>
+                    </div>
+                    <!--upload-->
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@L("Thumbnail")</label>
+                        <div class="col-md-9">
+                            <input type="hidden" name="Thumbnail" id="Thumbnail" value="" />
+                            <img width="50" height="50" id="ThumbnailShow" name="ThumbnailShow" class="img-thumbnail" />
+                            <input type="file" class="form-control" name="ThumbnailFile" id="ThumbnailFile" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default close-button" >@L("Cancel")</button>
+                <button type="button" class="btn btn-primary save-button">@L("Save")</button>
+            </div>
+        </div>
+    </form>
+</section>

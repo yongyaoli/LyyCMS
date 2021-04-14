@@ -76,9 +76,9 @@
                 defaultContent: '',
                 render: (data, type, row, meta) => {
                     return [
-                        `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#ArticleEditModal">`,
-                        `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
-                        '   </button>',
+                        //`   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#ArticleEditModal">`,
+                        //`       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
+                        //'   </button>',
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user-page" data-user-id="${row.id}">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
@@ -195,5 +195,50 @@
         }
     });
 
+    $('input[type="file"]').change("propertychange", function () {
+        console.log("add");
+        ajaxFileUpload();
+    });
+    function ajaxFileUpload() {
+
+        var fileUpload = $("#ThumbnailFile").get(0);
+        var files = fileUpload.files;
+        console.log(files);
+        var data = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            data.append(files[i].name, files[i]);
+        }
+        console.log(data);
+        if (files.length < 1) {
+            console.log("没有数据");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: abp.appPath + 'users/UploadAvatar',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                //成功之后
+                if (data.success) {
+                    $("#Thumbnail").val(data.result);
+                    $("#ThumbnailShow").attr("src", abp.appPath + data.result);
+                } else {
+                    console.log("失败了");
+                }
+
+            },
+            error: function () {
+                console.log(JSON.stringify(data));
+            }
+        });
+
+        $('input[type="file"]').change(function (e) {//再次绑定
+            ajaxFileUpload();
+        })
+        return false;
+    }
 
 })(jQuery);

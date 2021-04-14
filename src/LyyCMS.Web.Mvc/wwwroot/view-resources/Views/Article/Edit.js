@@ -55,7 +55,7 @@ function ajaxFileUpload() {
     }
     $.ajax({
         type: "POST",
-        url: 'users/UploadAvatar',
+        url: abp.appPath + 'users/UploadAvatar',
         contentType: false,
         processData: false,
         data: data,
@@ -64,7 +64,7 @@ function ajaxFileUpload() {
             //成功之后
             if (data.success) {
                 $("#Thumbnail").val(data.result);
-                $("#ThumbnailShow").attr("src", data.result);
+                $("#ThumbnailShow").attr("src", abp.appPath + data.result);
             } else {
                 console.log("失败了");
             }

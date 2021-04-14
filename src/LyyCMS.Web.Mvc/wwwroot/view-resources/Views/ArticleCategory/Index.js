@@ -138,7 +138,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _articleCategoryService.delete({
+                    _articleCategoryService.deleteEntity({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));

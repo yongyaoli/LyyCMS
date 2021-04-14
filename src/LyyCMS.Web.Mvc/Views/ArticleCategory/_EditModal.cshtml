@@ -44,7 +44,7 @@
                         <select id="parent" name="parent" class="form-control">
                             @foreach (var parent in Model.Parents)
                             {
-                                <option value="@parent.Id">@parent.Name </option>
+                                <!option value="@parent.Id"  @(Model.ArticleCategory.ParentId==parent.Id?"checked":"") >@parent.Name </!option>
                             }
                         </select>
                     </div>
