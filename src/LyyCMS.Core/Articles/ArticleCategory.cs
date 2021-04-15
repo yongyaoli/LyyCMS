@@ -39,5 +39,13 @@ namespace LyyCMS.Articles
         /// 子级
         /// </summary>
         public virtual ICollection<ArticleCategory> Children { get; set; }
+
+        //selectitem
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Name))
+                return base.ToString();
+            return Name;
+        }
     }
 }

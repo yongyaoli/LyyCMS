@@ -54,12 +54,8 @@
                     <div class="form-group row required">
                         <label class="col-md-3 col-form-label">@L("ArticleCategory")</label>
                         <div class="col-md-9">
-                            <select id="articleCategoryId" name="articleCategoryId" class="form-control">
-                                @foreach (var cate in Model.ArticleCategory)
-                                {
-                                    <!option value="@cate.Id" @(Model.Article.articleCategoryId==cate.Id ? "selected" : "")>@cate.Name </!option>
-                                }
-                            </select>
+                           
+                            <select id="articleCategoryId" name="articleCategoryId"  asp-for="Article.articleCategoryId" asp-items="Model.Categories" class="form-control"></select>
 
                         </div>
                     </div>

@@ -6,6 +6,7 @@ using LyyCMS.Web.Models.Articles;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,10 +53,19 @@ namespace LyyCMS.Web.Controllers
         public async Task<IActionResult> Create()
         {
             var allCategory = await _categoryAppService.GetAllArticleCategoryListAsync();
-            EditArticleModalViewModel model = new EditArticleModalViewModel()
+            //EditArticleModalViewModel model = new EditArticleModalViewModel()
+            //{
+            //    Article =  new ArticleDto(),
+            //    ArticleCategory = allCategory
+            //};
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+            foreach(var cate in allCategory)
             {
-                Article =  new ArticleDto(),
-                ArticleCategory = allCategory
+                selectListItems.Add(new SelectListItem { Value = cate.Id.ToString(), Text = cate.Name });
+            }
+            CreateArticleViewModel model = new CreateArticleViewModel()
+            {
+                Categories = selectListItems
             };
             return View(model);
         }
@@ -81,12 +91,21 @@ namespace LyyCMS.Web.Controllers
             ArticleListDto articleDto = new ArticleListDto();
             articleDto.Id = id;
             var article = await _articleAppService.GetAsync(articleDto);
+           
             var allCategory = await _categoryAppService.GetAllArticleCategoryListAsync();
+
             EditArticleModalViewModel model = new EditArticleModalViewModel()
             {
                 Article = article,
-                ArticleCategory = allCategory
+                ArticleCategory = allCategory,
+                Categories = allCategory.Select(c=>new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString(),
+                    Selected = c.Id==article.articleCategoryId
+                })
             };
+            ViewBag.cate = allCategory;
             return View(model);
         }
 

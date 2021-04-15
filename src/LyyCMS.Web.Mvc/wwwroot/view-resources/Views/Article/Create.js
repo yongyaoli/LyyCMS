@@ -26,7 +26,7 @@
         _articleService.createArticle(article).done(function () {
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
-            window.location.href = abp.appPath + 'Article/Index',
+            window.location.href = abp.appPath + 'Article/Index'
         }).always(function () {
             abp.ui.clearBusy(_$form);
         });

@@ -79,6 +79,7 @@
                         //`   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#ArticleEditModal">`,
                         //`       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         //'   </button>',
+                        `<a asp-action="Edit" asp-route-id="${row.id}"> </a>`,
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user-page" data-user-id="${row.id}">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
