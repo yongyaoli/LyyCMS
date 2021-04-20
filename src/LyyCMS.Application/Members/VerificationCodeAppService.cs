@@ -158,22 +158,6 @@ namespace LyyCMS.Members
 
 
 
-        /// <summary>
-        /// 删除验证码信息
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [AbpAuthorize(VerificationCodePermissions.VerificationCode_Delete)]
-        public async Task Delete(EntityDto<int> input)
-        {
-            //TODO:删除前的逻辑判断，是否允许删除
-            await _resposotory.DeleteAsync(input.Id);
-        }
-
-
- 
-         
-
     }
 }
 

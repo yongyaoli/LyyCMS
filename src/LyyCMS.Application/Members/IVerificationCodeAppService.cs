@@ -20,13 +20,6 @@ namespace LyyCMS.Members
     {
         
 
-		
-		
-		/// <summary>
-		/// 导出验证码为excel文件
-		/// </summary>
-		/// <returns></returns>
-		//Task<FileDto> GetToExcelFile();
 
     }
 }
