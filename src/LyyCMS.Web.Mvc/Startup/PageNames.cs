@@ -19,5 +19,9 @@
         public const string ArticleCategory = "ArticleCategory";
 
         public const string Article = "Article";
+
+        //幻灯片
+        public const string Slide = "Slide";
+        public const string SlideItems = "SlideItems";
     }
 }

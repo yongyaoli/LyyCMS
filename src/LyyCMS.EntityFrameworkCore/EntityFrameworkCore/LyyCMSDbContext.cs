@@ -6,6 +6,7 @@ using LyyCMS.MultiTenancy;
 using LyyCMS.Members;
 using LyyCMS.EntityMapper.VerificationCodes;
 using LyyCMS.Articles;
+using LyyCMS.Slides;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -30,6 +31,10 @@ namespace LyyCMS.EntityFrameworkCore
 
         public DbSet<Article> Article { get; set; }
 
+        public DbSet<Slide> Slide { get; set; }
+
+        public DbSet<SlideItem> SlideItems { get; set; }
+
 
         //重写创建实体的方法
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,6 +49,10 @@ namespace LyyCMS.EntityFrameworkCore
             modelBuilder.Entity<Article>().ToTable("Article")
                 .Property(x => x.status)
                 .HasDefaultValue(0);
+
+            modelBuilder.Entity<Slide>().ToTable("Slide");
+
+            modelBuilder.Entity<SlideItem>().ToTable("SlideItems");
 
             base.OnModelCreating(modelBuilder);
         }
