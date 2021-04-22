@@ -135,6 +135,13 @@
     <text name="ArticleList">文章列表</text>
     <text name="NeedArticleCategory">需要文章分类</text>
     <text name="Save">保存</text>
+
+
+    <text name="Slide">幻灯片</text>
+    <text name="SlideItems">幻灯片图片</text>
+
+    <text name="CreateNewSlide">新建幻灯片</text>
+    <text name="Remark">备注说明</text>
   </texts>
 </localizationDictionary>
 

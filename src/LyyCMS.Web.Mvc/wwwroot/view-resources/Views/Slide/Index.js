@@ -1,7 +1,7 @@
 ﻿(function ($) {
     var _slideService = abp.services.app.slide,
         l = abp.localization.getSource('LyyCMS'),
-        _$modal = $('#SlideModal'),
+        _$modal = $('#SlideCreateModal'),
         _$form = _$modal.find('form'),
         _$table = $('#SlideTable');
     console.log(_slideService);
@@ -53,7 +53,7 @@
             },
             {
                 targets: 2,
-                data: 'description',
+                data: 'remark',
                 sortable: false
             },
             {
@@ -64,6 +64,9 @@
                 defaultContent: '',
                 render: (data, type, row, meta) => {
                     return [
+                        `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#SlideItemsEditModal">`,
+                        `       <i class="fas fa-pencil-alt"></i> ${l('SlideItems')}`,
+                        '   </button>',
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#SlideEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
@@ -128,7 +131,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _slideService.delete({
+                    _slideService.deleteEntity({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));

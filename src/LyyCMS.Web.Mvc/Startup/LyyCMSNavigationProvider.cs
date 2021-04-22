@@ -75,7 +75,14 @@ namespace LyyCMS.Web.Startup
                         )
                         )
                     )
-
+                .AddItem(
+                    new MenuItemDefinition(
+                        PageNames.Slide,
+                        L("Slide"),
+                        url: "Slide",
+                        icon: "fas fa-info-circle"
+                    )
+                )
                 .AddItem( // Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",

@@ -1,5 +1,8 @@
-﻿using LyyCMS.Controllers;
+﻿using Abp.Application.Services.Dto;
+using LyyCMS.Controllers;
 using LyyCMS.Slides;
+using LyyCMS.Slides.Dtos;
+using LyyCMS.Web.Models.Slide;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,6 +30,16 @@ namespace LyyCMS.Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View();
+        }
+
+        public async Task<ActionResult> EditModal(int Id)
+        {
+            SlideListDto slide = new SlideListDto();
+            slide.Id = Id;
+            var output = await _slideAppService.GetAsync(slide);
+            var model = ObjectMapper.Map<EditSlideModalViewModel>(output);
+
+            return PartialView("_EditModal", model);
         }
     }
 }
