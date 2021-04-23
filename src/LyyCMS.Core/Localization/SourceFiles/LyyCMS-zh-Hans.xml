@@ -142,6 +142,10 @@
 
     <text name="CreateNewSlide">新建幻灯片</text>
     <text name="Remark">备注说明</text>
+    <text name="CreateSlideItems">创建幻灯片图片</text>
+    <text name="Image">图片</text>
+    <text name="Url">URL地址</text>
+    <text name="TargetUrl">目标地址</text>
   </texts>
 </localizationDictionary>
 

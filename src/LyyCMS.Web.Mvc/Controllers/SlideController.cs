@@ -41,5 +41,20 @@ namespace LyyCMS.Web.Controllers
 
             return PartialView("_EditModal", model);
         }
+
+        /// <summary>
+        /// 图片
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Items(int Id)
+        {
+            SlideListDto slide = new SlideListDto();
+            slide.Id = Id;
+            var output = await _slideAppService.GetAsync(slide);
+            SlideListViewModel slideListViewModel = new SlideListViewModel();
+            slideListViewModel.Slide = output;
+            slideListViewModel.SlideItems = output.SlideItems;
+            return View(slideListViewModel);
+        }
     }
 }

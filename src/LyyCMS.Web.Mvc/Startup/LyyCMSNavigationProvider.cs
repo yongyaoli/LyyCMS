@@ -80,7 +80,7 @@ namespace LyyCMS.Web.Startup
                         PageNames.Slide,
                         L("Slide"),
                         url: "Slide",
-                        icon: "fas fa-info-circle"
+                        icon: "fas fa-image"
                     )
                 )
                 .AddItem( // Menu items below is just for demonstration!

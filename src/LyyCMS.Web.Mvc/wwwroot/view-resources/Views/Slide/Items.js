@@ -1,11 +1,11 @@
 ﻿(function ($) {
-    var _slideService = abp.services.app.slide,
+    var _slideItemService = abp.services.app.slideItem,
         l = abp.localization.getSource('LyyCMS'),
-        _$modal = $('#SlideCreateModal'),
+        _$modal = $('#SlideItemCreateModal'),
         _$form = _$modal.find('form'),
-        _$table = $('#SlideTable');
-    console.log(_slideService);
-    console.log(_slideService.getPagedArticleCategory);
+        _$table = $('#SlideItemTable');
+    console.log(_slideItemService);
+    console.log(_slideItemService.getPagedArticleCategory);
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
@@ -14,10 +14,11 @@
             var filter = $('#SlideSearchForm').serializeFormToObject(true);
             filter.maxResultCount = data.length;
             filter.skipCount = data.start;
+            //TODO 带上参数ID
             console.log(filter);
             abp.ui.setBusy(_$table);
             //getPagedArticleCategory
-            _slideService.getAll(filter).done(function (result) {
+            _slideItemService.getAll(filter).done(function (result) {
                 console.log("返回的结果:", result);
                 callback({
                     recordsTotal: result.totalCount,
@@ -48,16 +49,31 @@
             },
             {
                 targets: 1,
-                data: 'name',
+                data: 'title',
                 sortable: false
             },
             {
                 targets: 2,
-                data: 'remark',
+                data: 'image',
                 sortable: false
             },
             {
                 targets: 3,
+                data: 'url',
+                sortable: false
+            },
+            {
+                targets: 4,
+                data: 'target',
+                sortable: false
+            },
+            {
+                targets: 5,
+                data: 'description',
+                sortable: false
+            },
+            {
+                targets: 6,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -106,7 +122,7 @@
         //}
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _slideService.create(user).done(function () {
+        _slideItemService.create(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
@@ -131,7 +147,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _slideService.deleteEntity({
+                    _slideItemService.deleteEntity({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));
@@ -146,7 +162,7 @@
         var Id = $(this).attr("data-slide-id");
 
         window.location.href = abp.appPath + 'Slide/Items?id=' + Id;
-         
+
     });
 
 
