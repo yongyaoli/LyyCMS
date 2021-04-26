@@ -13,6 +13,17 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <Product>LyyCMS.Web.Mvc</Product>
+    <Description>基于 Abp的 CMS</Description>
+    <Copyright>Lyy</Copyright>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReleaseNotes>基于 Abp的 CMS 1.0</PackageReleaseNotes>
+    <Version>1.0.0</Version>
+    <PackageLicenseUrl>https://github.com/yongyaoli/LyyCMS/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/yongyaoli/LyyCMS</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>LyyCMS.Web.Mvc</Company>
+    <Authors>LyyCMS.Web.Mvc</Authors>
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Views\Article\Index.AdvancedSearch.cshtml" />
