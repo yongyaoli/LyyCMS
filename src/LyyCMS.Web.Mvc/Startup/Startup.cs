@@ -1,29 +1,29 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Castle.Facilities.Logging;
-using Abp.AspNetCore;
+﻿using Abp.AspNetCore;
 using Abp.AspNetCore.Mvc.Antiforgery;
+using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Castle.Logging.Log4Net;
+using Abp.Dependency;
+using Abp.Json;
+using Castle.Facilities.Logging;
 using LyyCMS.Authentication.JwtBearer;
 using LyyCMS.Configuration;
 using LyyCMS.Identity;
 using LyyCMS.Web.Resources;
-using Abp.AspNetCore.SignalR.Hubs;
-using Abp.Dependency;
-using Abp.Json;
-using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Serialization;
-using Microsoft.OpenApi.Models;
-using UEditor.Core;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
+using UEditor.Core;
 
 namespace LyyCMS.Web.Startup
 {
@@ -66,7 +66,7 @@ namespace LyyCMS.Web.Startup
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "AbpZeroTemplate API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "LyyCMS API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
             });
 
@@ -84,7 +84,7 @@ namespace LyyCMS.Web.Startup
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            
+
             app.UseAbp(); // Initializes ABP framework.
 
             if (env.IsDevelopment())
@@ -129,7 +129,7 @@ namespace LyyCMS.Web.Startup
             //Enable middleware to serve swagger - ui assets(HTML, JS, CSS etc.)
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "AbpZeroTemplate API V1");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "LyyCMS API V1");
             }); //URL: /swagger 
         }
     }
