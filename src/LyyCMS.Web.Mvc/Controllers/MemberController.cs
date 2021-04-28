@@ -40,5 +40,16 @@ namespace LyyCMS.Web.Controllers
         }
 
 
+        public async Task<IActionResult> CategoryList(GetMemberInput input)
+        {
+            var memberCategory = (await _categoryAppService.GetPagedAllCategoryAsync()).Items;
+            var model = new MemberCategoryListViewModel()
+            {
+                CategoryList = memberCategory
+            };
+
+            return View(model);
+        }
+
     }
 }

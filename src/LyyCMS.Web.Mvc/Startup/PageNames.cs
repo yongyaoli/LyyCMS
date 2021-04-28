@@ -12,6 +12,7 @@
         /// 会员
         /// </summary>
         public const string Members = "Members";
+        public const string MembersCategory = "MembersCategory";
 
         /// <summary>
         /// 文章分类

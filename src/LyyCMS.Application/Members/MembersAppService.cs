@@ -58,7 +58,7 @@ namespace LyyCMS.Members
             return ObjectMapper.Map<MemberListDto>(category);
         }
 
-        public async Task<PagedResultDto<MemberListDto>> GetPagedMemeberAsync(GetMemberInput input)
+        public async Task<PagedResultDto<MemberListDto>> GetPagedMemberAsync(GetMemberInput input)
         {
             var query = _resposotory.GetAll();
             var personcount = await query.CountAsync();

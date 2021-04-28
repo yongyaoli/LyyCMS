@@ -15,7 +15,7 @@
             filter.skipCount = data.start;
 
             abp.ui.setBusy(_$table);
-            _memberService.getPagedMemeber(filter).done(function (result) {
+            _memberService.getPagedMember(filter).done(function (result) {
                 callback({
                     recordsTotal: result.totalCount,
                     recordsFiltered: result.totalCount,
@@ -171,7 +171,7 @@
 
     $(document).on('click', 'a[data-target="#UserCreateModal"]', (e) => {
         console.log(e);
-        $('.nav-tabs a[href="#user-details"]').tab('show')
+        $('.nav-tabs a[href="#user-details"]').tab('show');
     });
 
     abp.event.on('user.edited', (data) => {

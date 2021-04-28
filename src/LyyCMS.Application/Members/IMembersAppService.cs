@@ -17,7 +17,7 @@ namespace LyyCMS.Members
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultDto<MemberListDto>> GetPagedMemeberAsync(GetMemberInput input);
+        Task<PagedResultDto<MemberListDto>> GetPagedMemberAsync(GetMemberInput input);
 
 
         Task<MemberListDto> GetMemberByIdAsync(NullableIdDto input);
