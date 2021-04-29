@@ -11,14 +11,19 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using Abp.Linq.Extensions;
+using Abp.Application.Services;
+using LyyCMS.Articles.Dtos;
+using LyyCMS.Articles;
 
 namespace LyyCMS.Members
 {
-    public class CategoryAppService : ICategoryAppService
+    public class CategoryAppService :
+        AsyncCrudAppService<Category, CategoryDto, int, PagedArticleResultRequestDto, CategoryEditDto, CategoryDto, CategoryListDto>,
+        ICategoryAppService
     {
         private readonly IRepository<Category> _resposotory;
 
-        public CategoryAppService(IRepository<Category> repository)
+        public CategoryAppService(IRepository<Category> repository) : base(repository)
         {
             _resposotory = repository;
         }
