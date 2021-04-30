@@ -1,10 +1,10 @@
 ﻿(function ($) {
-    var _memberService = abp.services.app.category,
+    var _categoryService = abp.services.app.category,
         l = abp.localization.getSource('LyyCMS'),
-        _$modal = $('#UserCategoryCreateModal'),
+        _$modal = $('#CategoryCreateModal'),
         _$form = _$modal.find('form'),
         _$table = $('#MembersCategoryTable');
-    console.log(_memberService);
+    console.log(_categoryService);
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
@@ -15,7 +15,7 @@
             filter.skipCount = data.start;
 
             abp.ui.setBusy(_$table);
-            _memberService.getPagedCategory(filter).done(function (result) {
+            _categoryService.getPagedCategory(filter).done(function (result) {
                 callback({
                     recordsTotal: result.totalCount,
                     recordsFiltered: result.totalCount,
@@ -42,22 +42,30 @@
                 targets: 0,
                 className: 'control',
                 defaultContent: '',
+            }, {
+                targets: 1,
+                data: 'code',
+                sortable: false
             },
             {
-                targets: 1,
+                targets: 2,
                 data: 'name',
                 sortable: false
             },
-            
             {
-                targets: 6,
+                targets: 3,
+                data: 'desc',
+                sortable: false
+            },
+            {
+                targets: 4,
                 data: null,
                 sortable: false,
                 autoWidth: false,
                 defaultContent: '',
                 render: (data, type, row, meta) => {
                     return [
-                        `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#UserEditModal">`,
+                        `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#CategoryEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
                         `   <button type="button" class="btn btn-sm bg-danger delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
@@ -96,7 +104,7 @@
         }
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _memberService.RegisterMember(user).done(function () {
+        _categoryService.create(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
@@ -121,7 +129,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _memberService.delete({
+                    _categoryService.delete({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));
@@ -137,19 +145,19 @@
 
         e.preventDefault();
         console.log(abp.appPath + 'Users/EditModal?userId=' + userId);
-        console.log(abp.appPath + 'Members/EditMember?userId=' + userId);
+        console.log(abp.appPath + 'Category/EditCategory?userId=' + userId);
         abp.ajax({
-            url: abp.appPath + 'Members/EditMember?userId=' + userId,
+            url: abp.appPath + 'Category/EditCategory?userId=' + userId,
             type: 'POST',
             dataType: 'html',
             success: function (content) {
-                $('#UserEditModal div.modal-content').html(content);
+                $('#CategoryEditModal div.modal-content').html(content);
             },
             error: function (e) { }
         });
     });
 
-    $(document).on('click', 'a[data-target="#UserCreateModal"]', (e) => {
+    $(document).on('click', 'a[data-target="#CategoryCreateModal"]', (e) => {
         console.log(e);
         $('.nav-tabs a[href="#user-details"]').tab('show');
     });

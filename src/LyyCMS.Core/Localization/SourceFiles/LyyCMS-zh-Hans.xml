@@ -110,6 +110,10 @@
     <text name="CreateNewMember">创建会员</text>
     <text name="MemberDetails">会员详情</text>
     <text name="Category">分类</text>
+    <text name="MemberCategory">会员分类</text>
+    <text name="CreateCategory">创建会员分类</text>
+    <text name="CategoryCode">会员分类编号</text>
+    <text name="CategoryDesc">会员分类描述</text>
 
 
     <text name="ArticleCategory">文章分类</text>
@@ -146,6 +150,7 @@
     <text name="Image">图片</text>
     <text name="Url">URL地址</text>
     <text name="TargetUrl">目标地址</text>
+
   </texts>
 </localizationDictionary>
 
