@@ -114,6 +114,7 @@
     <text name="CreateCategory">创建会员分类</text>
     <text name="CategoryCode">会员分类编号</text>
     <text name="CategoryDesc">会员分类描述</text>
+    <text name="CategoryName">会员分类</text>
 
 
     <text name="ArticleCategory">文章分类</text>
