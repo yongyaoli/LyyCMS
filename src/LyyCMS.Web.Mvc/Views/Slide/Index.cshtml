@@ -1,0 +1,76 @@
+﻿@using LyyCMS.Web.Startup
+@using LyyCMS.Web.Models.Slide
+@model SlideListViewModel
+
+@{ ViewBag.Title = L("Slide");
+    ViewBag.CurrentPageName = PageNames.Slide; }
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Slide/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Slide/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Slide")</h1>
+            </div>
+            <div class="col-sm-6">
+                <a href="javascript:;" data-toggle="modal" data-target="#SlideCreateModal" class="btn bg-blue float-sm-right">
+                    <i class="fa fa-plus-square"></i>
+                    @L("Create")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Use for bulk actions-->
+                            </div>
+                            <div class="col-md-6">
+                                @await Html.PartialAsync("~/Views/Slide/Index.AdvancedSearch.cshtml")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="SlideTable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>@L("Name")</th>
+                                        <th>@L("Description")</th>
+                                        <th style="width: 250px">@L("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("~/Views/Slide/_CreateModal.cshtml", Model)
+
+<div class="modal fade" id="SlideEditModal" tabindex="-1" role="dialog" aria-labelledby="SlideEditModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

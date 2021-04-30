@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LyyCMS.Members.Dtos
+{
+    public class CreateOrUpdateCategoryDtoInput
+    {
+        public CategoryEditDto edit { get; set; }
+    }
+}
