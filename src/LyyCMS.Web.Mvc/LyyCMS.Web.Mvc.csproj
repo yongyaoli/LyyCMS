@@ -60,6 +60,9 @@
     <PackageReference Include="Abp.Castle.Log4Net" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
     <PackageReference Include="UEditor.Core" Version="1.0.6" />
+    <PackageReference Include="Senparc.Weixin" Version="6.8.400" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.11.400" />
+    <PackageReference Include="Senparc.Weixin.MP.MVC" Version="7.6.400" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="upload\image\" />
