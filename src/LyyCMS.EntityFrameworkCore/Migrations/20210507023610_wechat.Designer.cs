@@ -4,14 +4,16 @@ using LyyCMS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LyyCMS.Migrations
 {
     [DbContext(typeof(LyyCMSDbContext))]
-    partial class LyyCMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210507023610_wechat")]
+    partial class wechat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1987,14 +1989,6 @@ namespace LyyCMS.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("AppId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AppSecret")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
@@ -2015,25 +2009,6 @@ namespace LyyCMS.Migrations
 
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Originalid")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Push")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SortId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WechatCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

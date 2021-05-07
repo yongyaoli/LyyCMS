@@ -24,5 +24,9 @@
         //幻灯片
         public const string Slide = "Slide";
         public const string SlideItems = "SlideItems";
+
+        //微信
+        public const string WeChatAccount = "WeChatAccount";
+
     }
 }

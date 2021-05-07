@@ -27,10 +27,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Views\Article\Index.AdvancedSearch.cshtml" />
+    <Content Remove="Views\WeChatAccount\Index.AdvancedSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Views\Article\Index.AdvancedSearch.cshtml" />
+    <None Include="Views\WeChatAccount\Index.AdvancedSearch.cshtml" />
     <None Update="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

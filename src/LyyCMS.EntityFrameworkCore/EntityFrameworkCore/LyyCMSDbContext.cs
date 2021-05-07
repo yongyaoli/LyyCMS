@@ -7,6 +7,7 @@ using LyyCMS.Members;
 using LyyCMS.EntityMapper.VerificationCodes;
 using LyyCMS.Articles;
 using LyyCMS.Slides;
+using LyyCMS.WeChat;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -35,6 +36,9 @@ namespace LyyCMS.EntityFrameworkCore
 
         public DbSet<SlideItem> SlideItems { get; set; }
 
+        //微信
+        public DbSet<WeChatAccount> WeChatAccounts { get; set; }
+
 
         //重写创建实体的方法
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,6 +57,9 @@ namespace LyyCMS.EntityFrameworkCore
             modelBuilder.Entity<Slide>().ToTable("Slide");
 
             modelBuilder.Entity<SlideItem>().ToTable("SlideItems");
+
+            //wechat
+            modelBuilder.Entity<WeChatAccount>().ToTable("WeChatAccount");
 
             base.OnModelCreating(modelBuilder);
         }

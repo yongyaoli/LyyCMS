@@ -114,7 +114,7 @@
     <text name="CreateCategory">创建会员分类</text>
     <text name="CategoryCode">会员分类编号</text>
     <text name="CategoryDesc">会员分类描述</text>
-    <text name="CategoryName">会员分类</text>
+    <text name="MemberCategoryName">会员分类</text>
 
 
     <text name="ArticleCategory">文章分类</text>
@@ -151,6 +151,11 @@
     <text name="Image">图片</text>
     <text name="Url">URL地址</text>
     <text name="TargetUrl">目标地址</text>
+
+
+    <text name="WeChat">微信</text>
+    <text name="WeChatAccount">微信公众号</text>
+    <text name="WeChatMenu">菜单</text>
 
   </texts>
 </localizationDictionary>

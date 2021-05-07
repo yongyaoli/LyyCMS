@@ -12,6 +12,7 @@ namespace LyyCMS.Members.Dtos
     [AutoMapFrom(typeof(Category))]
     public class CategoryDto : EntityDto<int>
     {
+        /// <summary>
         /// 分类名称
         /// </summary>
         [Required]

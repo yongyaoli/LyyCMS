@@ -83,6 +83,27 @@ namespace LyyCMS.Web.Startup
                         icon: "fas fa-image"
                     )
                 )
+                .AddItem(
+                    new MenuItemDefinition(
+                        "WeChat",
+                        L("WeChat"),
+                        icon: "fas fa-wechat"
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.ArticleCategory,
+                            L("WeChatAccount"),
+                            url: "WeChatAccount",
+                            icon: "fa fa-tags"
+                        )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "WeChatMenu",
+                            L("WeChatMenu"),
+                            url: "WeChatMenu",
+                            icon: "fa fa-book"
+                        )
+                    )
+                )
                 .AddItem( // Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",
