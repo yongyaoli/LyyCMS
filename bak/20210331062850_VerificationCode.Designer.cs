@@ -17,6 +17,7 @@ namespace LyyCMS.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");

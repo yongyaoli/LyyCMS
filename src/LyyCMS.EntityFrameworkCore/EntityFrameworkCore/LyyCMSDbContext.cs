@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore;
 using Abp.Zero.EntityFrameworkCore;
 using LyyCMS.Authorization.Roles;
 using LyyCMS.Authorization.Users;
@@ -60,6 +61,17 @@ namespace LyyCMS.EntityFrameworkCore
 
             //wechat
             modelBuilder.Entity<WeChatAccount>().ToTable("WeChatAccount");
+
+            //modelBuilder.ConfigureIdentityServer(options =>
+            //{
+            //    options.DatabaseProvider = EfCoreDatabaseProvider.MySql;
+            //});
+            
+    
+
+            
+            modelBuilder.ConfigureIdentityServerForMySQL();
+           
 
             base.OnModelCreating(modelBuilder);
         }
