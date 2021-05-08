@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace LyyCMS.WeChat
 {
     public interface IWeChatAccountAppService :
-        IAsyncCrudAppService<WeChatAccountDto, int, PagedResultRequest, WeChatAccountDto, WeChatAccountDto>
+        IAsyncCrudAppService<WeChatAccountDto, int, PagedResultRequest, CreateWxAccountDto, WeChatAccountDto>
     {
     }
 }

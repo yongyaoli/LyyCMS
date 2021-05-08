@@ -87,7 +87,7 @@ namespace LyyCMS.Web.Startup
                     new MenuItemDefinition(
                         "WeChat",
                         L("WeChat"),
-                        icon: "fas fa-wechat"
+                        icon: "fas fa-tags"
                     ).AddItem(
                         new MenuItemDefinition(
                             PageNames.ArticleCategory,

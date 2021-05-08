@@ -1,5 +1,5 @@
 ﻿(function ($) {
-    var _accountSerivce = abp.services.app.wechataccount,
+    var _accountSerivce = abp.services.app.weChatAccount,
         l = abp.localization.getSource('LyyCMS'),
         _$modal = $('#WxAccountCreateModal'),
         _$form = _$modal.find('form'),
@@ -16,6 +16,7 @@
 
             abp.ui.setBusy(_$table);
             _accountSerivce.getAll(filter).done(function (result) {
+                console.log(result);
                 callback({
                     recordsTotal: result.totalCount,
                     recordsFiltered: result.totalCount,
@@ -50,11 +51,16 @@
             },
             {
                 targets: 2,
-                data: 'appid',
+                data: 'appId',
                 sortable: false
             },
             {
-                targets: 6,
+                targets: 3,
+                data: 'originalid',
+                sortable: false
+            },
+            {
+                targets: 4,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -90,17 +96,10 @@
         }
 
         var user = _$form.serializeFormToObject();
-        user.roleNames = [];
-        var _$roleCheckboxes = _$form[0].querySelectorAll("input[name='role']:checked");
-        if (_$roleCheckboxes) {
-            for (var roleIndex = 0; roleIndex < _$roleCheckboxes.length; roleIndex++) {
-                var _$roleCheckbox = $(_$roleCheckboxes[roleIndex]);
-                user.roleNames.push(_$roleCheckbox.val());
-            }
-        }
+        
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _accountSerivce.RegisterMember(user).done(function () {
+        _accountSerivce.create(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));

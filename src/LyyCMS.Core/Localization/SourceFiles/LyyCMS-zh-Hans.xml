@@ -156,7 +156,10 @@
     <text name="WeChat">微信</text>
     <text name="WeChatAccount">微信公众号</text>
     <text name="WeChatMenu">菜单</text>
-
+    <text name="AppId">AppId</text>
+    <text name="AppSecret">AppSecret</text>
+    <text name="CreateNewWxAccount">添加公众号</text>
+    
   </texts>
 </localizationDictionary>
 

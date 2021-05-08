@@ -2,7 +2,7 @@
 @using LyyCMS.Web.Models.WeChat
 @model WeChatAccountViewModel
 
-@{ ViewBag.Title = L("WxChatAccount");
+@{ ViewBag.Title = L("WeChatAccount");
     ViewBag.CurrentPageName = PageNames.WeChatAccount; }
 @section scripts
     {
@@ -19,7 +19,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>@L("WxChatAccount")</h1>
+                <h1>@L("WeChatAccount")</h1>
             </div>
             <div class="col-sm-6">
                 <a href="javascript:;" data-toggle="modal" data-target="#WxAccountCreateModal" class="btn bg-blue float-sm-right">
@@ -53,6 +53,7 @@
                                         <th></th>
                                         <th>@L("Name")</th>
                                         <th>@L("AppId")</th>
+                                        <th>@L("Originalid")</th>
                                         <th style="width: 250px">@L("Actions")</th>
                                     </tr>
                                 </thead>

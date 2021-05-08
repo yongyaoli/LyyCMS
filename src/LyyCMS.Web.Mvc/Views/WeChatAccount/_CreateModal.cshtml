@@ -1,5 +1,66 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using LyyCMS.Web.Models.Common.Modals
+@using LyyCMS.Web.Models.WeChat
+@model WeChatAccountViewModel
+
+@{ Layout = null; }
+<div class="modal fade" id="WxAccountCreateModal" tabindex="-1" role="dialog" aria-labelledby="WxAccountCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewWxAccount")))
+            <form name="roleCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="rolename">@L("Name")</label>
+                        <div class="col-md-9">
+                            <input id="name" type="text" name="Name" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="appid">@L("AppId")</label>
+                        <div class="col-md-9">
+                            <input id="appid" type="text" name="AppId" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="appsecret">@L("AppSecret")</label>
+                        <div class="col-md-9">
+                            <input id="appsecret" type="text" name="AppSecret" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="token">@L("Token")</label>
+                        <div class="col-md-9">
+                            <input id="token" type="text" name="Token" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="originalid">@L("Originalid")</label>
+                        <div class="col-md-9">
+                            <input id="originalid" type="text" name="Originalid" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="wechatcode">@L("WechatCode")</label>
+                        <div class="col-md-9">
+                            <input id="wechatcode" type="text" name="WechatCode" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="push">@L("PushToWeChat")</label>
+                        <div class="col-md-9">
+                            <input type="checkbox" name="Push" value="true" id="push" checked />
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="sortid">@L("SortId")</label>
+                        <div class="col-md-9">
+                            <input id="sortid" type="number" name="SortId" class="form-control" required value="99">
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

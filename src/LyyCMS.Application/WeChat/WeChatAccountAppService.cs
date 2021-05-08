@@ -12,7 +12,7 @@ using LyyCMS.WeChat.Dto;
 namespace LyyCMS.WeChat
 {
     public class WeChatAccountAppService:
-        AsyncCrudAppService<WeChatAccount, WeChatAccountDto, int, PagedResultRequest, WeChatAccountDto, WeChatAccountDto>,
+        AsyncCrudAppService<WeChatAccount, WeChatAccountDto, int, PagedResultRequest, CreateWxAccountDto, WeChatAccountDto>,
         IWeChatAccountAppService
     {
         private readonly IRepository<WeChatAccount> _resposotory;
