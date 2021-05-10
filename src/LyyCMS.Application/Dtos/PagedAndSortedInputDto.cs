@@ -15,7 +15,7 @@ namespace LyyCMS.Dtos
 
         public PagedAndSortedInputDto()
         {
-            MaxResultCount = AppLtmConsts.DefaultPageSize;
+            MaxResultCount = LyyCMSConsts.DefaultPageSize;
         }
     }
 }

@@ -39,6 +39,8 @@ namespace LyyCMS.EntityFrameworkCore
 
         //微信
         public DbSet<WeChatAccount> WeChatAccounts { get; set; }
+        //微信菜单
+        public DbSet<WeChatMenu> WeChatMenus { get; set; }
 
 
         //重写创建实体的方法
@@ -65,14 +67,14 @@ namespace LyyCMS.EntityFrameworkCore
             //wechat
             modelBuilder.Entity<WeChatAccount>().ToTable("WeChatAccount");
 
+            modelBuilder.Entity<WeChatMenu>().ToTable("WeChatMenu");
+
             //modelBuilder.ConfigureIdentityServer(options =>
             //{
             //    options.DatabaseProvider = EfCoreDatabaseProvider.MySql;
             //});
             
-    
-
-            
+   
             modelBuilder.ConfigureIdentityServerForMySQL();
            
             

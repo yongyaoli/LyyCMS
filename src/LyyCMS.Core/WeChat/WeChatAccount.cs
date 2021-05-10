@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -54,6 +55,10 @@ namespace LyyCMS.WeChat
         [Required]
         [DefaultValue(99)]
         public int SortId { get; set; }
-        
+
+        /// <summary>
+        /// 菜单
+        /// </summary>
+        public virtual ICollection<WeChatMenu> wxmenus { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace  LyyCMS.Dtos
 {
     public class PagedAndFilteredInputDto : IPagedResultRequest
     {
-        [Range(1, AppLtmConsts.MaxPageSize)]
+        [Range(1, LyyCMSConsts.MaxPageSize)]
         public int MaxResultCount { get; set; }
 
         [Range(0, int.MaxValue)]
@@ -23,7 +23,7 @@ namespace  LyyCMS.Dtos
 
         public PagedAndFilteredInputDto()
         {
-            MaxResultCount = AppLtmConsts.DefaultPageSize;
+            MaxResultCount = LyyCMSConsts.DefaultPageSize;
         }
     }
 }

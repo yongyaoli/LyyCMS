@@ -22,21 +22,23 @@ namespace LyyCMS.EntityFrameworkCore
         {
             Check.NotNull(builder, nameof(builder));
 
-            builder.Entity<Members.Member>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<Members.Member>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-            builder.Entity<Members.Category>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<Members.Category>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-            builder.Entity<VerificationCode>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<VerificationCode>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-            builder.Entity<ArticleCategory>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<ArticleCategory>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-            builder.Entity<Article>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<Article>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-            builder.Entity<Slide>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<Slide>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-            builder.Entity<SlideItem>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<SlideItem>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-            builder.Entity<WeChatAccount>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<WeChatAccount>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
+
+            builder.Entity<WeChatMenu>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
 /* Configure your own tables/entities inside here */
 
