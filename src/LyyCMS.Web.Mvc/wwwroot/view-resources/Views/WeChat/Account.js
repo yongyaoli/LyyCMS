@@ -125,7 +125,7 @@
             type: 'GET',
             dataType: 'JSON',
             success: function (content) {
-                console.log(context);
+                console.log(content);
                 //$('#WxAccountEditModal div.modal-content').html(content);
             },
             error: function (e) { }

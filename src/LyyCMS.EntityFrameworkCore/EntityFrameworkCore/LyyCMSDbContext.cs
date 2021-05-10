@@ -44,6 +44,9 @@ namespace LyyCMS.EntityFrameworkCore
         //重写创建实体的方法
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //设置表前缀
+            //modelBuilder.ChangeAbpTablePrefix<Tenant,Role,User>("lyy");
+
             modelBuilder.Entity<Member>().ToTable("Member");
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<VerificationCode>().ToTable("VerificationCode");
@@ -72,6 +75,7 @@ namespace LyyCMS.EntityFrameworkCore
             
             modelBuilder.ConfigureIdentityServerForMySQL();
            
+            
 
             base.OnModelCreating(modelBuilder);
         }
