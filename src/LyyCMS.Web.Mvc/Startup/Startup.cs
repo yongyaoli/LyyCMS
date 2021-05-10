@@ -20,10 +20,20 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Senparc.CO2NET.RegisterServices;
 using System;
 using System.IO;
 using System.Linq;
+using Senparc.Weixin.RegisterServices;
 using UEditor.Core;
+using Senparc.CO2NET;
+using Senparc.Weixin.Entities;
+using Senparc.Weixin;
+using Senparc.Weixin.MP;
+using Microsoft.Extensions.Options;
+using Senparc.CO2NET.Cache;
+using System.Collections.Generic;
+using Register = Senparc.CO2NET.Register;
 
 namespace LyyCMS.Web.Startup
 {
@@ -70,7 +80,9 @@ namespace LyyCMS.Web.Startup
                 options.DocInclusionPredicate((docName, description) => true);
             });
 
-            
+
+            services.AddSenparcGlobalServices(_appConfiguration)//Senparc.CO2NET 全局注册
+                .AddSenparcWeixinServices(_appConfiguration);//Senparc.Weixin 注册
 
 
             // Configure Abp and Dependency Injection
@@ -82,7 +94,8 @@ namespace LyyCMS.Web.Startup
             );
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, 
+            IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
 
             app.UseAbp(); // Initializes ABP framework.
@@ -131,6 +144,61 @@ namespace LyyCMS.Web.Startup
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "LyyCMS API V1");
             }); //URL: /swagger 
+
+
+        // 启动 CO2NET 全局注册，必须！
+        IRegisterService register = RegisterService.Start(senparcSetting.Value)
+                .UseSenparcGlobal(false, () => GetExCacheStrategies(senparcSetting.Value));
+
+            register.UseSenparcWeixin(senparcWeixinSetting.Value, senparcSetting.Value)
+
+                #region 注册公众号或小程序（按需）
+
+                //注册公众号
+                .RegisterMpAccount(
+                    senparcWeixinSetting.Value.WeixinAppId,
+                    senparcWeixinSetting.Value.WeixinAppSecret,
+                    "【盛派网络小助手】公众号");
+
+            #endregion
+
         }
+
+
+        /// <summary>
+        /// 获取扩展缓存策略
+        /// </summary>
+        /// <returns></returns>
+        private IList<IDomainExtensionCacheStrategy> GetExCacheStrategies(SenparcSetting senparcSetting)
+        {
+            var exContainerCacheStrategies = new List<IDomainExtensionCacheStrategy>();
+            senparcSetting = senparcSetting ?? new SenparcSetting();
+
+            //注意：以下两个 if 判断仅作为演示，方便大家添加自定义的扩展缓存策略，
+            //      只要进行了 register.UseSenparcWeixin() 操作，Container 的缓存策略下的 Local、Redis 和 Memcached 系统已经默认自动注册，无需操作！
+
+            #region 演示扩展缓存注册方法
+
+            //判断Redis是否可用
+            var redisConfiguration = senparcSetting.Cache_Redis_Configuration;
+            if ((!string.IsNullOrEmpty(redisConfiguration) && redisConfiguration != "Redis配置"))
+            {
+                //exContainerCacheStrategies.Add(RedisContainerCacheStrategy.Instance);
+            }
+
+            //判断Memcached是否可用
+            var memcachedConfiguration = senparcSetting.Cache_Memcached_Configuration;
+            if ((!string.IsNullOrEmpty(memcachedConfiguration) && memcachedConfiguration != "Memcached配置"))
+            {
+                //exContainerCacheStrategies.Add(MemcachedContainerCacheStrategy.Instance);//TODO:如果没有进行配置会产生异常
+            }
+
+            #endregion
+
+            //扩展自定义的缓存策略
+
+            return exContainerCacheStrategies;
+        }
+
     }
 }

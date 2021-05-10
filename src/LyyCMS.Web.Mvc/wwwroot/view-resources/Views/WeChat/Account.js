@@ -67,6 +67,9 @@
                 defaultContent: '',
                 render: (data, type, row, meta) => {
                     return [
+                        `   <button type="button" class="btn btn-sm bg-secondary get-menu" data-wx-id="${row.id}">`,
+                        `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
+                        '   </button>',
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#WxAccountEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
@@ -108,6 +111,29 @@
             abp.ui.clearBusy(_$modal);
         });
     });
+
+    //获取菜单
+    $(document).on('click', '.get-menu', function () {
+        var id = $(this).attr("data-wx-id");
+
+        getWxMenu(id);
+    });
+
+    function getWxMenu(id) {
+        abp.ajax({
+            url: abp.appPath + 'WeChatMenu/GetMenu?id=' + id,
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (content) {
+                console.log(context);
+                //$('#WxAccountEditModal div.modal-content').html(content);
+            },
+            error: function (e) { }
+        });
+    }
+
+
+
 
     $(document).on('click', '.delete-user', function () {
         var userId = $(this).attr("data-user-id");
