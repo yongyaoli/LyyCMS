@@ -159,7 +159,7 @@
     <text name="AppId">AppId</text>
     <text name="AppSecret">AppSecret</text>
     <text name="CreateNewWxAccount">添加公众号</text>
-    
+    <text name="Originalid">原始ID</text>
   </texts>
 </localizationDictionary>
 
