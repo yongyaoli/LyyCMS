@@ -14,6 +14,7 @@ namespace LyyCMS.Web.Startup
 
         public static IWebHost BuildWebHost(string[] args)
         {
+            /*
             var configuration = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory)
                 .AddJsonFile("host.json")
                 .Build();
@@ -21,6 +22,11 @@ namespace LyyCMS.Web.Startup
 
             return WebHost.CreateDefaultBuilder(args)
                 .UseUrls(configuration["url"])
+                .UseStartup<Startup>()
+                .Build();
+            */
+
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
         }

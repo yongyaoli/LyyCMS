@@ -62,9 +62,11 @@
     <PackageReference Include="Abp.Castle.Log4Net" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
     <PackageReference Include="UEditor.Core" Version="1.0.6" />
-    <PackageReference Include="Senparc.Weixin" Version="6.8.400" />
-    <PackageReference Include="Senparc.Weixin.MP" Version="16.11.400" />
-    <PackageReference Include="Senparc.Weixin.MP.MVC" Version="7.6.400" />
+    <PackageReference Include="Senparc.Weixin" Version="6.9.101-preview2" />
+    <!--<PackageReference Include="Senparc.Weixin.MP" Version="16.11.400" />-->
+    <PackageReference Include="Senparc.Weixin.MP.MVC" Version="7.7.100-preview2" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.12.101-preview2" />
+    <PackageReference Include="Senparc.Weixin.MP.Middleware" Version="0.3.100.1-preview2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="upload\image\" />
