@@ -6,6 +6,8 @@ using LyyCMS.Controllers;
 using LyyCMS.WeChat;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Containers;
 using Senparc.Weixin.MP.Entities;
@@ -53,8 +55,13 @@ namespace LyyCMS.Web.Controllers
                         buttons = buttonGroupBase.button;
                         //写入数据库
                         List<ConditionalButtonGroup> conditionalButtonGroups = result.conditionalmenu;
-                        
+                        foreach (var btn in buttons)
+                        {
+                            string name = btn.name;
+                            
+                        }
 
+                        return Json(result, new JsonSerializerSettings() { ContractResolver = new DefaultContractResolver() });
                         Logger.Info($"微信{id}获取菜单:" + Json(result).ToString());
                     }
                     else
