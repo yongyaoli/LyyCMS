@@ -11,6 +11,8 @@ using LyyCMS.WeChat;
 using LyyCMS.Web.Models.Members;
 using LyyCMS.Web.Models.WeChat;
 using LyyCMS.WeChat.Dto;
+using Abp.Application.Services.Dto;
+using LyyCMS.Web.Models.Users;
 
 namespace LyyCMS.Web.Controllers
 {
@@ -37,6 +39,17 @@ namespace LyyCMS.Web.Controllers
                 accountList = weChatAccounts
             };
             return View(model);
+        }
+
+
+        public async Task<ActionResult> EditModal(int userId)
+        {
+            var account = await _weChatAccountAppService.GetAsync(new EntityDto<int>(userId));
+            var model = new EditWxAccountVIewModel()
+            {
+                wxAccount =  account
+            };
+            return PartialView("_EditModal", model);
         }
     }
 }

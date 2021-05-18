@@ -169,9 +169,8 @@
 
         e.preventDefault();
         console.log(abp.appPath + 'WeChatAccount/EditModal?userId=' + userId);
-        console.log(abp.appPath + 'WeChatAccount/EditMember?userId=' + userId);
         abp.ajax({
-            url: abp.appPath + 'WeChatAccount/EditMember?userId=' + userId,
+            url: abp.appPath + 'WeChatAccount/EditModal?userId=' + userId,
             type: 'POST',
             dataType: 'html',
             success: function (content) {

@@ -156,7 +156,6 @@
         var userId = $(this).attr("data-user-id");
 
         e.preventDefault();
-        console.log(abp.appPath + 'Users/EditModal?userId=' + userId);
         console.log(abp.appPath + 'Members/EditMember?userId=' + userId);
         abp.ajax({
             url: abp.appPath + 'Members/EditMember?userId=' + userId,

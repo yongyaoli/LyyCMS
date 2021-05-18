@@ -160,6 +160,8 @@
     <text name="AppSecret">AppSecret</text>
     <text name="CreateNewWxAccount">添加公众号</text>
     <text name="Originalid">原始ID</text>
+    <text name="WxAccountDetails">公众号详情</text>
+    <text name="EditWxAccount">编辑公众号</text>
   </texts>
 </localizationDictionary>
 

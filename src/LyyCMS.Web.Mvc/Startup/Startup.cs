@@ -194,13 +194,13 @@ namespace LyyCMS.Web.Startup
                     options.AccountSettingFunc = context => senparcWeixinSetting.Value;
                 });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Open /WeixinAsync to connect WeChat MessageHandler");//首页默认显示
-                });
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/", async context =>
+            //    {
+            //        await context.Response.WriteAsync("Open /WeixinAsync to connect WeChat MessageHandler");//首页默认显示
+            //    });
+            //});
 
         }
 
