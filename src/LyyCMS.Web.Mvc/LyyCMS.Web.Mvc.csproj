@@ -33,6 +33,19 @@
     <None Include="app.config" />
     <None Include="Views\Article\Index.AdvancedSearch.cshtml" />
     <None Include="Views\WeChatAccount\Index.AdvancedSearch.cshtml" />
+    <None Include="wwwroot\zTree\css\awesomeStyle\awesome.less" />
+    <None Include="wwwroot\zTree\css\awesomeStyle\fa.less" />
+    <None Include="wwwroot\zTree\js\jquery-1.4.4.min.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.all.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.all.min.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.core.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.core.min.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.excheck.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.excheck.min.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.exedit.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.exedit.min.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.exhide.js" />
+    <None Include="wwwroot\zTree\js\jquery.ztree.exhide.min.js" />
     <None Update="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

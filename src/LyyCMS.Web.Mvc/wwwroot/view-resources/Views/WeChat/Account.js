@@ -70,6 +70,9 @@
                         `   <button type="button" class="btn btn-sm bg-secondary get-menu" data-wx-id="${row.id}">`,
                         `       <i class="fas fa-handle-alt"></i> 获取微信菜单`,
                         '   </button>',
+                        `   <button type="button" class="btn btn-sm bg-secondary get-fans" data-wx-id="${row.id}">`,
+                        `       <i class="fas fa-handle-alt"></i> 粉丝 `,
+                        '   </button>',
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#WxAccountEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
@@ -113,6 +116,29 @@
     });
 
     //获取菜单
+    $(document).on('click', '.get-fans', function () {
+        var id = $(this).attr("data-wx-id");
+
+        getWxFans(id);
+    });
+
+    function getWxFans(id) {
+        abp.ajax({
+            url: abp.appPath + 'WeChatAccount/GetFans?id=' + id,
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (content) {
+                console.log(content);
+                abp.notify.info("获取微信粉丝成功");
+            },
+            error: function (e) {
+                abp.notify.error("获取微信粉丝失败");
+            }
+        });
+    }
+
+    //粉丝
+    //获取菜单
     $(document).on('click', '.get-menu', function () {
         var id = $(this).attr("data-wx-id");
 
@@ -134,7 +160,6 @@
             }
         });
     }
-
 
 
 

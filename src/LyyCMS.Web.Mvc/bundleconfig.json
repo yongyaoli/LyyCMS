@@ -134,5 +134,59 @@
     "inputFiles": [
       "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/WeChat/Account.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/WeChat/Account.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Slide/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Slide/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Slide/Item.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Slide/Item.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Members/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Members/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Members/CategoryIndex.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Members/CategoryIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/ArticleCategory/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/ArticleCategory/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Article/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Article/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Article/Edit.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Article/Edit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Article/Create.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Article/Create.js"
+    ]
   }
 ]
