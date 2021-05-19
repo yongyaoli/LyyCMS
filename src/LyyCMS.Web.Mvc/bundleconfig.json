@@ -148,9 +148,9 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/view-resources/Views/Slide/Item.min.js",
+    "outputFileName": "wwwroot/view-resources/Views/Slide/Items.min.js",
     "inputFiles": [
-      "wwwroot/view-resources/Views/Slide/Item.js"
+      "wwwroot/view-resources/Views/Slide/Items.js"
     ]
   },
   {

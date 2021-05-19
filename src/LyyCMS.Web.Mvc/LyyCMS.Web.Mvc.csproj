@@ -28,11 +28,16 @@
   <ItemGroup>
     <Content Remove="Views\Article\Index.AdvancedSearch.cshtml" />
     <Content Remove="Views\WeChatAccount\Index.AdvancedSearch.cshtml" />
+    <Content Remove="wwwroot\view-resources\Views\Slide\Items.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\view-resources\Views\Slide\Items.min.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Views\Article\Index.AdvancedSearch.cshtml" />
     <None Include="Views\WeChatAccount\Index.AdvancedSearch.cshtml" />
+    <None Include="wwwroot\view-resources\Views\Slide\Items.min.js" />
     <None Include="wwwroot\zTree\css\awesomeStyle\awesome.less" />
     <None Include="wwwroot\zTree\css\awesomeStyle\fa.less" />
     <None Include="wwwroot\zTree\js\jquery-1.4.4.min.js" />

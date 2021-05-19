@@ -9,6 +9,7 @@ using LyyCMS.EntityMapper.VerificationCodes;
 using LyyCMS.Articles;
 using LyyCMS.Slides;
 using LyyCMS.WeChat;
+using LyyCMS.WxFans;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -42,6 +43,9 @@ namespace LyyCMS.EntityFrameworkCore
         //微信菜单
         public DbSet<WeChatMenu> WeChatMenus { get; set; }
 
+        public DbSet<WxFansGroup> WxFansGroups { get; set; }
+        public DbSet<WxFansInfo> WxFansInfos { get; set; }
+
 
         //重写创建实体的方法
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -68,6 +72,10 @@ namespace LyyCMS.EntityFrameworkCore
             modelBuilder.Entity<WeChatAccount>().ToTable("WeChatAccount");
 
             modelBuilder.Entity<WeChatMenu>().ToTable("WeChatMenu");
+
+            modelBuilder.Entity<WxFansGroup>().ToTable("WxFansGroup");
+
+            modelBuilder.Entity<WxFansInfo>().ToTable("WxFansInfo");
 
             //modelBuilder.ConfigureIdentityServer(options =>
             //{

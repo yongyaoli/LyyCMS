@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <MsgType><![CDATA[text]]></MsgType>
+  <Content><![CDATA[你发送了文字：赏
+
+你的OpenId：oJ20gt19ngp_2kg5eiiRLD7S6Y_U]]></Content>
+  <ToUserName><![CDATA[oJ20gt19ngp_2kg5eiiRLD7S6Y_U]]></ToUserName>
+  <FromUserName><![CDATA[gh_f57a3bd2b2f6]]></FromUserName>
+  <CreateTime>1621408114</CreateTime>
+</xml>

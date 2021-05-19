@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LyyCMS.WxFans;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -41,7 +42,9 @@ namespace LyyCMS.EntityFrameworkCore
 
             builder.Entity<WeChatAccount>().Property(x => x.Id).HasMaxLength(300);
 
-            
+            builder.Entity<WxFansGroup>().Property(x => x.Id).HasMaxLength(300);
+
+            builder.Entity<WxFansInfo>().Property(x => x.Id).HasMaxLength(300);
 
         }
     }

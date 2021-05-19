@@ -3,14 +3,16 @@ using System;
 using LyyCMS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LyyCMS.Migrations
 {
     [DbContext(typeof(LyyCMSDbContext))]
-    partial class LyyCMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210519063050_wxfans")]
+    partial class wxfans
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2104,21 +2106,7 @@ namespace LyyCMS.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("groupId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("name")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("weChaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("weChaId");
 
                     b.ToTable("WxFansGroup");
                 });
@@ -2151,42 +2139,7 @@ namespace LyyCMS.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("city")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("country")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("headimgurl")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("language")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("nickname")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("openid")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("province")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("sex")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("subscribe_time")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("unionid")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("weChaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("weChaId");
 
                     b.ToTable("WxFansInfo");
                 });
@@ -2483,24 +2436,6 @@ namespace LyyCMS.Migrations
                         .HasForeignKey("WeChatAccountId");
 
                     b.Navigation("WeChatAccount");
-                });
-
-            modelBuilder.Entity("LyyCMS.WxFans.WxFansGroup", b =>
-                {
-                    b.HasOne("LyyCMS.WeChat.WeChatAccount", "weCha")
-                        .WithMany()
-                        .HasForeignKey("weChaId");
-
-                    b.Navigation("weCha");
-                });
-
-            modelBuilder.Entity("LyyCMS.WxFans.WxFansInfo", b =>
-                {
-                    b.HasOne("LyyCMS.WeChat.WeChatAccount", "weCha")
-                        .WithMany()
-                        .HasForeignKey("weChaId");
-
-                    b.Navigation("weCha");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

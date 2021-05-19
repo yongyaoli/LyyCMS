@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <ToUserName><![CDATA[gh_f57a3bd2b2f6]]></ToUserName>
+<FromUserName><![CDATA[oJ20gt19ngp_2kg5eiiRLD7S6Y_U]]></FromUserName>
+<CreateTime>1621408152</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wsq.qq.com/reflow/259381031]]></EventKey>
+<MenuId>206674373</MenuId>
+</xml>

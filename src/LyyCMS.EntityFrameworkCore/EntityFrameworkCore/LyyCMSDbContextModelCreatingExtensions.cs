@@ -12,6 +12,7 @@ using LyyCMS.Articles;
 using LyyCMS.Members;
 using LyyCMS.Slides;
 using LyyCMS.WeChat;
+using LyyCMS.WxFans;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -40,14 +41,18 @@ namespace LyyCMS.EntityFrameworkCore
 
             builder.Entity<WeChatMenu>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-/* Configure your own tables/entities inside here */
+            builder.Entity<WxFansGroup>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-//builder.Entity<YourEntity>(b =>
-//{
-//    b.ToTable(BookConsts.DbTablePrefix + "YourEntities", BookConsts.DbSchema);
+            builder.Entity<WxFansInfo>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
-//    //...
-//});
+            /* Configure your own tables/entities inside here */
+
+            //builder.Entity<YourEntity>(b =>
+            //{
+            //    b.ToTable(BookConsts.DbTablePrefix + "YourEntities", BookConsts.DbSchema);
+
+            //    //...
+            //});
         }
 
         //public static void ConfigureCustomUserProperties<TUser>(this EntityTypeBuilder<TUser> b)

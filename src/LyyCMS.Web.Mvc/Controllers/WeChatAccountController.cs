@@ -13,6 +13,8 @@ using LyyCMS.Web.Models.WeChat;
 using LyyCMS.WeChat.Dto;
 using Abp.Application.Services.Dto;
 using LyyCMS.Web.Models.Users;
+using LyyCMS.WxFans;
+using LyyCMS.WxFans.Dto;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.AdvancedAPIs.User;
 using Senparc.Weixin.MP.CommonAPIs;
@@ -26,13 +28,16 @@ namespace LyyCMS.Web.Controllers
 
         private readonly IWeChatAccountAppService _weChatAccountAppService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IWxFansInfoAppService _wxFansInfoAppService;
 
         public WeChatAccountController(IWeChatAccountAppService weChatAccountAppService,
             IWebHostEnvironment webHostEnvironment,
+            IWxFansInfoAppService wxFansInfoAppService,
             ICategoryAppService categoryAppService)
         {
             _weChatAccountAppService = weChatAccountAppService;
             _webHostEnvironment = webHostEnvironment;
+            _wxFansInfoAppService = wxFansInfoAppService;
         }
 
         public async Task<IActionResult> Index(PagedResultRequest pagedResultRequest)
@@ -66,13 +71,40 @@ namespace LyyCMS.Web.Controllers
                 try
                 {
                     var accessToken = await AccessTokenContainer.TryGetAccessTokenAsync(account.AppId, account.AppSecret);
-
                     OpenIdResultJson resultJson = await UserApi.GetAsync(accessToken, "");
-
                     Logger.Info("获取到的粉丝:"+resultJson.count);
 
-                    var opens = resultJson.data;
+                    OpenIdResultJson_Data data = resultJson.data;
+                    List<BatchGetUserInfoData> infoData = new List<BatchGetUserInfoData>();
+                    foreach (var _openid in data.openid)
+                    {
+                        infoData.Add(new BatchGetUserInfoData()
+                        {
+                            openid = _openid,
+                            lang = "zh_CN"
+                        });
+                    }
 
+                    BatchGetUserInfoJsonResult result = await UserApi.BatchGetUserInfoAsync(accessToken, infoData);
+                    List<UserInfoJson> users = result.user_info_list;
+                    foreach(UserInfoJson info in users)
+                    {
+                        CreateWxFansInfoDto infoDto = new CreateWxFansInfoDto();
+                        infoDto.weCha = account;
+                        infoDto.openid = info.openid;
+                        infoDto.city = info.city;
+                        infoDto.headimgurl = info.headimgurl;
+                        infoDto.language = info.language;
+                        infoDto.nickname = info.nickname;
+                        infoDto.province = info.province;
+                        infoDto.sex = info.sex.ToString();
+                        infoDto.subscribe_time = new DateTime(info.subscribe_time);
+                        infoDto.country = info.country;
+                        infoDto.unionid = info.unionid;
+                        //info.groupid
+                        //TODO  报错...
+                        await _wxFansInfoAppService.CreateAsync(infoDto);
+                    }
                 }
                 catch (Exception e)
                 {
