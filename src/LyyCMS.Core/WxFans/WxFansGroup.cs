@@ -14,7 +14,7 @@ namespace LyyCMS.WxFans
     public class WxFansGroup: FullAuditedEntity
     {
 
-        public WeChatAccount weCha { get; set; }
+        public virtual WeChatAccount weCha { get; set; }
 
         public string name { get; set; }
 

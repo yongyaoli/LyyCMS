@@ -11,7 +11,7 @@ namespace LyyCMS.WxFans.Dto
     [AutoMapTo(typeof(WxFansGroup))]
     public class CreateWxFansGroupDto
     {
-        public WeChatAccount WeChatAccount { get; set; }
+        public virtual WeChatAccount WeChatAccount { get; set; }
 
         public string name { get; set; }
 

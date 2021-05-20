@@ -2,6 +2,7 @@
 using LyyCMS.WeChat;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,14 @@ namespace LyyCMS.WxFans.Dto
     [AutoMapTo(typeof(WxFansInfo))]
     public class CreateWxFansInfoDto
     {
-        public WeChatAccountDto weCha { get; set; }
+        [Required]
+        public int weChaId { get; set; }
 
+        public virtual WeChatAccount weCha { get; set; }
+
+        [Required]
         public string openid { get; set; }
+        [Required]
         public string nickname { get; set; }
         public string sex { get; set; }
         public string city { get; set; }

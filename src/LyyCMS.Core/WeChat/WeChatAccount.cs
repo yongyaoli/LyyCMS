@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using LyyCMS.WxFans;
 
 namespace LyyCMS.WeChat
 {
@@ -60,5 +61,7 @@ namespace LyyCMS.WeChat
         /// 菜单
         /// </summary>
         public virtual ICollection<WeChatMenu> wxmenus { get; set; }
+
+        public virtual ICollection<WxFansInfo> fansInfos { get; set; }
     }
 }

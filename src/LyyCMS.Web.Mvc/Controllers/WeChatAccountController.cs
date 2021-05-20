@@ -85,34 +85,41 @@ namespace LyyCMS.Web.Controllers
                         });
                     }
 
-                    BatchGetUserInfoJsonResult result = await UserApi.BatchGetUserInfoAsync(accessToken, infoData);
-                    List<UserInfoJson> users = result.user_info_list;
-                    foreach(UserInfoJson info in users)
+                    if (infoData.Count > 0)
                     {
-                        CreateWxFansInfoDto infoDto = new CreateWxFansInfoDto();
-                        infoDto.weCha = account;
-                        infoDto.openid = info.openid;
-                        infoDto.city = info.city;
-                        infoDto.headimgurl = info.headimgurl;
-                        infoDto.language = info.language;
-                        infoDto.nickname = info.nickname;
-                        infoDto.province = info.province;
-                        infoDto.sex = info.sex.ToString();
-                        infoDto.subscribe_time = new DateTime(info.subscribe_time);
-                        infoDto.country = info.country;
-                        infoDto.unionid = info.unionid;
-                        //info.groupid
-                        //TODO  报错...
-                        await _wxFansInfoAppService.CreateAsync(infoDto);
+                        BatchGetUserInfoJsonResult result = await UserApi.BatchGetUserInfoAsync(accessToken, infoData);
+                        List<UserInfoJson> users = result.user_info_list;
+                        foreach (UserInfoJson info in users)
+                        {
+                            CreateWxFansInfoDto infoDto = new CreateWxFansInfoDto();
+                            infoDto.weChaId = account.Id;
+                            infoDto.openid = info.openid;
+                            infoDto.city = info.city;
+                            infoDto.headimgurl = info.headimgurl;
+                            infoDto.language = info.language;
+                            infoDto.nickname = info.nickname;
+                            infoDto.province = info.province;
+                            infoDto.sex = info.sex.ToString();
+                            infoDto.subscribe_time = new DateTime(info.subscribe_time);
+                            infoDto.country = info.country;
+                            infoDto.unionid = info.unionid;
+
+                            //info.groupid
+
+                            //await _wxFansInfoAppService.CreateAsync(infoDto);
+                            await _wxFansInfoAppService.CreateFasnAsync(infoDto);
+                        }
                     }
+                   
                 }
                 catch (Exception e)
                 {
-
+                    Logger.Error("获取粉丝信息失败",e);
+                    return Json(new { code = "1", msg = "获取粉丝信息失败" });
                 }
             }
 
-            return null;
+            return Json(new {code="0", msg="获取成功"});
         }
 
 
