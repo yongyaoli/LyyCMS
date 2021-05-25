@@ -10,6 +10,6 @@ namespace LyyCMS.WxFans
         IAsyncCrudAppService<WxFansInfoDto, int, PagedResultRequest, CreateWxFansInfoDto, WxFansInfoDto>
     {
 
-        Task<WxFansInfoDto> CreateFasnAsync(CreateWxFansInfoDto input);
+        Task<WxFansInfoDto> CreateFansAsync(CreateWxFansInfoDto input);
     }
 }

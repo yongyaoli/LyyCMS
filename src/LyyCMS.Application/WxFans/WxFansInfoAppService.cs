@@ -25,7 +25,7 @@ namespace LyyCMS.WxFans
             _accountRepository = accoutRepository;
         }
 
-        public async Task<WxFansInfoDto> CreateFasnAsync(CreateWxFansInfoDto input)
+        public async Task<WxFansInfoDto> CreateFansAsync(CreateWxFansInfoDto input)
         {
             Logger.Info("start create article");
             var id = input.weChaId;

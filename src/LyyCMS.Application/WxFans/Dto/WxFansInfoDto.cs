@@ -25,5 +25,23 @@ namespace LyyCMS.WxFans.Dto
         public string headimgurl { get; set; }
         public DateTime subscribe_time { get; set; }
         public string unionid { get; set; }
+
+        public int groupid { get; set; }
+
+        /// <summary>
+        /// 是否关注,值为0时，代表此用户没有关注该公众号
+        /// </summary>
+        public int subscribe { get; set; }
+
+        public string remark { get; set; }
+
+        /// <summary>
+        /// 关注的渠道
+        /// </summary>
+        public string subscribe_scene { get; set; }
+
+        public string qr_scene { get; set; }
+
+        public string qr_scene_str { get; set; }
     }
 }

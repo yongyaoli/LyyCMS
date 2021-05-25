@@ -103,11 +103,13 @@ namespace LyyCMS.Web.Controllers
                             infoDto.subscribe_time = new DateTime(info.subscribe_time);
                             infoDto.country = info.country;
                             infoDto.unionid = info.unionid;
-
-                            //info.groupid
-
-                            //await _wxFansInfoAppService.CreateAsync(infoDto);
-                            await _wxFansInfoAppService.CreateFasnAsync(infoDto);
+                            infoDto.groupid = info.groupid;
+                            infoDto.qr_scene = info.qr_scene.ToString();
+                            infoDto.qr_scene_str = info.qr_scene_str;
+                            infoDto.remark = info.remark;
+                            infoDto.subscribe = info.subscribe;
+                            
+                            await _wxFansInfoAppService.CreateFansAsync(infoDto);
                         }
                     }
                    
