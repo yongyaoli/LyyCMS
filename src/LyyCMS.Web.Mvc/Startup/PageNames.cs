@@ -28,5 +28,7 @@
         //微信
         public const string WeChatAccount = "WeChatAccount";
 
+        public const string WxFans = "WxFans";
+
     }
 }

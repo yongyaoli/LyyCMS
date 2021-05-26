@@ -1,4 +1,5 @@
 ﻿(function ($) {
+    console.log(abp.services);
     var _accountSerivce = abp.services.app.weChatAccount,
         l = abp.localization.getSource('LyyCMS'),
         _$modal = $('#WxAccountCreateModal'),
@@ -118,8 +119,10 @@
     //获取菜单
     $(document).on('click', '.get-fans', function () {
         var id = $(this).attr("data-wx-id");
-
-        getWxFans(id);
+        var fansUrl = abp.appPath + "WxFans/Index?id=" + id;
+        console.log(fansUrl);
+        window.location.href = fansUrl;
+        //getWxFans(id);
     });
 
     function getWxFans(id) {

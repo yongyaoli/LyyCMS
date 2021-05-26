@@ -13,7 +13,8 @@ namespace LyyCMS.WxFans.Dto
     public class WxFansInfoDto : EntityDto<int>
     {
 
-        public virtual WeChatAccount weCha { get; set; }
+        //public virtual WeChatAccount weCha { get; set; }
+        public virtual int weChaId { get; set; }
 
         public string openid { get; set; }
         public string nickname { get; set; }

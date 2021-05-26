@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LyyCMS.WeChat;
+using Abp.Application.Services.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace LyyCMS.WxFans
 {
@@ -34,6 +36,16 @@ namespace LyyCMS.WxFans
             var dtos = ObjectMapper.Map<WxFansInfo>(input);
             await _resposotory.InsertAsync(dtos);
             return MapToEntityDto(dtos);
+        }
+
+        public async Task<ListResultDto<WxFansInfoDto>> GetFansByAccount(int accountId)
+        {
+            var wxAccount = _accountRepository.FirstOrDefaultAsync(x => x.Id == accountId).Result;
+            var fans = await _resposotory.GetAll().Where(x => x.weCha.Equals(wxAccount)).ToListAsync();
+
+            return new ListResultDto<WxFansInfoDto>(ObjectMapper.Map<List<WxFansInfoDto>>(fans));
+
+
         }
     }
 }

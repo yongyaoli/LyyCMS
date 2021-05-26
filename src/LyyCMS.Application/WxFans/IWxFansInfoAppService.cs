@@ -3,6 +3,7 @@ using LyyCMS.Articles.Dtos;
 using LyyCMS.WeChat.Dto;
 using LyyCMS.WxFans.Dto;
 using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
 
 namespace LyyCMS.WxFans
 {
@@ -11,5 +12,7 @@ namespace LyyCMS.WxFans
     {
 
         Task<WxFansInfoDto> CreateFansAsync(CreateWxFansInfoDto input);
+
+        Task<ListResultDto<WxFansInfoDto>> GetFansByAccount(int accountId);
     }
 }
