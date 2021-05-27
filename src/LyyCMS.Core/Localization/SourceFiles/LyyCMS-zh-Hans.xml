@@ -72,7 +72,11 @@
     
     <text name="Yes">是</text>
     <text name="No">否</text>
-    
+
+    <text name="Sex">性别</text>
+
+
+
     <text name="Cancel">取消</text>
     <text name="OK">确定</text>
     <text name="CreateNewRole">创建新角色</text>
@@ -162,6 +166,11 @@
     <text name="Originalid">原始ID</text>
     <text name="WxAccountDetails">公众号详情</text>
     <text name="EditWxAccount">编辑公众号</text>
+
+    <text name="Openid">Openid</text>
+
+    <text name="toBlack">拉黑</text>
+
   </texts>
 </localizationDictionary>
 

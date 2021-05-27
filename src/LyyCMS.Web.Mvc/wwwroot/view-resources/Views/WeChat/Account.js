@@ -71,6 +71,9 @@
                         `   <button type="button" class="btn btn-sm bg-secondary get-menu" data-wx-id="${row.id}">`,
                         `       <i class="fas fa-handle-alt"></i> 获取微信菜单`,
                         '   </button>',
+                        `   <button type="button" class="btn btn-sm bg-secondary get-fanslist" data-wx-id="${row.id}">`,
+                        `       <i class="fas fa-handle-alt"></i> 拉取粉丝 `,
+                        '   </button>',
                         `   <button type="button" class="btn btn-sm bg-secondary get-fans" data-wx-id="${row.id}">`,
                         `       <i class="fas fa-handle-alt"></i> 粉丝 `,
                         '   </button>',
@@ -123,6 +126,11 @@
         console.log(fansUrl);
         window.location.href = fansUrl;
         //getWxFans(id);
+    });
+
+    $(document).on('click', '.get-fanslist', function () {
+        var id = $(this).attr("data-wx-id");
+        getWxFans(id);
     });
 
     function getWxFans(id) {

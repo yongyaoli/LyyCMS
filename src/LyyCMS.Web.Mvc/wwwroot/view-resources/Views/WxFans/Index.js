@@ -20,6 +20,7 @@
             abp.ui.setBusy(_$table);
             //_wxfansService.getFansByAccount(filter)
             _wxfansService.getFansByAccount(accountId).done(function (result) {
+                console.log(result);
                 callback({
                     recordsTotal: result.totalCount,
                     recordsFiltered: result.totalCount,
@@ -54,16 +55,50 @@
             },
             {
                 targets: 2,
-                data: 'nickName',
+                data: 'nickname',
                 sortable: false
             },
             {
                 targets: 3,
-                data: 'sex',
-                sortable: false
+                data: 'headimgurl',
+                sortable: false,
+                render: data => {
+                    console.log(data);
+                    if (data == null) {
+                        return `<img width="50" heigth="50" src="img/logo.png">`; //empty
+                    } else {
+                        return `<img width="50" heigth="50" src="${data}">`;
+                    }
+                }
             },
             {
                 targets: 4,
+                data: 'province',
+                sortable: false
+            },
+            {
+                targets: 5,
+                data: 'city',
+                sortable: false
+            },
+            {
+                targets: 6,
+                data: 'sex',
+                sortable: false,
+                render:data => {
+                    return `${data==1?"男":"女"}`;
+                }
+            },
+            {
+                targets: 7,
+                data: 'subscribe',
+                sortable: false,
+                render: data => {
+                    return `${data == 1 ? "是" : "否"}`;
+                }
+            },
+            {
+                targets: 8,
                 data: null,
                 sortable: false,
                 autoWidth: false,
@@ -74,7 +109,7 @@
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
                         `   <button type="button" class="btn btn-sm bg-danger delete-user" data-user-id="${row.id}" data-user-name="${row.name}">`,
-                        `       <i class="fas fa-trash"></i> ${l('Delete')}`,
+                        `       <i class="fas fa-trash"></i> ${l('toBlack')}`,
                         '   </button>'
                     ].join('');
                 }
