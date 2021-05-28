@@ -8,11 +8,11 @@ using Abp.Application.Services.Dto;
 namespace LyyCMS.WxFans
 {
     public interface IWxFansInfoAppService:
-        IAsyncCrudAppService<WxFansInfoDto, int, PagedResultRequest, CreateWxFansInfoDto, WxFansInfoDto>
+        IAsyncCrudAppService<WxFansInfoDto, int, PagedResultReq, CreateWxFansInfoDto, WxFansInfoDto>
     {
 
         Task<WxFansInfoDto> CreateFansAsync(CreateWxFansInfoDto input);
 
-        Task<ListResultDto<WxFansInfoDto>> GetFansByAccount(int accountId);
+        Task<PagedResultDto<WxFansInfoDto>> GetFansByAccount(PagedResultReq accountId);
     }
 }

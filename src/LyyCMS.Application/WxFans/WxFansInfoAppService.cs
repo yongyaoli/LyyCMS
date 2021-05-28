@@ -1,21 +1,25 @@
-﻿using Abp.Application.Services;
+﻿using System;
+using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
-using LyyCMS.Articles;
+using LyyCMS.WeChat;
 using LyyCMS.WeChat.Dto;
 using LyyCMS.WxFans.Dto;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using LyyCMS.WeChat;
-using Abp.Application.Services.Dto;
-using Microsoft.EntityFrameworkCore;
+using Abp.Linq.Extensions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using LyyCMS.Articles.Dtos;
+using LyyCMS.Members.Dtos;
+using System.Linq.Dynamic.Core;
 
 namespace LyyCMS.WxFans
 {
     public class WxFansInfoAppService:
-        AsyncCrudAppService<WxFansInfo, WxFansInfoDto, int, PagedResultRequest, CreateWxFansInfoDto, WxFansInfoDto>,
+        AsyncCrudAppService<WxFansInfo, WxFansInfoDto, int, PagedResultReq, CreateWxFansInfoDto, WxFansInfoDto>,
         IWxFansInfoAppService
     {
         private readonly IRepository<WxFansInfo> _resposotory;
@@ -38,14 +42,19 @@ namespace LyyCMS.WxFans
             return MapToEntityDto(dtos);
         }
 
-        public async Task<ListResultDto<WxFansInfoDto>> GetFansByAccount(int accountId)
+        public async Task<PagedResultDto<WxFansInfoDto>> GetFansByAccount(PagedResultReq input)
         {
-            var wxAccount = _accountRepository.FirstOrDefaultAsync(x => x.Id == accountId).Result;
-            var fans = await _resposotory.GetAll().Where(x => x.weCha.Equals(wxAccount)).ToListAsync();
+            int aid = input.AccountId;
+            aid = aid < 1 ? 1 : aid;
+            var wxAccount = _accountRepository.FirstOrDefaultAsync(x => x.Id == aid).Result;
+            var query = _resposotory.GetAll().Where(x=>x.weCha.Equals(wxAccount));
+            var personcount = await query.CountAsync();
 
-            return new ListResultDto<WxFansInfoDto>(ObjectMapper.Map<List<WxFansInfoDto>>(fans));
+            var members = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
+            var dtos = ObjectMapper.Map<List<WxFansInfoDto>>(members);
+            var pagedReulstMember = new PagedResultDto<WxFansInfoDto>(personcount, dtos);
 
-
+            return pagedReulstMember;
         }
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
 using LyyCMS.WxFans;
 
 namespace LyyCMS.Web.Controllers
@@ -28,8 +29,13 @@ namespace LyyCMS.Web.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
+            var aid = id;
+            EntityDto<int> dto = new EntityDto();
+            dto.Id = aid;
+            var account = await _weChatAccountAppService.GetAsync(dto);
+            ViewData["account"] = account;
             return View();
         }
     }

@@ -166,7 +166,7 @@
     <text name="Originalid">原始ID</text>
     <text name="WxAccountDetails">公众号详情</text>
     <text name="EditWxAccount">编辑公众号</text>
-
+    <text name="WxFans">公众号粉丝</text>
     <text name="Openid">Openid</text>
 
     <text name="toBlack">拉黑</text>

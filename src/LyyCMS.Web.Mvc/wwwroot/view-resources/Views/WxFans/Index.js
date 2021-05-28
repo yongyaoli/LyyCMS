@@ -16,10 +16,13 @@
             var filter = $('#UsersSearchForm').serializeFormToObject(true);
             filter.maxResultCount = data.length;
             filter.skipCount = data.start;
-
+            var aid = getQueryVariable("id");
+            var accid = parseInt(aid);
+            filter.AccountId = accid;
             abp.ui.setBusy(_$table);
+            console.log("filter",filter);
             //_wxfansService.getFansByAccount(filter)
-            _wxfansService.getFansByAccount(accountId).done(function (result) {
+            _wxfansService.getFansByAccount(filter).done(function (result) {
                 console.log(result);
                 callback({
                     recordsTotal: result.totalCount,
