@@ -71,6 +71,7 @@ namespace LyyCMS.Web.Controllers
                 try
                 {
                     var accessToken = await AccessTokenContainer.TryGetAccessTokenAsync(account.AppId, account.AppSecret);
+                    
                     OpenIdResultJson resultJson = await UserApi.GetAsync(accessToken, "");
                     Logger.Info("获取到的粉丝:"+resultJson.count);
 

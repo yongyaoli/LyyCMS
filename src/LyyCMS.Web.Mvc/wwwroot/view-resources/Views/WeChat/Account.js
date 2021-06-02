@@ -77,6 +77,9 @@
                         `   <button type="button" class="btn btn-sm bg-secondary get-fans" data-wx-id="${row.id}">`,
                         `       <i class="fas fa-handle-alt"></i> 粉丝 `,
                         '   </button>',
+                        `   <button type="button" class="btn btn-sm bg-secondary get-media" data-wx-id="${row.id}">`,
+                        `       <i class="fas fa-handle-alt"></i> 素材 `,
+                        '   </button>',
                         `   <button type="button" class="btn btn-sm bg-secondary edit-user" data-user-id="${row.id}" data-toggle="modal" data-target="#WxAccountEditModal">`,
                         `       <i class="fas fa-pencil-alt"></i> ${l('Edit')}`,
                         '   </button>',
@@ -125,7 +128,13 @@
         var fansUrl = abp.appPath + "WxFans/Index?id=" + id;
         console.log(fansUrl);
         window.location.href = fansUrl;
-        //getWxFans(id);
+    });
+    //素材
+    $(document).on('click', '.get-media', function () {
+        var id = $(this).attr("data-wx-id");
+        var fansUrl = abp.appPath + "Material/Index?id=" + id;
+        console.log(fansUrl);
+        window.location.href = fansUrl;
     });
 
     $(document).on('click', '.get-fanslist', function () {

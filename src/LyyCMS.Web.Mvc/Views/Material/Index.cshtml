@@ -1,0 +1,14 @@
+﻿@using Senparc.Weixin.MP.AdvancedAPIs.Media
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    MediaList_NewsResult pictxt = ViewData["picList"] as MediaList_NewsResult;
+}
+
+<hr />
+<div>列表展示图文素材</div>
+@foreach (MediaList_News_Item item in pictxt.item)
+{
+    <span>@item.media_id</span>
+}
