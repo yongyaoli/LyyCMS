@@ -170,6 +170,7 @@
     <text name="Openid">Openid</text>
 
     <text name="toBlack">拉黑</text>
+    <text name="Material">微信素材</text>
 
   </texts>
 </localizationDictionary>

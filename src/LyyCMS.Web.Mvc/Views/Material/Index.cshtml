@@ -1,14 +1,91 @@
-﻿@using Senparc.Weixin.MP.AdvancedAPIs.Media
+﻿@using LyyCMS.Web.Startup
+@using Senparc.Weixin.MP.AdvancedAPIs.Media
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@{ ViewBag.Title = L("Material");
+    ViewBag.CurrentPageName = PageNames.Material; }
+
 @{
     MediaList_NewsResult pictxt = ViewData["picList"] as MediaList_NewsResult;
-}
 
+    MediaList_OthersResult other = ViewData["otherList"] as MediaList_OthersResult;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Material")</h1>
+            </div>
+            <div class="col-sm-6">
+
+
+            </div>
+        </div>
+    </div>
+</section>
 <hr />
 <div>列表展示图文素材</div>
-@foreach (MediaList_News_Item item in pictxt.item)
-{
-    <span>@item.media_id</span>
-}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <table style="border:dashed 1px #0094ff">
+                        <thead>
+                            <tr>
+                                <td>素材ID</td>
+                                <td>
+                                    素材名称
+                                </td>
+                                <td>地址</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (MediaList_News_Item item in pictxt.item)
+                            {
+                                <span>@item.media_id</span>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr />
+<div>其他素材</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <table style="border:dashed 1px #0094ff">
+                        <thead>
+                            <tr>
+                                <td>素材ID</td>
+                                <td>
+                                    素材名称
+                                </td>
+                                <td>地址</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (MediaList_Others_Item item in other.item)
+                            {
+                                <tr>
+                                    <td>@item.media_id</td>
+                                    <td>@item.name</td>
+                                    <td>@item.url</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

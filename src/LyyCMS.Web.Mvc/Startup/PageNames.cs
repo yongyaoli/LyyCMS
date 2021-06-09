@@ -29,6 +29,7 @@
         public const string WeChatAccount = "WeChatAccount";
 
         public const string WxFans = "WxFans";
+        public const string Material = "Material";
 
     }
 }
