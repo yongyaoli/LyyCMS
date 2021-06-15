@@ -196,5 +196,10 @@
       "destination": "wwwroot/libs/push.js"
     }
     //other libs end
+    ,
+    {
+      "library": "jquery-treetable@3.2.0",
+      "destination": "wwwroot/lib/jquery-treetable/"
+    }
   ]
 }

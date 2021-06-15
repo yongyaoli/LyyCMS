@@ -32,6 +32,8 @@ namespace LyyCMS.Web.Controllers
                 ParentCategoryList = articleCategories
             };
 
+            
+
             return View(model);
         }
 

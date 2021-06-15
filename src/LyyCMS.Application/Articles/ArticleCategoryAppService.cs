@@ -61,12 +61,17 @@ namespace LyyCMS.Articles
         public async Task<ArticleCategoryDto> CreateEntityAsync(CreateArticleCategoryDto input)
         {
             int pid = input.ParentId;
-            var category = await _respository.GetAsync(pid);
+            ArticleCategory category = null;
+            if (pid > 0)
+            {
+                category = await _respository.GetAsync(pid);
+            }
+            
             ArticleCategory articleCategory = new ArticleCategory();
             articleCategory.Name = input.Name;
             articleCategory.OrderNum = input.OrderNum;
             articleCategory.Description = input.Description;
-            articleCategory.Parent = category;
+            articleCategory.Parent = pid == 0 ? null : category;
 
             await _respository.InsertAsync(articleCategory);
             return MapToEntityDto(articleCategory);

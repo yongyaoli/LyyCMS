@@ -1,5 +1,6 @@
 ﻿@using LyyCMS.Web.Startup
 @using LyyCMS.Web.Models.Articles
+@using LyyCMS.Articles.Dtos
 @model ArticleCategoryListViewModel
 
 @{ ViewBag.Title = L("ArticleCategory");
@@ -7,12 +8,21 @@
 @section scripts
     {
     <environment names="Development">
+        <link href="~/lib/jquery-treetable/css/jquery.treetable.theme.default.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/jquery-treetable/css/jquery.treetable.css" rel="stylesheet" asp-append-version="true" />
         <script src="~/view-resources/Views/ArticleCategory/Index.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-treetable/jquery.treetable.js" asp-append-version="true"></script>
     </environment>
 
     <environment names="Staging,Production">
         <script src="~/view-resources/Views/ArticleCategory/Index.min.js" asp-append-version="true"></script>
     </environment>
+<script>
+    $("#treeTable").treeTable({
+        "column": 1,
+        "expandLevel":2
+    })
+</script>
 }
 
 <section class="content-header">
@@ -62,6 +72,29 @@
                             </table>
                         </div>
                     </div>
+                </div>
+
+                <div class="card">
+                    <table id="treeTable" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td>编号</td>
+                                <td>分类名称</td>
+                                <td>父类名称</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (ArticleCategoryListDto dto in Model.ParentCategoryList)
+                            {
+                                <tr id="@dto.Id" pId="@dto.ParentId">
+                                    <td>@dto.Id</td>
+                                    <td>@dto.Name</td>
+                                    <td>@dto.ParentName</td>
+                                </tr>
+                            }
+                        </tbody>
+                        
+                    </table>
                 </div>
             </div>
         </div>

@@ -1,7 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using LyyCMS.Controllers;
 using LyyCMS.WeChat;
-using LyyCMS.WxFans;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Senparc.Weixin.MP;
@@ -9,8 +8,6 @@ using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.AdvancedAPIs.Media;
 using Senparc.Weixin.MP.Containers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LyyCMS.Web.Controllers
