@@ -33,8 +33,6 @@ namespace LyyCMS.Web.Controllers
         [HttpGet, HttpPost]
         public ContentResult uploadimage()
         {
-            string s = "";
-
             string rootPath = _webHostEnvironment.WebRootPath;
 
             var file = Request.Form.Files[0];
@@ -47,10 +45,8 @@ namespace LyyCMS.Web.Controllers
         [HttpGet, HttpPost]
         public ContentResult Kind()
         {
-            string s = "";
 
             string rootPath = _webHostEnvironment.WebRootPath;
-
 
             return Content("");
         }

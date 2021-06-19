@@ -11,5 +11,7 @@ namespace LyyCMS.Web.Models.Articles
 
         public IReadOnlyList<ArticleCategoryListDto> ParentCategoryList { get; set; }
 
+        public IReadOnlyList<ArticleCategoryListDto> TreeData { get; set; }
+
     }
 }

@@ -45,6 +45,7 @@
                             <label class="col-md-3 col-form-label">@L("Parent")</label>
                             <div class="col-md-9">
                                 <select id="ParentId" name="ParentId" class="form-control" >
+                                    <option value="0">无</option>
                                     @foreach (var parent in Model.ParentCategoryList)
                                     {
                                 <option value="@parent.Id">@parent.Name </option>

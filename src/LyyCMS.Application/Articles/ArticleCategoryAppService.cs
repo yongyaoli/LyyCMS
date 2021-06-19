@@ -121,6 +121,11 @@ namespace LyyCMS.Articles
             return user;
         }
 
-
+        public List<ArticleCategoryListDto> GetAllArticleCategoryList()
+        {
+            List<ArticleCategory> categories = _respository.GetAll().ToList();
+            var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(categories);
+            return dtos;
+        }
     }
 }

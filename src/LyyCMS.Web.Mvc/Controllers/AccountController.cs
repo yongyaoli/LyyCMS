@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Abp;
+﻿using Abp;
 using Abp.AspNetCore.Mvc.Authorization;
 using Abp.Authorization;
 using Abp.Authorization.Users;
@@ -16,7 +8,6 @@ using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.MultiTenancy;
 using Abp.Notifications;
-using Abp.Runtime.Session;
 using Abp.Threading;
 using Abp.Timing;
 using Abp.UI;
@@ -30,8 +21,15 @@ using LyyCMS.MultiTenancy;
 using LyyCMS.Sessions;
 using LyyCMS.Web.Models.Account;
 using LyyCMS.Web.Views.Shared.Components.TenantChange;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace LyyCMS.Web.Controllers
 {

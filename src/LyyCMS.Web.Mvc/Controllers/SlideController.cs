@@ -1,13 +1,9 @@
-﻿using Abp.Application.Services.Dto;
-using LyyCMS.Controllers;
+﻿using LyyCMS.Controllers;
 using LyyCMS.Slides;
 using LyyCMS.Slides.Dtos;
 using LyyCMS.Web.Models.Slide;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LyyCMS.Web.Controllers

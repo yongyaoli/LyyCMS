@@ -60,9 +60,9 @@ namespace LyyCMS.Web.Controllers
                             string name = btn.name;
                             
                         }
-
-                        return Json(result, new JsonSerializerSettings() { ContractResolver = new DefaultContractResolver() });
                         Logger.Info($"微信{id}获取菜单:" + Json(result).ToString());
+                        return Json(result, new JsonSerializerSettings() { ContractResolver = new DefaultContractResolver() });
+                        
                     }
                     else
                     {

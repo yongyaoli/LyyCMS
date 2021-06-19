@@ -153,11 +153,13 @@
         var userId = $(this).attr("data-user-id");
 
         e.preventDefault();
+        console.log("edit ...", abp.appPath);
         abp.ajax({
             url: abp.appPath + 'ArticleCategory/EditModal?id=' + userId,
             type: 'POST',
             dataType: 'html',
             success: function (content) {
+                console.log(abp.appPath);
                 $('#ArticleCategoryEditModal div.modal-content').html(content);
             },
             error: function (e) { }
@@ -189,5 +191,38 @@
             return false;
         }
     });
+
+
+    var setting = {
+        view: { //效果参数
+            selectedMulti: true //获取多个节点
+        },
+        callback: {//回调函数
+            onClick: zTreeOnClick,//点击树形节点                  
+        }
+    }
+
+    //获取树状数据
+    abp.ajax({
+        url: abp.appPath + "ArticleCategory/GetArticleCategory",
+        dataType: "JSON",
+        type: "GET",
+        success: function (res) {
+            console.log("res", res);
+            $.fn.zTree.init($("#tree"), setting, res);//初始化树形
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
+
+    function zTreeOnClick(event, treeId, treeNode) {
+        console.log(treeId);
+        console.log(treeNode);
+        console.log(treeNode.id + ", " + treeNode.name);
+        console.log(event);
+        $("#name").html(treeNode.name);
+    }
+
 
 })(jQuery);

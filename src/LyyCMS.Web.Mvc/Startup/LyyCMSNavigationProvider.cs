@@ -90,7 +90,7 @@ namespace LyyCMS.Web.Startup
                         icon: "fas fa-tags"
                     ).AddItem(
                         new MenuItemDefinition(
-                            PageNames.ArticleCategory,
+                            PageNames.WeChatAccount,
                             L("WeChatAccount"),
                             url: "WeChatAccount",
                             icon: "fa fa-tags"

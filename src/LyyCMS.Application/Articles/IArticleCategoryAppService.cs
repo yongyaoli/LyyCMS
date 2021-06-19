@@ -17,6 +17,6 @@ namespace LyyCMS.Articles
 
         Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync();
 
-
+        List<ArticleCategoryListDto> GetAllArticleCategoryList();
     }
 }

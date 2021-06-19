@@ -1,10 +1,6 @@
 ﻿using LyyCMS.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UEditor.Core;
 
 namespace LyyCMS.Web.Controllers
@@ -30,7 +26,6 @@ namespace LyyCMS.Web.Controllers
         [HttpGet, HttpPost]
         public ContentResult uploadimage()
         {
-            string s = "";
 
             string rootPath = _webHostEnvironment.WebRootPath;
 
