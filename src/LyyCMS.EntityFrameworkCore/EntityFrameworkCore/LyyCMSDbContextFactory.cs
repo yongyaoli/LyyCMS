@@ -12,7 +12,7 @@ namespace LyyCMS.EntityFrameworkCore
         public LyyCMSDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<LyyCMSDbContext>();
-            var configuration = AppConfigurations.Get(WebContentDirectoryFinder.CalculateContentRootFolder());
+            var configuration = AppConfigurations.Get(WebContentDirectoryFinder.CalculateContentRootFolder(),addUserSecrets:true);
 
             LyyCMSDbContextConfigurer.Configure(builder, configuration.GetConnectionString(LyyCMSConsts.ConnectionStringName));
 

@@ -10,6 +10,7 @@ using LyyCMS.Articles;
 using LyyCMS.Slides;
 using LyyCMS.WeChat;
 using LyyCMS.WxFans;
+using LyyCMS.Sites;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -45,6 +46,10 @@ namespace LyyCMS.EntityFrameworkCore
 
         public DbSet<WxFansGroup> WxFansGroups { get; set; }
         public DbSet<WxFansInfo> WxFansInfos { get; set; }
+
+        //CMS
+        public DbSet<Site> Sites { get; set; }
+        public DbSet<Channel> Channels { get; set; }
 
 
         //重写创建实体的方法

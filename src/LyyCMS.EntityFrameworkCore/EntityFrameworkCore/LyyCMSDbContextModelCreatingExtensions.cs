@@ -13,6 +13,7 @@ using LyyCMS.Members;
 using LyyCMS.Slides;
 using LyyCMS.WeChat;
 using LyyCMS.WxFans;
+using LyyCMS.Sites;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -44,6 +45,10 @@ namespace LyyCMS.EntityFrameworkCore
             builder.Entity<WxFansGroup>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
             builder.Entity<WxFansInfo>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
+
+            //CMS
+            builder.Entity<Site>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
+            builder.Entity<Channel>().Property(x => x.Id).HasMaxLength(LyyCMSConsts.MaxIdLen);
 
             /* Configure your own tables/entities inside here */
 

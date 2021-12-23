@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LyyCMS.WxFans;
+using LyyCMS.Sites;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -45,7 +46,9 @@ namespace LyyCMS.EntityFrameworkCore
             builder.Entity<WxFansGroup>().Property(x => x.Id).HasMaxLength(300);
 
             builder.Entity<WxFansInfo>().Property(x => x.Id).HasMaxLength(300);
-
+            //CMS
+            builder.Entity<Site>().Property(x => x.Id).HasMaxLength(300);
+            builder.Entity<Channel>().Property(x => x.Id).HasMaxLength(300);
         }
     }
 }
