@@ -1,0 +1,60 @@
+﻿@using Abp.Authorization.Users
+@using LyyCMS.Web.Models.Common.Modals
+@using LyyCMS.Web.Models.Site
+@model SiteListViewModel
+@{ Layout = null; }
+
+<div class="modal fade" id="SiteCreateModal" tabindex="-1" role="dialog" aria-labelledby="SiteCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewSite")))
+            <form name="userCreateForm" role="form" class="form-horizontal" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" role="tab" href="javascript:;">@L("SiteDetails")</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-4">
+                        <div role="tabpanel" class="tab-pane container active" id="create-user-details">
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("SiteDir")</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="SiteDir" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                                </div>
+                            </div>
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("SiteName")</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="SiteName" required maxlength="@AbpUserBase.MaxNameLength">
+                                </div>
+                            </div>
+
+                            <div class="form-group row required">
+                                <label class="col-md-3 col-form-label">@L("siteType")</label>
+                                <div class="col-md-9">
+                                    <input type="email" class="form-control" name="siteType" required maxlength="@AbpUserBase.MaxEmailAddressLength">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">@L("root")</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="root" maxlength="@AbpUserBase.MaxPhoneNumberLength">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">@L("OrderNum")</label>
+                                <div class="col-md-9">
+                                    <input type="number" class="form-control" name="OrderNum" maxlength="@AbpUserBase.MaxPhoneNumberLength">
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

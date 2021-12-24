@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Entities.Auditing;
+﻿using Abp.AutoMapper;
+using LyyCMS.Slides;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,16 +7,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LyyCMS.Slides;
 
-namespace LyyCMS.Sites
+namespace LyyCMS.Sites.Dtos
 {
-    /// <summary>
-    /// 站点
-    /// </summary>
-    public class Site : FullAuditedEntity
+    [AutoMapTo(typeof(Site))]
+    public class CreateSiteDto
     {
-
         public string guid { get; set; }
 
         public string extendValues { get; set; }
@@ -29,8 +26,7 @@ namespace LyyCMS.Sites
         public string tableName { get; set; }
         public char root { get; set; }
         public int parentId { get; set; }
-        [Required]
-        [DefaultValue(99)]
+
         public int OrderNum { get; set; }
 
         public virtual ICollection<Channel> Channels { get; set; }

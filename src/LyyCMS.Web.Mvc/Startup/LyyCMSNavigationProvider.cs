@@ -104,6 +104,27 @@ namespace LyyCMS.Web.Startup
                         )
                     )
                 )
+                 .AddItem(
+                    new MenuItemDefinition(
+                        "Site",
+                        L("Site"),
+                        icon: "fas fa-tags"
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            PageNames.WeChatAccount,
+                            L("Site"),
+                            url: "Site",
+                            icon: "fa fa-tags"
+                        )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "Channel",
+                            L("Channel"),
+                            url: "Channel",
+                            icon: "fa fa-book"
+                        )
+                    )
+                )
                 .AddItem( // Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",

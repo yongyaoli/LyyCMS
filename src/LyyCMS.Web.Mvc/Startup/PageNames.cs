@@ -31,5 +31,8 @@
         public const string WxFans = "WxFans";
         public const string Material = "Material";
 
+        //CMS
+        public const string Site = "Site";
+        public const string Channel = "Channel";
     }
 }

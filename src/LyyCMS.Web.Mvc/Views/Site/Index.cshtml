@@ -1,0 +1,84 @@
+﻿
+@using LyyCMS.Web.Startup
+@using LyyCMS.Web.Models.Site
+@model SiteListViewModel
+
+@{ ViewBag.Title = L("Site");
+    ViewBag.CurrentPageName = PageNames.Site; }
+@section scripts
+    {
+    <environment names="Development">
+        <script src="~/view-resources/Views/Site/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Site/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>@L("Site")</h1>
+            </div>
+            <div class="col-sm-6">
+               
+                <a href="javascript:;" data-toggle="modal" data-target="#SiteCreateModal" class="btn bg-blue float-sm-right">
+                    <i class="fa fa-plus-square"></i>
+                    @L("Create")
+                </a>
+                <a asp-action="ChannelList" asp-controller="Site" class="btn bg-blue float-sm-right" style="margin-right: 20px">
+                    <i class="fa fa-plus-square-o"></i>
+                    @L("Channel")
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!--Use for bulk actions-->
+                            </div>
+                            <div class="col-md-6">
+                                @await Html.PartialAsync("~/Views/Member/Index.AdvancedSearch.cshtml")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="SiteTable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>@L("SiteName")</th>
+                                        <th>@L("SiteType")</th>
+                                        <th>@L("ImageUrl")</th>
+                                        <th>@L("Root")</th>
+                                        <th>@L("OrderNum")</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ @await Html.PartialAsync("~/Views/Site/_CreateModal.cshtml", Model)
+
+<div class="modal fade" id="SiteEditModal" tabindex="-1" role="dialog" aria-labelledby="SiteEditModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
