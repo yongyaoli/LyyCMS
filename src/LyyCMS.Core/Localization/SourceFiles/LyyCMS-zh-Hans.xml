@@ -177,6 +177,10 @@
 		<text name="SiteType">站点类型</text>
 		<text name="ImageUrl">图片地址</text>
 		<text name="Root">根目录</text>
+
+		<text name="SiteDir">站点目录</text>
+		<text name="SiteDetails">站点详情</text>
+		
 	</texts>
 </localizationDictionary>
 

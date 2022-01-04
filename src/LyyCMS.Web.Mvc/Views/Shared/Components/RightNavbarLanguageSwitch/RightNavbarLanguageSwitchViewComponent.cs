@@ -15,6 +15,7 @@ namespace LyyCMS.Web.Views.Shared.Components.RightNavbarLanguageSwitch
 
         public IViewComponentResult Invoke()
         {
+
             var model = new RightNavbarLanguageSwitchViewModel
             {
                 CurrentLanguage = _languageManager.CurrentLanguage,

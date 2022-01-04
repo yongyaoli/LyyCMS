@@ -1,0 +1,31 @@
+﻿@using LyyCMS.Web.Views.Shared.Components.RightNavbarSiteSwitch
+@model RightNavbarSiteSwitchViewModel
+
+ @if (null != Model.SiteList)
+{
+    <li class="nav-item dropdown">
+        <a href="javascript:void(0);" class="nav-link" data-toggle="dropdown" role="button">
+            <i class="@Model.CurrentSite.siteName" title="@Model.CurrentSite.siteName"></i>
+            <span class="d-none d-md-inline-block">@Model.CurrentSite.siteName</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right p-0">
+
+            @foreach (var siteInfo in Model.SiteList)
+            {
+            if (siteInfo.siteName != Model.CurrentSite.siteName)
+            {
+            <a class="dropdown-item" href="@Url.Action("ChangeSite", "LyyCMS", new {
+                                                  cultureName = siteInfo.siteName,
+                                                  returnUrl = Context.Request.Path + Context.Request.QueryString
+                                              })">
+                <i class="mr-2 @siteInfo.siteName"></i> @siteInfo.siteName
+            </a>
+            }
+            }
+            
+
+        </div>
+    </li>
+}else{
+    <li class="nav-item d-none d-sm-inline-block"><a class="nav-link" asp-controller="Site" asp-action="Index">新建站点</a></li>
+}

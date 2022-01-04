@@ -7,7 +7,7 @@
         public const string ConnectionStringName = "Default";
 
         // 多租户设置
-        public const bool MultiTenancyEnabled = false;
+        public const bool MultiTenancyEnabled = true;
 
         //MySql 最大ID长度
         public const int MaxIdLen = 300;
@@ -17,6 +17,9 @@
         public const int DefaultPageSize = 10;
 
         public const int MaxPageSize = 1000;
+
+        //默认站点
+        public const string DefaultSite = "LyycCMS.Site.DefaultSiteName";
     }
 
     /// <summary>
