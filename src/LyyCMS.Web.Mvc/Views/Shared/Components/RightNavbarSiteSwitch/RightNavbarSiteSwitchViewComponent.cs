@@ -33,29 +33,11 @@ namespace LyyCMS.Web.Views.Shared.Components.RightNavbarSiteSwitch
             PagedSiteResultRequestDto siteResultRequestDto = new PagedSiteResultRequestDto();
             siteResultRequestDto.SkipCount = 0;
             siteResultRequestDto.MaxResultCount = 100;
-            var siteList = _siteAppService.GetAllAsync(siteResultRequestDto);
-            if (null != siteList)
-            {
-                var rr = siteList.Result;
-                if (null != rr && rr.Items.Count>0)
-                {
-                    var sites = rr.Items;
-                    //取默认的
-                    foreach (var settingValue in settings)
-                    {
-                        var value = settingValue as ISettingValue;
-                        if (value != null)
-                        {
-
-                        }
-                    }
-                }
-            }
            
             var model = new RightNavbarSiteSwitchViewModel
             {
-                CurrentSite = defaultSite,
-                SiteList = null,
+                CurrentSite = _siteAppService.GetAllAsync(siteResultRequestDto).Result.Items.FirstOrDefault(),
+                SiteList = _siteAppService.GetAllAsync(siteResultRequestDto).Result.Items.ToList(),
             };
 
             return View(model);

@@ -1,10 +1,10 @@
 ﻿(function ($) {
-    var _memberService = abp.services.app.members,
+    var _siteService = abp.services.app.site,
         l = abp.localization.getSource('LyyCMS'),
         _$modal = $('#SiteCreateModal'),
         _$form = _$modal.find('form'),
         _$table = $('#SiteTable');
-    console.log(_memberService);
+    console.log(_siteService);
     var _$usersTable = _$table.DataTable({
         paging: true,
         serverSide: true,
@@ -15,7 +15,8 @@
             filter.skipCount = data.start;
 
             abp.ui.setBusy(_$table);
-            _memberService.getPagedMember(filter).done(function (result) {
+            _siteService.getAll(filter).done(function (result) {
+                console.log(result);
                 callback({
                     recordsTotal: result.totalCount,
                     recordsFiltered: result.totalCount,
@@ -45,29 +46,28 @@
             },
             {
                 targets: 1,
-                data: 'name',
+                data: 'siteDir',
                 sortable: false
             },
             {
                 targets: 2,
-                data: 'loginName',
+                data: 'siteName',
                 sortable: false
             },
             {
                 targets: 3,
-                data: 'email',
+                data: 'siteType',
                 sortable: false
             },
             {
                 targets: 4,
-                data: 'phoneNumber',
+                data: 'root',
                 sortable: false
             },
             {
                 targets: 5,
-                data: 'isDeleted',
-                sortable: false,
-                render: data => `<input type="checkbox" disabled ${data ? 'checked' : ''}>`
+                data: 'orderNum',
+                sortable: false
             },
             {
                 targets: 6,
@@ -116,7 +116,7 @@
         }
         console.log(user);
         abp.ui.setBusy(_$modal);
-        _memberService.RegisterMember(user).done(function () {
+        _siteService.create(user).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
@@ -141,7 +141,7 @@
             null,
             (isConfirmed) => {
                 if (isConfirmed) {
-                    _memberService.delete({
+                    _siteService.delete({
                         id: userId
                     }).done(() => {
                         abp.notify.info(l('SuccessfullyDeleted'));
