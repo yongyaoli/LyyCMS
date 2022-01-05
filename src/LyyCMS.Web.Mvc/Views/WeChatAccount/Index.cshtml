@@ -2,17 +2,19 @@
 @using LyyCMS.Web.Models.WeChat
 @model WeChatAccountViewModel
 
-@{ ViewBag.Title = L("WeChatAccount");
-    ViewBag.CurrentPageName = PageNames.WeChatAccount; }
+@{
+    ViewBag.Title = L("WeChatAccount");
+    ViewBag.CurrentPageName = PageNames.WeChatAccount;
+}
 @section scripts
     {
-    <environment names="Development">
-        <script src="~/view-resources/Views/WeChat/Account.js" asp-append-version="true"></script>
-    </environment>
+<environment names="Development">
+    <script src="~/view-resources/Views/WeChat/Account.js" asp-append-version="true"></script>
+</environment>
 
-    <environment names="Staging,Production">
-        <script src="~/view-resources/Views/WeChat/Account.min.js" asp-append-version="true"></script>
-    </environment>
+<environment names="Staging,Production">
+    <script src="~/view-resources/Views/WeChat/Account.min.js" asp-append-version="true"></script>
+</environment>
 }
 
 <section class="content-header">
@@ -30,6 +32,18 @@
         </div>
     </div>
 </section>
+<div>
+    @if (null != Model.siteList)
+    {
+        <select>
+            @foreach (var site in Model.siteList)
+            {
+                <option name="@site.Id">@site.siteName</option>
+            }
+        </select>
+    }
+
+</div>
 <section class="content">
     <div class="container-fluid">
         <div class="row">

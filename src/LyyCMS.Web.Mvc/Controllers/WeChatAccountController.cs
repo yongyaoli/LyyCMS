@@ -19,6 +19,8 @@ using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.AdvancedAPIs.User;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Containers;
+using LyyCMS.Sites;
+using LyyCMS.Sites.Dtos;
 
 namespace LyyCMS.Web.Controllers
 {
@@ -29,23 +31,31 @@ namespace LyyCMS.Web.Controllers
         private readonly IWeChatAccountAppService _weChatAccountAppService;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IWxFansInfoAppService _wxFansInfoAppService;
+        private readonly ISiteAppService _siteAppService;
 
         public WeChatAccountController(IWeChatAccountAppService weChatAccountAppService,
             IWebHostEnvironment webHostEnvironment,
             IWxFansInfoAppService wxFansInfoAppService,
-            ICategoryAppService categoryAppService)
+            ICategoryAppService categoryAppService,
+            ISiteAppService siteAppService)
         {
             _weChatAccountAppService = weChatAccountAppService;
             _webHostEnvironment = webHostEnvironment;
             _wxFansInfoAppService = wxFansInfoAppService;
+            _siteAppService = siteAppService;
         }
 
         public async Task<IActionResult> Index(PagedResultRequest pagedResultRequest)
         {
             var weChatAccounts = (await _weChatAccountAppService.GetAllAsync(pagedResultRequest)).Items;
+            PagedSiteResultRequestDto siteReq = new PagedSiteResultRequestDto();
+            siteReq.SkipCount = 0;
+            siteReq.MaxResultCount = 10;
+            var siteList = (await _siteAppService.GetAllAsync(siteReq)).Items;
             var model = new WeChatAccountViewModel
             {
-                accountList = weChatAccounts
+                accountList = weChatAccounts,
+                siteList = siteList
             };
             return View(model);
         }

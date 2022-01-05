@@ -19,6 +19,8 @@ using LyyCMS.Controllers;
 using LyyCMS.Identity;
 using LyyCMS.MultiTenancy;
 using LyyCMS.Sessions;
+using LyyCMS.Sites;
+using LyyCMS.Sites.Dtos;
 using LyyCMS.Web.Models.Account;
 using LyyCMS.Web.Views.Shared.Components.TenantChange;
 using Microsoft.AspNetCore.Identity;
@@ -46,6 +48,7 @@ namespace LyyCMS.Web.Controllers
         private readonly ISessionAppService _sessionAppService;
         private readonly ITenantCache _tenantCache;
         private readonly INotificationPublisher _notificationPublisher;
+        private readonly ISiteAppService _siteAppService;
 
         public AccountController(
             UserManager userManager,
@@ -58,7 +61,8 @@ namespace LyyCMS.Web.Controllers
             UserRegistrationManager userRegistrationManager,
             ISessionAppService sessionAppService,
             ITenantCache tenantCache,
-            INotificationPublisher notificationPublisher)
+            INotificationPublisher notificationPublisher,
+            ISiteAppService siteAppService)
         {
             _userManager = userManager;
             _multiTenancyConfig = multiTenancyConfig;
@@ -71,6 +75,7 @@ namespace LyyCMS.Web.Controllers
             _sessionAppService = sessionAppService;
             _tenantCache = tenantCache;
             _notificationPublisher = notificationPublisher;
+            _siteAppService = siteAppService;
         }
 
 
@@ -146,6 +151,14 @@ namespace LyyCMS.Web.Controllers
 
             await _signInManager.SignInAsync(loginResult.Identity, loginModel.RememberMe);
             await UnitOfWorkManager.Current.SaveChangesAsync();
+
+            var siteList = _siteAppService.GetAllAsync();
+
+            if (null != siteList)
+            {
+                var selectSite = siteList.Result.Items.FirstOrDefault();
+                CurrentSite = selectSite;
+            }
 
             return Json(new AjaxResponse { TargetUrl = returnUrl });
         }

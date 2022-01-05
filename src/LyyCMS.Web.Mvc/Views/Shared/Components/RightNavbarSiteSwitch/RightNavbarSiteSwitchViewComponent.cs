@@ -33,8 +33,8 @@ namespace LyyCMS.Web.Views.Shared.Components.RightNavbarSiteSwitch
             PagedSiteResultRequestDto siteResultRequestDto = new PagedSiteResultRequestDto();
             siteResultRequestDto.SkipCount = 0;
             siteResultRequestDto.MaxResultCount = 100;
-           
-            var model = new RightNavbarSiteSwitchViewModel
+
+             var model = new RightNavbarSiteSwitchViewModel
             {
                 CurrentSite = _siteAppService.GetAllAsync(siteResultRequestDto).Result.Items.FirstOrDefault(),
                 SiteList = _siteAppService.GetAllAsync(siteResultRequestDto).Result.Items.ToList(),
