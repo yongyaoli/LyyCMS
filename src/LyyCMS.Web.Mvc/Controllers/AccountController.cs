@@ -151,8 +151,10 @@ namespace LyyCMS.Web.Controllers
 
             await _signInManager.SignInAsync(loginResult.Identity, loginModel.RememberMe);
             await UnitOfWorkManager.Current.SaveChangesAsync();
-
-            var siteList = _siteAppService.GetAllAsync();
+            PagedSiteResultRequestDto pagedSiteResultRequestDto = new PagedSiteResultRequestDto();
+            pagedSiteResultRequestDto.SkipCount = 0;
+            pagedSiteResultRequestDto.MaxResultCount = 100;
+            var siteList = _siteAppService.GetAllAsync(pagedSiteResultRequestDto);
 
             if (null != siteList)
             {

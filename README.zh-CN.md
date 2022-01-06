@@ -2,9 +2,15 @@ MPACore.PhoneBook
 ---
 #### 基于Abp的后台管理系统
 
+[![MIT](https://img.shields.io/github/license/yongyaoli/LyyCMS?style=flat-square)](https://github.com/yongyaoli/LyyCMS/blob/main/LICENSE)
+[![Build status](https://ci.appveyor.com/api/projects/status/xsv4y8h7h1xelkco?svg=true)](https://ci.appveyor.com/project/yongyaoli/lyycms)
+[![NuGet Download](https://img.shields.io/nuget/dt/LyyCMS.svg?style=flat-square)](https://www.nuget.org/packages/LyyCMS)
+
 ---
 #### 关于Abp
 [Abp官网](https://aspnetboilerplate.com/)
+[![Abp](https://img.shields.io/nuget/v/Abp.svg?style=flat-square)](https://www.nuget.org/packages/Abp)
+
 
 [Abp](https://abp.io/)
 
@@ -21,7 +27,7 @@ MPACore.PhoneBook
 
 #### swagger
 
-[本地swagger 访问路径](http://localhost:62114/swagger/index.html)
+[本地swagger 访问路径: http://localhost:62114/swagger/index.html](http://localhost:62114/swagger/index.html)
 
 
 #### 第三方插件

@@ -2,7 +2,9 @@
 @using LyyCMS.Web.Models.Common.Modals
 @using LyyCMS.Web.Models.Articles
 @model ArticleListViewModel
-@{ Layout = null; }
+@{
+    Layout = null;
+}
 <div class="modal fade" id="ArticleModal" tabindex="-1" role="dialog" aria-labelledby="ArticleModalLabel" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -32,7 +34,7 @@
                                     <input type="text" class="form-control" name="Source" required>
                                 </div>
                             </div>
-                            
+
 
                             <div class="form-group row required">
                                 <label class="col-md-3 col-form-label">@L("Content")</label>
@@ -49,9 +51,14 @@
                                 <label class="col-md-3 col-form-label">@L("ArticleCategory")</label>
                                 <div class="col-md-9">
                                     <select id="articleCategoryId" name="articleCategoryId">
-                                        @foreach (var parent in Model.CategoryList)
+                                        @if (null != Model.CategoryList)
                                         {
-                            <option value="@parent.Id">@parent.Name </option>}
+                                            foreach (var parent in Model.CategoryList)
+                                            {
+                                                <option value="@parent.Id">@parent.Name </option>
+                                            }
+                                        }
+
                                     </select>
                                 </div>
                             </div>

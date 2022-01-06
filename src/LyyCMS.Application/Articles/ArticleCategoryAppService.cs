@@ -23,7 +23,7 @@ namespace LyyCMS.Articles
 
         private readonly IRepository<Article> _repositoryArticle;
 
-        public ArticleCategoryAppService(IRepository<ArticleCategory> repository,IRepository<Article> repositoryArticle) : base(repository)
+        public ArticleCategoryAppService(IRepository<ArticleCategory> repository, IRepository<Article> repositoryArticle) : base(repository)
         {
             _respository = repository;
             _repositoryArticle = repositoryArticle;
@@ -42,20 +42,20 @@ namespace LyyCMS.Articles
         }
 
 
-        public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
-        {
-            var query = _respository.GetAll();
-            var persons = await query.ToListAsync();
-            var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(persons);
-            foreach(ArticleCategoryListDto listDto in dtos){
-                ArticleCategory parent = persons.FirstOrDefault(x => x.Id == listDto.Id).Parent;
-                listDto.ParentId = parent == null ? 0 : parent.Id;
-                listDto.ParentName = parent == null ? "无" : parent.Name;
-            }
-            //order
-            dtos = dtos.OrderBy(x => x.OrderNum).OrderBy(x => x.ParentId).ToList();
-            return dtos;
-        }
+        //public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
+        //{
+        //    var query = _respository.GetAll();
+        //    var persons = await query.ToListAsync();
+        //    var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(persons);
+        //    foreach(ArticleCategoryListDto listDto in dtos){
+        //        ArticleCategory parent = persons.FirstOrDefault(x => x.Id == listDto.Id).Parent;
+        //        listDto.ParentId = parent == null ? 0 : parent.Id;
+        //        listDto.ParentName = parent == null ? "无" : parent.Name;
+        //    }
+        //    //order
+        //    dtos = dtos.OrderBy(x => x.OrderNum).OrderBy(x => x.ParentId).ToList();
+        //    return dtos;
+        //}
 
 
         public async Task<ArticleCategoryDto> CreateEntityAsync(CreateArticleCategoryDto input)
@@ -66,7 +66,7 @@ namespace LyyCMS.Articles
             {
                 category = await _respository.GetAsync(pid);
             }
-            
+
             ArticleCategory articleCategory = new ArticleCategory();
             articleCategory.Name = input.Name;
             articleCategory.OrderNum = input.OrderNum;
@@ -92,16 +92,16 @@ namespace LyyCMS.Articles
         public async Task DeleteEntityAsync(EntityDto<int> input)
         {
             var articleCategory = await Repository.GetAllIncluding(x => x.Children).FirstOrDefaultAsync(x => x.Id == input.Id);
-            if(null== articleCategory)
+            if (null == articleCategory)
             {
                 throw new UserFriendlyException("数据不存在");
             }
-            if (articleCategory.Children.Count>0)
+            if (articleCategory.Children.Count > 0)
             {
                 throw new UserFriendlyException("请选删除子级分类");
             }
             var articles = _repositoryArticle.GetAllListAsync().Result.Where(x => x.articleCategoryId == input.Id).ToList();
-            if(null!=articles && articles.Count > 0)
+            if (null != articles && articles.Count > 0)
             {
                 throw new UserFriendlyException("文章分类下存在文章，不能进行删除");
             }
@@ -121,10 +121,10 @@ namespace LyyCMS.Articles
             return user;
         }
 
-        public List<ArticleCategoryListDto> GetAllArticleCategoryList()
+        public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
         {
-            List<ArticleCategory> categories = _respository.GetAll().ToList();
-            var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(categories);
+            var articleCate = await Repository.GetAllIncluding(x => x.Children).ToListAsync();
+            var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(articleCate);
             return dtos;
         }
     }

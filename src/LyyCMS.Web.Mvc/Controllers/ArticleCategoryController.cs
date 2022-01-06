@@ -49,16 +49,16 @@ namespace LyyCMS.Web.Controllers
         /// 返回JSON 
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetArticleCategory()
+        public async Task<JsonResult> GetArticleCategory()
         {
-            //var articleCategories = _categoryAppService.GetAllArticleCategoryList();
+            var articleCategories = _categoryAppService.GetAllArticleCategoryListAsync();
 
-            //List <ArticleCategoryListDto> afterCategory = new List<ArticleCategoryListDto>();
+            List <ArticleCategoryListDto> afterCategory = new List<ArticleCategoryListDto>();
 
             //sort(0, articleCategories, afterCategory);
             //return Json(afterCategory);
 
-            IList<TreeData> treeDatas = GetData();
+            IList<TreeData> treeDatas = await GetData();
 
             return Json(treeDatas);
         }
@@ -66,9 +66,9 @@ namespace LyyCMS.Web.Controllers
 
 
 
-        public IList<TreeData> GetData()
+        public async Task<IList<TreeData>> GetData()
         {
-            var articleCategories = _categoryAppService.GetAllArticleCategoryList();
+            var articleCategories = (await _categoryAppService.GetAllArticleCategoryListAsync());
             List<TreeData> nodes = articleCategories.Where(x => x.ParentId == 0).Select(x => new TreeData { id = x.Id, pId = x.ParentId, name = x.Name }).ToList();
             foreach (TreeData item in nodes)
             {

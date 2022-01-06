@@ -15,8 +15,8 @@ namespace LyyCMS.Articles
         Task<PagedResultDto<ArticleCategoryListDto>> GetPagedArticleCategoryAsync(GetArticleCategoryInput input);
 
 
-        Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync();
+        //Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync();
 
-        List<ArticleCategoryListDto> GetAllArticleCategoryList();
+        Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync();
     }
 }
