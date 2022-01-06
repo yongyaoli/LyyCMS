@@ -49,19 +49,19 @@ namespace LyyCMS.Web.Controllers
         /// 返回JSON 
         /// </summary>
         /// <returns></returns>
-        public async Task<JsonResult> GetArticleCategory()
-        {
-            var articleCategories = _categoryAppService.GetAllArticleCategoryListAsync();
+        //public async Task<JsonResult> GetArticleCategory()
+        //{
+        //    var articleCategories = _categoryAppService.GetAllArticleCategoryListAsync();
 
-            List <ArticleCategoryListDto> afterCategory = new List<ArticleCategoryListDto>();
+        //    List <ArticleCategoryListDto> afterCategory = new List<ArticleCategoryListDto>();
 
-            //sort(0, articleCategories, afterCategory);
-            //return Json(afterCategory);
+        //    sort(0, articleCategories, afterCategory);
+        //    return Json(afterCategory);
 
-            IList<TreeData> treeDatas = await GetData();
+        //    IList<TreeData> treeDatas = await GetData();
 
-            return Json(treeDatas);
-        }
+        //    return Json(treeDatas);
+        //}
 
 
 
@@ -92,7 +92,8 @@ namespace LyyCMS.Web.Controllers
 
         public async Task<ActionResult> EditModal(int id)
         {
-            var articleCategory = await _categoryAppService.GetAsync(new EntityDto<int>(id));
+            var articleCategory = await _categoryAppService.GetAsync(null);
+            //var articleCategory = await _categoryAppService.GetAsync(new EntityDto<int>(id));
 
             PagedArticleCategoryResultRequestDto dto = new PagedArticleCategoryResultRequestDto();
             dto.MaxResultCount = int.MaxValue;

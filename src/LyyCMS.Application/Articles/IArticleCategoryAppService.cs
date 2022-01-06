@@ -9,14 +9,13 @@ namespace LyyCMS.Articles
 {
     //IApplicationService
     public interface IArticleCategoryAppService :
-        IAsyncCrudAppService<ArticleCategoryDto, int, PagedArticleCategoryResultRequestDto, CreateArticleCategoryDto, ArticleCategoryDto>
+        IAsyncCrudAppService<ArticleCategoryDto, int, PagedArticleCategoryResultRequestDto, CreateArticleCategoryDto, ArticleCategoryDto,ArticleCategoryListDto>
     {
 
         Task<PagedResultDto<ArticleCategoryListDto>> GetPagedArticleCategoryAsync(GetArticleCategoryInput input);
 
-
-        //Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync();
-
         Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync();
+
+        //Task<ArticleCategoryDto> GetEntityByIdAsync(int id);
     }
 }

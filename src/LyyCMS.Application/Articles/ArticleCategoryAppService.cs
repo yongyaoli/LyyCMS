@@ -15,7 +15,7 @@ using Abp.Extensions;
 namespace LyyCMS.Articles
 {
     public class ArticleCategoryAppService :
-        AsyncCrudAppService<ArticleCategory, ArticleCategoryDto, int, PagedArticleCategoryResultRequestDto, CreateArticleCategoryDto, ArticleCategoryDto>,
+        AsyncCrudAppService<ArticleCategory, ArticleCategoryDto, int, PagedArticleCategoryResultRequestDto, CreateArticleCategoryDto, ArticleCategoryDto, ArticleCategoryListDto>,
         IArticleCategoryAppService
     {
 
@@ -40,23 +40,6 @@ namespace LyyCMS.Articles
 
             return pagedReulstArticleCategory;
         }
-
-
-        //public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
-        //{
-        //    var query = _respository.GetAll();
-        //    var persons = await query.ToListAsync();
-        //    var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(persons);
-        //    foreach(ArticleCategoryListDto listDto in dtos){
-        //        ArticleCategory parent = persons.FirstOrDefault(x => x.Id == listDto.Id).Parent;
-        //        listDto.ParentId = parent == null ? 0 : parent.Id;
-        //        listDto.ParentName = parent == null ? "无" : parent.Name;
-        //    }
-        //    //order
-        //    dtos = dtos.OrderBy(x => x.OrderNum).OrderBy(x => x.ParentId).ToList();
-        //    return dtos;
-        //}
-
 
         public async Task<ArticleCategoryDto> CreateEntityAsync(CreateArticleCategoryDto input)
         {
@@ -109,21 +92,21 @@ namespace LyyCMS.Articles
         }
 
 
-        protected override async Task<ArticleCategory> GetEntityByIdAsync(int id)
-        {
-            var user = await Repository.GetAllIncluding(x => x.Children).FirstOrDefaultAsync(x => x.Id == id);
+        //public override async Task<ArticleCategory> GetEntityByIdAsync(int id)
+        //{
+        //    var user = await _respository.GetAllIncluding(x => x.Children).FirstOrDefaultAsync(x => x.Id == id);
 
-            if (user == null)
-            {
-                throw new EntityNotFoundException(typeof(ArticleCategory), id);
-            }
+        //    if (user == null)
+        //    {
+        //        throw new EntityNotFoundException(typeof(ArticleCategory), id);
+        //    }
 
-            return user;
-        }
+        //    return user;
+        //}
 
         public async Task<List<ArticleCategoryListDto>> GetAllArticleCategoryListAsync()
         {
-            var articleCate = await Repository.GetAllIncluding(x => x.Children).ToListAsync();
+            var articleCate = await _respository.GetAllIncluding(x => x.Children).ToListAsync();
             var dtos = ObjectMapper.Map<List<ArticleCategoryListDto>>(articleCate);
             return dtos;
         }

@@ -203,18 +203,18 @@
     }
 
     //获取树状数据
-    abp.ajax({
-        url: abp.appPath + "ArticleCategory/GetArticleCategory",
-        dataType: "JSON",
-        type: "GET",
-        success: function (res) {
-            console.log("res", res);
-            $.fn.zTree.init($("#tree"), setting, res);//初始化树形
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    })
+    //abp.ajax({
+    //    url: abp.appPath + "ArticleCategory/GetArticleCategory",
+    //    dataType: "JSON",
+    //    type: "GET",
+    //    success: function (res) {
+    //        console.log("res", res);
+    //        $.fn.zTree.init($("#tree"), setting, res);//初始化树形
+    //    },
+    //    error: function (e) {
+    //        console.log(e);
+    //    }
+    //})
 
     function zTreeOnClick(event, treeId, treeNode) {
         console.log(treeId);
