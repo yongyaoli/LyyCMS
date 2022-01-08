@@ -6,6 +6,7 @@ using LyyCMS.Authorization.Roles;
 using LyyCMS.Authorization.Users;
 using LyyCMS.MultiTenancy;
 using Microsoft.Extensions.Logging;
+using Abp.Domain.Uow;
 
 namespace LyyCMS.Identity
 {
@@ -15,8 +16,9 @@ namespace LyyCMS.Identity
             IOptions<SecurityStampValidatorOptions> options,
             SignInManager signInManager,
             ISystemClock systemClock,
-            ILoggerFactory loggerFactory) 
-            : base(options, signInManager, systemClock, loggerFactory)
+            ILoggerFactory loggerFactory,
+            IUnitOfWorkManager unitOfWorkManger) 
+            : base(options, signInManager, systemClock, loggerFactory,unitOfWorkManger)
         {
         }
     }

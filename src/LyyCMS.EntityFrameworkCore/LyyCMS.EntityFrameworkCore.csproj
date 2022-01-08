@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <RootNamespace>LyyCMS</RootNamespace>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -12,8 +12,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.24" />
-    <PackageReference Include="pomelo.entityframeworkcore.mysql" Version="5.0.0" />
+    <PackageReference Include="MySql.Data.EntityFramework" Version="8.0.27" />
+    <PackageReference Include="pomelo.entityframeworkcore.mysql" Version="6.0.0" />
     <PackageReference Include="pomelo.entityframeworkcore.mysql.design" Version="1.1.2" />
   </ItemGroup>
   <ItemGroup>

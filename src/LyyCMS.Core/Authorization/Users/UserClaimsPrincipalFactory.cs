@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Abp.Authorization;
 using LyyCMS.Authorization.Roles;
+using Abp.Domain.Uow;
 
 namespace LyyCMS.Authorization.Users
 {
@@ -10,11 +11,13 @@ namespace LyyCMS.Authorization.Users
         public UserClaimsPrincipalFactory(
             UserManager userManager,
             RoleManager roleManager,
-            IOptions<IdentityOptions> optionsAccessor)
+            IOptions<IdentityOptions> optionsAccessor,
+            IUnitOfWorkManager unitOfWorkManger)
             : base(
                   userManager,
                   roleManager,
-                  optionsAccessor)
+                  optionsAccessor,
+                  unitOfWorkManger)
         {
         }
     }
