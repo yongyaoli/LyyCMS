@@ -13,4 +13,10 @@
   <ItemGroup>
     <ProjectReference Include="..\LyyCMS.Core\LyyCMS.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Oss\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="OnceMi.AspNetCore.OSS" Version="1.1.1" />
+  </ItemGroup>
 </Project>
