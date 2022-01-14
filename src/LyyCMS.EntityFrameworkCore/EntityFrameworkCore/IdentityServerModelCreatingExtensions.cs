@@ -1,17 +1,12 @@
 ﻿using Abp;
 using LyyCMS.Articles;
 using LyyCMS.Members;
+using LyyCMS.Regions;
+using LyyCMS.Sites;
 using LyyCMS.Slides;
 using LyyCMS.WeChat;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LyyCMS.WxFans;
-using LyyCMS.Sites;
+using Microsoft.EntityFrameworkCore;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -49,6 +44,8 @@ namespace LyyCMS.EntityFrameworkCore
             //CMS
             builder.Entity<Site>().Property(x => x.Id).HasMaxLength(300);
             builder.Entity<Channel>().Property(x => x.Id).HasMaxLength(300);
+
+            builder.Entity<Region>().Property(x => x.Id).HasMaxLength(300);
         }
     }
 }

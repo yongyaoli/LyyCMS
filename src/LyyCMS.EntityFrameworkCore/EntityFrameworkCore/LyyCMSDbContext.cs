@@ -5,12 +5,12 @@ using LyyCMS.Authorization.Roles;
 using LyyCMS.Authorization.Users;
 using LyyCMS.MultiTenancy;
 using LyyCMS.Members;
-using LyyCMS.EntityMapper.VerificationCodes;
 using LyyCMS.Articles;
 using LyyCMS.Slides;
 using LyyCMS.WeChat;
 using LyyCMS.WxFans;
 using LyyCMS.Sites;
+using LyyCMS.Regions;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -52,6 +52,9 @@ namespace LyyCMS.EntityFrameworkCore
         public DbSet<Channel> Channels { get; set; }
 
 
+        public DbSet<Region> Regions { get; set; }
+
+
         //重写创建实体的方法
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -82,12 +85,14 @@ namespace LyyCMS.EntityFrameworkCore
 
             modelBuilder.Entity<WxFansInfo>().ToTable("WxFansInfo");
 
+            modelBuilder.Entity<Region>().ToTable("Region");
+
             //modelBuilder.ConfigureIdentityServer(options =>
             //{
             //    options.DatabaseProvider = EfCoreDatabaseProvider.MySql;
             //});
-            
-   
+
+
             modelBuilder.ConfigureIdentityServerForMySQL();
            
             
