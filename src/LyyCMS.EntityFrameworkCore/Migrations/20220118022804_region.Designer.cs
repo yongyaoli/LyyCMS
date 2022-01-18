@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LyyCMS.Migrations
 {
     [DbContext(typeof(LyyCMSDbContext))]
-    [Migration("20220114070310_region")]
+    [Migration("20220118022804_region")]
     partial class region
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

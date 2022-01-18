@@ -2,6 +2,7 @@
 using Abp.AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,20 @@ namespace LyyCMS.Regions.Dtos
     {
         public int Pid;
 
-        public string Name;
+        public string RegionName;
+
+        /// <summary>
+        /// 1 正常， 0 删除
+        /// </summary>
+        [DefaultValue(1)]
+        public int RegionStatus;
+
 
         /// <summary>
         /// 排序
         /// </summary>
         [Required]
+        [DefaultValue(99)]
         public int OrderNum { get; set; }
 
         /// <summary>
@@ -35,9 +44,9 @@ namespace LyyCMS.Regions.Dtos
         //selectitem
         public override string ToString()
         {
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(RegionName))
                 return base.ToString();
-            return Name;
+            return RegionName;
         }
     }
 }

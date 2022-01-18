@@ -1,28 +1,32 @@
-﻿using LyyCMS.Articles;
-using System;
+﻿using Abp.Domain.Entities.Auditing;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace LyyCMS.Regions
 {
     /// <summary>
     /// 区域管理
     /// </summary>
-    public class Region : Abp.Domain.Entities.Auditing.FullAuditedEntity
+    public class Region : FullAuditedEntity
     {
-
+        
         public int Pid;
 
-        public string Name;
+        [Required]
+        public string RegionName;
+
+        /// <summary>
+        /// 1 正常， 0 删除
+        /// </summary>
+        [DefaultValue(1)]
+        public int RegionStatus;
 
         /// <summary>
         /// 排序
         /// </summary>
         [Required]
+        [DefaultValue(99)]
         public int OrderNum { get; set; }
 
         /// <summary>
@@ -38,9 +42,9 @@ namespace LyyCMS.Regions
         //selectitem
         public override string ToString()
         {
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(RegionName))
                 return base.ToString();
-            return Name;
+            return RegionName;
         }
     }
 }
