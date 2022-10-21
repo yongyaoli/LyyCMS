@@ -99,30 +99,30 @@ namespace LyyCMS.Web.Startup
             //OSS 阿里云，腾讯 七牛 https://gitee.com/oncemi/oncemi_aspnetcore_oss
             //default minio
             //添加默认对象储存配置信息
-            services.AddOSSService(option =>
-            {
-                option.Provider = OSSProvider.Minio;
-                option.Endpoint = "oss.oncemi.com:9000";
-                option.AccessKey = "Q*************9";
-                option.SecretKey = "A**************************Q";
-                option.IsEnableHttps = true;
-                option.IsEnableCache = true;
-            });
+            //services.AddOSSService(option =>
+            //{
+            //    option.Provider = OSSProvider.Minio;
+            //    option.Endpoint = "oss.oncemi.com:9000";
+            //    option.AccessKey = "Q*************9";
+            //    option.SecretKey = "A**************************Q";
+            //    option.IsEnableHttps = true;
+            //    option.IsEnableCache = true;
+            //});
 
             //aliyun oss
             //添加名称为‘aliyunoss’的OSS对象储存配置信息
-            services.AddOSSService("aliyunoss", option =>
-            {
-                option.Provider = OSSProvider.Aliyun;
-                option.Endpoint = "oss-cn-hangzhou.aliyuncs.com";
-                option.AccessKey = "L*******************U";
-                option.SecretKey = "5*******************************T";
-                option.IsEnableCache = true;
-            });
+            //services.AddOSSService("aliyunoss", option =>
+            //{
+            //    option.Provider = OSSProvider.Aliyun;
+            //    option.Endpoint = "oss-cn-hangzhou.aliyuncs.com";
+            //    option.AccessKey = "L*******************U";
+            //    option.SecretKey = "5*******************************T";
+            //    option.IsEnableCache = true;
+            //});
 
             //qcloud oss
             //也可以从配置文件中加载节点为‘OSSProvider’的配置信息
-            services.AddOSSService("QCloud", "OSSProvider");
+            //services.AddOSSService("QCloud", "OSSProvider");
 
 
 

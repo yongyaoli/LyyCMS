@@ -19,6 +19,7 @@ namespace LyyCMS.Regions
         /// <summary>
         /// 1 正常， 0 删除
         /// </summary>
+        [Required]
         [DefaultValue(1)]
         public int RegionStatus;
 
