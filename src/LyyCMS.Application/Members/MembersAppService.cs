@@ -1,18 +1,15 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
+﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
+using Abp.Linq.Extensions;
 using Abp.UI;
 using LyyCMS.Members.Dtos;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
-using Abp.Linq.Extensions;
-using LyyCMS.Articles.Dtos;
-using Abp.Application.Services;
+using System.Threading.Tasks;
 
 namespace LyyCMS.Members
 {
@@ -21,6 +18,7 @@ namespace LyyCMS.Members
         IMembersAppService
     {
         private readonly IRepository<Member> _resposotory;
+
 
         public MembersAppService(IRepository<Member> repository) : base(repository)
         {
@@ -73,20 +71,21 @@ namespace LyyCMS.Members
         protected async Task UpdateMemberAsync(MemberEditDto input)
         {
             var p = await _resposotory.GetAsync(input.Id.Value);
-            await _resposotory.UpdateAsync(input.MapTo(p));
+            Member member = ObjectMapper.Map(input, p);
+            await _resposotory.UpdateAsync(member);
 
         }
 
         protected async Task CreateMemberAsync(MemberEditDto input)
         {
-            await _resposotory.InsertAsync(input.MapTo<Member>());
+            await _resposotory.InsertAsync(ObjectMapper.Map<Member>(input));
         }
 
         public async Task RegisterMember(CreateOrUpdateMemberDtoInput input)
         {
             var member = input;
             member.edit.LoginPass = "123456";
-            var entity = ObjectMapper.Map<Member>(member);
+            var entity = ObjectMapper.Map<Member>(member.edit);
 
             await _resposotory.InsertAsync(entity);
 

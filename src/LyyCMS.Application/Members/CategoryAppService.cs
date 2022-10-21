@@ -57,7 +57,7 @@ namespace LyyCMS.Members
         public async Task<CategoryListDto> GetCategoryByIdAsync(NullableIdDto input)
         {
             var category = await _resposotory.GetAsync(input.Id.Value);
-            return category.MapTo<CategoryListDto>();
+            return ObjectMapper.Map<CategoryListDto>(category);
         }
 
         public async Task<PagedResultDto<CategoryListDto>> GetPagedCategoryAsync(GetCategoryInput input)
@@ -66,8 +66,7 @@ namespace LyyCMS.Members
             var personcount = await query.CountAsync();
 
             var categories = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
-            //var dtos = AutoMapperObjectMapper.
-            var dtos = categories.MapTo<List<CategoryListDto>>();
+            var dtos = ObjectMapper.Map<List<CategoryListDto>>(categories);
             var pagedReulstMember = new PagedResultDto<CategoryListDto>(personcount, dtos);
 
             return pagedReulstMember;
@@ -81,7 +80,7 @@ namespace LyyCMS.Members
 
             var persons = await query.ToListAsync();
 
-            var dtos = persons.MapTo<List<CategoryListDto>>();
+            var dtos = ObjectMapper.Map<List<CategoryListDto>>(persons);
             var pagedReulstMember = new PagedResultDto<CategoryListDto>(personcount, dtos);
 
             return pagedReulstMember;
@@ -92,13 +91,13 @@ namespace LyyCMS.Members
         protected async Task UpdateCategoryAsync(CategoryEditDto input)
         {
             var p = await _resposotory.GetAsync(input.Id.Value);
-            await _resposotory.UpdateAsync(input.MapTo(p));
+            await _resposotory.UpdateAsync(ObjectMapper.Map(input, p));
 
         }
 
         protected async Task CreateCategoryAsync(CategoryEditDto input)
         {
-            await _resposotory.InsertAsync(input.MapTo<Category>());
+            await _resposotory.InsertAsync(ObjectMapper.Map<Category>(input));
         }
     }
 }

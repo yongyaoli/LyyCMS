@@ -92,7 +92,7 @@ namespace LyyCMS.Web.Controllers
 
             if (!string.IsNullOrWhiteSpace(returnUrl))
             {
-                var escapedReturnUrl = Uri.EscapeUriString(returnUrl);
+                var escapedReturnUrl = Uri.EscapeDataString(returnUrl);
                 var localPath = UrlHelper.LocalPathAndQuery(escapedReturnUrl, Request.Host.Host, Request.Host.Port);
                 if (!string.IsNullOrWhiteSpace(localPath))
                 {

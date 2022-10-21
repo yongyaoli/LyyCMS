@@ -115,8 +115,10 @@
             }
         }
         console.log(user);
+        var e = { edit: user };
         abp.ui.setBusy(_$modal);
-        _memberService.RegisterMember(user).done(function () {
+        //   _memberService.RegisterMember(user).done(function () {
+        _memberService.registerMember(e).done(function () {
             _$modal.modal('hide');
             _$form[0].reset();
             abp.notify.info(l('SavedSuccessfully'));
