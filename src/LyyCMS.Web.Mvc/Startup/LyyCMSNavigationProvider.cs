@@ -108,13 +108,13 @@ namespace LyyCMS.Web.Startup
                     new MenuItemDefinition(
                         "Site",
                         L("Site"),
-                        icon: "fas fa-tags"
+                        icon: "fas fa-info"
                     ).AddItem(
                         new MenuItemDefinition(
                             PageNames.WeChatAccount,
                             L("Site"),
                             url: "Site",
-                            icon: "fa fa-tags"
+                            icon: "fa fa-info"
                         )
                     ).AddItem(
                         new MenuItemDefinition(

@@ -36,8 +36,8 @@ namespace LyyCMS.Web.Views.Shared.Components.RightNavbarSiteSwitch
 
              var model = new RightNavbarSiteSwitchViewModel
             {
-                CurrentSite = _siteAppService.GetAllAsync(siteResultRequestDto).Result.Items.FirstOrDefault(),
-                SiteList = _siteAppService.GetAllAsync(siteResultRequestDto).Result.Items.ToList(),
+                CurrentSite = _siteAppService.GetAllAsync(siteResultRequestDto)?.Result.Items.FirstOrDefault(),
+                SiteList = _siteAppService.GetAllAsync(siteResultRequestDto)?.Result.Items.ToList(),
             };
 
             return View(model);
