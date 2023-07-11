@@ -24,7 +24,7 @@ namespace LyyCMS.Sites.Dtos
         public string keywords { get; set; }
         public string description { get; set; }
         public string tableName { get; set; }
-        public char root { get; set; }
+        public string root { get; set; }
         public int parentId { get; set; }
 
         public int OrderNum { get; set; }

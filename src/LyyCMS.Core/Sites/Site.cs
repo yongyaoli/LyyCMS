@@ -22,8 +22,14 @@ namespace LyyCMS.Sites
         public string keywords { get; set; }
         public string description { get; set; }
         public string tableName { get; set; }
-        public char root { get; set; }
+
+
+        [Display(Description ="根目录")]
+        public string root { get; set; }
+
+        [DefaultValue(0)]
         public int parentId { get; set; }
+        
         [Required]
         [DefaultValue(99)]
         public int OrderNum { get; set; }

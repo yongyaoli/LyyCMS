@@ -10,5 +10,7 @@
         public const string Pages_Roles = "Pages.Roles";
 
         public const string Pages_Members = "Pages.Members";
+
+        public const string Page_Site = "Pages.Site";
     }
 }

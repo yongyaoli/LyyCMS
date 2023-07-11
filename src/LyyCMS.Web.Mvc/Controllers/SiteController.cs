@@ -1,23 +1,24 @@
-﻿using Abp.Runtime.Session;
+﻿using Abp;
+using Abp.AspNetCore.Mvc.Authorization;
+using Abp.Runtime.Session;
 using Abp.Timing;
 using Abp.Web.Models;
-using Abp;
+using LyyCMS.Authorization;
 using LyyCMS.Controllers;
 using LyyCMS.Sites;
 using LyyCMS.Sites.Dtos;
-using LyyCMS.Web.Models.Roles;
 using LyyCMS.Web.Models.Site;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System;
-using System.Threading.Tasks;
-using IUrlHelper = Abp.Web.Http.IUrlHelper;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LyyCMS.Web.Controllers
 {
+    [AbpMvcAuthorize(PermissionNames.Page_Site)]
     public class SiteController : LyyCMSControllerBase
     {
         private readonly SiteAppService _siteAppService;
