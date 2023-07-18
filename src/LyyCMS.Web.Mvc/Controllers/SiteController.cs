@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace LyyCMS.Web.Controllers
 {
-    [AbpMvcAuthorize(PermissionNames.Page_Site)]
+    //[AbpMvcAuthorize(PermissionNames.Page_Site)]
     public class SiteController : LyyCMSControllerBase
     {
         private readonly SiteAppService _siteAppService;
@@ -106,6 +106,13 @@ namespace LyyCMS.Web.Controllers
             }
 
             return LocalRedirect("/"); //TODO: Go to app root
+        }
+
+
+        public async Task<IActionResult> ChannelList()
+        {
+
+            return null;
         }
     }
 }
