@@ -180,7 +180,14 @@
 
 		<text name="SiteDir">站点目录</text>
 		<text name="SiteDetails">站点详情</text>
+
+
+		<text name="SysManage">系统设置</text>
+		<text name="SysDict">数据字典</text>
+		<text name="SysDictItem">数据字典项</text>
 		
+	
+		<text name="MiniWeChat">小程序</text>
 	</texts>
 </localizationDictionary>
 

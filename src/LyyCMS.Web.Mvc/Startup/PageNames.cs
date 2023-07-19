@@ -34,5 +34,9 @@
         //CMS
         public const string Site = "Site";
         public const string Channel = "Channel";
+
+
+        //系统设置
+        public const string SysDict = "SysDict"; //数据字典
     }
 }

@@ -11,6 +11,7 @@ using LyyCMS.WeChat;
 using LyyCMS.WxFans;
 using LyyCMS.Sites;
 using LyyCMS.Regions;
+using LyyCMS.SysManage;
 
 namespace LyyCMS.EntityFrameworkCore
 {
@@ -53,6 +54,11 @@ namespace LyyCMS.EntityFrameworkCore
 
 
         public DbSet<Region> Regions { get; set; }
+
+
+        public DbSet<SysDict> SysDicts { get; set; }
+        public DbSet<SysDictItem> SysDictItems { get; set; }
+
 
 
         //重写创建实体的方法
