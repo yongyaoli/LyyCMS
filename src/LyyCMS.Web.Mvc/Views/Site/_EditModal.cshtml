@@ -1,0 +1,47 @@
+﻿@using Abp.Authorization.Users
+@using LyyCMS.Web.Models.Site
+@using LyyCMS.Web.Models.Common.Modals
+@model EditSiteModalViewModel
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditSite")))
+<form name="SiteEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.Site.Id" />
+    <div class="modal-body">
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="SiteName">@L("SiteName")</label>
+            <div class="col-md-9">
+                <input id="SiteName" class="form-control" type="text" name="SiteName" value="@Model.Site.siteName" required maxlength="32" minlength="2">
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="remark">@L("OrderNum")</label>
+            <div class="col-md-9">
+                <input id="OrderNum" type="number" class="form-control" name="OrderNum" value="@Model.Site.OrderNum" required maxlength="@AbpUserBase.MaxNameLength">
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="remark">@L("Root")</label>
+            <div class="col-md-9">
+                <input id="Root" type="text" class="form-control" name="Root" value="@Model.Site.root" required maxlength="@AbpUserBase.MaxNameLength">
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="remark">@L("SiteType")</label>
+            <div class="col-md-9">
+                <input id="SiteType" type="text" class="form-control" name="SiteType" value="@Model.Site.siteType" required maxlength="@AbpUserBase.MaxNameLength">
+            </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="remark">@L("SiteDir")</label>
+            <div class="col-md-9">
+                <input id="SiteDir" type="text" class="form-control" name="SiteDir" value="@Model.Site.siteDir" required maxlength="@AbpUserBase.MaxNameLength">
+            </div>
+        </div>
+
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/Site/_EditModal.js" asp-append-version="true"></script>

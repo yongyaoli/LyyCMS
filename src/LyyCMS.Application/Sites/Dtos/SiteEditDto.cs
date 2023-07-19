@@ -1,4 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using LyyCMS.Articles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace LyyCMS.Sites.Dtos
 {
+    [AutoMapTo(typeof(Site))]
     public class SiteEditDto : EntityDto<int>
     {
         public string guid { get; set; }

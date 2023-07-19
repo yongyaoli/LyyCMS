@@ -1,5 +1,5 @@
 ﻿(function ($) {
-    var _slideService = abp.services.app.slide,
+    var _siteService = abp.services.app.site,
         l = abp.localization.getSource('LyyCMS'),
         _$modal = $('#SiteEditModal'),
         _$form = _$modal.find('form');
@@ -11,7 +11,7 @@
 
         var slide = _$form.serializeFormToObject();
         abp.ui.setBusy(_$form);
-        _slideService.update(slide).done(function () {
+        _siteService.updateEntry(slide).done(function () {
             _$modal.modal('hide');
             abp.notify.info(l('SavedSuccessfully'));
 

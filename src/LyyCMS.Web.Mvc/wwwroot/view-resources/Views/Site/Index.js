@@ -156,13 +156,13 @@
         var userId = $(this).attr("data-user-id");
 
         e.preventDefault();
-        console.log(abp.appPath + 'Site/EditSite?userId=' + userId);
+        console.log(abp.appPath + 'Site/EditModal?Id=' + userId);
         abp.ajax({
-            url: abp.appPath + 'Site/EditSite?userId=' + userId,
+            url: abp.appPath + 'Site/EditModal?Id=' + userId,
             type: 'POST',
             dataType: 'html',
             success: function (content) {
-                $('#SiteditModal div.modal-content').html(content);
+                $('#SiteEditModal div.modal-content').html(content);
             },
             error: function (e) { }
         });

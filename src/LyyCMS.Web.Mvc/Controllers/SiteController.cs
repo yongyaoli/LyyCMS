@@ -7,7 +7,9 @@ using LyyCMS.Authorization;
 using LyyCMS.Controllers;
 using LyyCMS.Sites;
 using LyyCMS.Sites.Dtos;
+using LyyCMS.Slides.Dtos;
 using LyyCMS.Web.Models.Site;
+using LyyCMS.Web.Models.Slide;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,14 +20,16 @@ using System.Threading.Tasks;
 
 namespace LyyCMS.Web.Controllers
 {
-    //[AbpMvcAuthorize(PermissionNames.Page_Site)]
+    [AbpMvcAuthorize]
     public class SiteController : LyyCMSControllerBase
     {
         private readonly SiteAppService _siteAppService;
+        private readonly ChannAppService _channAppService;
 
-        public SiteController(SiteAppService siteAppService)
+        public SiteController(SiteAppService siteAppService, ChannAppService channAppService)
         {
             _siteAppService = siteAppService;
+            _channAppService = channAppService;
         }
 
         public async Task<IActionResult> Index(PagedSiteResultRequestDto input)
@@ -108,6 +112,20 @@ namespace LyyCMS.Web.Controllers
             return LocalRedirect("/"); //TODO: Go to app root
         }
 
+
+        public async Task<ActionResult> EditModal(int Id)
+        {
+            SiteDto site = new SiteDto();
+            site.Id = Id;
+            var output = await _siteAppService.GetAsync(site);
+            //var channelList = await _channAppService.g
+            EditSiteModalViewModel model = new EditSiteModalViewModel()
+            {
+                Site = output
+            };
+
+            return PartialView("_EditModal", model);
+        }
 
         public async Task<IActionResult> ChannelList()
         {

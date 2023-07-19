@@ -1,6 +1,8 @@
-﻿using Abp.Application.Services;
+﻿using Abp;
+using Abp.Application.Services;
 using Abp.Domain.Repositories;
 using LyyCMS.Sites.Dtos;
+using System.Threading.Tasks;
 
 namespace LyyCMS.Sites
 {
@@ -12,6 +14,17 @@ namespace LyyCMS.Sites
         {
             _resposotory= repository;
             _channelRepository= channelRepository;
+
+        }
+
+        public async Task<SiteDto> UpdateEntryAsync(SiteEditDto input)
+        {
+            var site = await GetEntityByIdAsync(input.Id);
+
+            ObjectMapper.Map(input, site);
+
+            await _resposotory.UpdateAsync(site);
+            return MapToEntityDto(site);
 
         }
 

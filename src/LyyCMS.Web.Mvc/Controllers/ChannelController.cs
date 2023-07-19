@@ -9,7 +9,7 @@ namespace LyyCMS.Web.Controllers
     /// <summary>
     /// 站点频道
     /// </summary>
-    //[AbpMvcAuthorize(PermissionNames.Page_Site)]
+    [AbpMvcAuthorize]
     public class ChannelController : LyyCMSControllerBase
     {
         private readonly ChannAppService _channelAppService;
