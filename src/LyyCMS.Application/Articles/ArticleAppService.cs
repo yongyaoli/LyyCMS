@@ -15,7 +15,7 @@ using Castle.Core.Logging;
 namespace LyyCMS.Articles
 {
     public class ArticleAppService :
-        AsyncCrudAppService<Article, ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleDto, ArticleListDto>,
+        AsyncCrudAppService<Article, ArticleDto, int, PagedArticleResultRequestDto, CreateArticleDto, ArticleEditDto, ArticleListDto>,
         IArticleAppService
     {
         //public ILogger Logger { get; set; }
@@ -44,9 +44,10 @@ namespace LyyCMS.Articles
             var id = input.articleCategoryId;
             var cate = _categoryRepository.FirstOrDefaultAsync(x => x.Id == id).Result;
             input.category = cate;
-            var dtos = ObjectMapper.Map<Article>(input);
-            await _resposotory.InsertAsync(dtos);
-            return MapToEntityDto(dtos);
+            //var dtos = ObjectMapper.Map<Article>(input);
+            var article = MapToEntity(input);
+            await _resposotory.InsertAsync(article);
+            return MapToEntityDto(article);
         }
 
         public async Task<PagedResultDto<ArticleListDto>> GetPagedArticleAsync(GetArticleInput input)
@@ -71,6 +72,7 @@ namespace LyyCMS.Articles
             var article = await GetEntityByIdAsync(input.Id);
 
             ObjectMapper.Map(input, article);
+            MapToEntity(input, article);
             var cate = await _categoryRepository.FirstOrDefaultAsync(x => x.Id == input.articleCategoryId);
             article.category = cate;
             await _resposotory.UpdateAsync(article);
@@ -81,6 +83,11 @@ namespace LyyCMS.Articles
         {
             var article = await GetEntityByIdAsync(input.Id);
             await _resposotory.DeleteAsync(article);
+        }
+
+        public Task<ArticleDto> UpdateAsync(ArticleDto input)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

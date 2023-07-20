@@ -1,0 +1,45 @@
+﻿@using LyyCMS.Web.Models.Common.Modals
+@using LyyCMS.Web.Models.SysMangae
+@model SysDictViewModel
+
+@{
+    Layout = null;
+}
+<div class="modal fade" id="SysDictCreateModal" tabindex="-1" role="dialog" aria-labelledby="SysDictCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewSysDict")))
+            <form name="roleCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="DictName">@L("Name")</label>
+                        <div class="col-md-9">
+                            <input id="DictName" type="text" name="DictName" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="DictCode">@L("DictCode")</label>
+                        <div class="col-md-9">
+                            <input id="DictCode" type="text" name="DictCode" class="form-control" required maxlength="32" minlength="2">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="dictState">@L("dictState")</label>
+                        <div class="col-md-9">
+                            <input type="checkbox" name="dictState" value="true" id="dictState" checked />
+                        </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label" for="sortid">@L("DictSort")</label>
+                        <div class="col-md-9">
+                            <input id="DictSort" type="number" name="DictSort" class="form-control" required value="99">
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>

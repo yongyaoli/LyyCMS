@@ -185,6 +185,18 @@
 		<text name="SysManage">系统设置</text>
 		<text name="SysDict">数据字典</text>
 		<text name="SysDictItem">数据字典项</text>
+		<text name="DictName">字典名称</text>
+		<text name="DictCode">字典编号</text>
+		<text name="DictSort">排序</text>
+		<text name="DictState">状态</text>
+
+		<text name="ItemName">名称</text>
+		<text name="ItemCode">编码</text>
+		<text name="ItemVal">值</text>
+		<text name="ItemSort">排序</text>
+		<text name="ItemState">状态</text>
+		<text name="CreateNewSysDict">创建数据字典</text>
+		
 		
 	
 		<text name="MiniWeChat">小程序</text>

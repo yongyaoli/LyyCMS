@@ -27,6 +27,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="Views\Article\Index.AdvancedSearch.cshtml" />
+    <Content Remove="Views\SysDict\Index.AdvancedSearch.cshtml" />
     <Content Remove="Views\WeChatAccount\Index.AdvancedSearch.cshtml" />
     <Content Remove="wwwroot\view-resources\Views\Slide\Items.min.js" />
   </ItemGroup>
@@ -36,6 +37,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Views\Article\Index.AdvancedSearch.cshtml" />
+    <None Include="Views\SysDict\Index.AdvancedSearch.cshtml" />
     <None Include="Views\WeChatAccount\Index.AdvancedSearch.cshtml" />
     <None Include="wwwroot\view-resources\Views\Slide\Items.min.js" />
     <None Include="wwwroot\zTree\css\awesomeStyle\awesome.less" />
@@ -91,6 +93,11 @@
     <Folder Include="upload\image\" />
     <Folder Include="wwwroot\upload\" />
     <Folder Include="wwwroot\view-resources\Views\_Bundles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Views\SysDict\Index.AdvancedSearch.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

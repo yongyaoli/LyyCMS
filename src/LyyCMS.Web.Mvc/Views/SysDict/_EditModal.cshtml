@@ -1,0 +1,49 @@
+﻿@using Abp.Authorization.Users
+@using LyyCMS.Web.Models.Common.Modals
+@using LyyCMS.Web.Models.SysManage
+@model EditSysDictModalViewModel
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditSysDict")))
+<form name="SysDictEditForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.SysDictDto.Id" />
+    <div class="modal-body">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" role="tab" href="#edit-user-details">@L("SysDictDetails")</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#edit-user-roles">@L("Parent")</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container active" id="edit-user-details">
+
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="name">@L("DictName")</label>
+                    <div class="col-md-9">
+                        <input id="DictName" type="text" class="form-control" name="DictName" value="@Model.SysDictDto.DictName" required maxlength="@AbpUserBase.MaxNameLength">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label" for="DictCode">@L("DictCode")</label>
+                    <div class="col-md-9">
+                        <input id="DictCode" type="text" class="form-control" name="DictCode" value="@Model.SysDictDto.DictCode" required maxlength="@AbpUserBase.MaxSurnameLength">
+                    </div>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-form-label">@L("DictSort")</label>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" name="DictSort" required value="@Model.SysDictDto.DictSort">
+                    </div>
+                </div>
+            </div>
+             
+
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+
+<script src="~/view-resources/Views/SysDict/_EditModal.js" asp-append-version="true"></script>
