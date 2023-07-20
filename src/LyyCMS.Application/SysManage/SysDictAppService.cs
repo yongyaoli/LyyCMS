@@ -29,7 +29,7 @@ namespace LyyCMS.SysManage
             var item = _sysDictItemRepository.GetAll();
             var count = await dict.CountAsync();
 
-            #region 第一种 直接关联查询 然后 清空子表中的父表信息
+            #region 第一种 直接关联查询 然后 清空子表中的父表信息 清空
             var dictPage = await dict.Include(x=>x.SysDictItems).OrderBy(input.Sorting).PageBy(input).ToListAsync();
             var dtoDict = ObjectMapper.Map<List<SysDictListDto>>(dictPage);
             foreach(var _item in dtoDict)
