@@ -25,11 +25,13 @@ namespace LyyCMS.Web.Controllers
     {
         private readonly SiteAppService _siteAppService;
         private readonly ChannAppService _channAppService;
+        private readonly Abp.Web.Http.IUrlHelper _urlHelper;
 
-        public SiteController(SiteAppService siteAppService, ChannAppService channAppService)
+        public SiteController(SiteAppService siteAppService, ChannAppService channAppService, Abp.Web.Http.IUrlHelper urlHelper)
         {
             _siteAppService = siteAppService;
             _channAppService = channAppService;
+            _urlHelper = urlHelper;
         }
 
         public async Task<IActionResult> Index(PagedSiteResultRequestDto input)
@@ -54,11 +56,12 @@ namespace LyyCMS.Web.Controllers
 
             var selectSite = siteList.Result.Items.FirstOrDefault(x => x.siteName.Equals(cultureName));
             CurrentSite = selectSite;
-            var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cultureName, cultureName));
+            //var reqCul = new RequestCulture(cultureName);
+            //var cookieValue = CookieRequestCultureProvider.MakeCookieValue(reqCul);
 
             Response.Cookies.Append(
-                CookieRequestCultureProvider.DefaultCookieName,
-                cookieValue,
+                LyyCMSConsts.DefaultSite,
+                CurrentSite.Id.ToString(),
                 new CookieOptions
                 {
                     Expires = Clock.Now.AddYears(2),
@@ -82,12 +85,6 @@ namespace LyyCMS.Web.Controllers
                 {
                     userSetinfo += " " + settingValue.Name + " : " + settingValue.Value;
                 }
-
-                //SettingManager.ChangeSettingForUser(
-                //    AbpSession.ToUserIdentifier(),
-                //    LyyCMSConsts.DefaultSite,
-                //    cultureName
-                //);
             }
 
             if (Request.IsAjaxRequest())
@@ -98,15 +95,19 @@ namespace LyyCMS.Web.Controllers
             if (!string.IsNullOrWhiteSpace(returnUrl))
             {
                 var escapedReturnUrl = Uri.EscapeDataString(returnUrl);
-                var localPath = UrlHelper.LocalPathAndQuery(escapedReturnUrl, Request.Host.Host, Request.Host.Port);
-                if (!string.IsNullOrWhiteSpace(localPath))
+                if(null != _urlHelper)
                 {
-                    var unescapedLocalPath = Uri.UnescapeDataString(localPath);
-                    if (Url.IsLocalUrl(unescapedLocalPath))
+                    var localPath = _urlHelper.LocalPathAndQuery(escapedReturnUrl, Request.Host.Host, Request.Host.Port);
+                    if (!string.IsNullOrWhiteSpace(localPath))
                     {
-                        return LocalRedirect(unescapedLocalPath);
+                        var unescapedLocalPath = Uri.UnescapeDataString(localPath);
+                        if (Url.IsLocalUrl(unescapedLocalPath))
+                        {
+                            return LocalRedirect(unescapedLocalPath);
+                        }
                     }
                 }
+                
             }
 
             return LocalRedirect("/"); //TODO: Go to app root
